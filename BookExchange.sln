@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D1630677-3254-4D05-AD90-C87E2C04411B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookExchange.API", "src\BookExchange.API\BookExchange.API.csproj", "{3EAFF2CE-FCAB-4A83-B939-FA5019AE62CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookExchange.Application", "src\BookExchange.Application\BookExchange.Application.csproj", "{B1CD51C9-FCF6-4768-A08A-FE9F2E9A4FFB}"
@@ -46,7 +44,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2FBC7CD0-2A3B-4245-A950-D9401723342B} = {D1630677-3254-4D05-AD90-C87E2C04411B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA24AEB6-6A4B-4947-8F07-409028A10C89}
