@@ -1,11 +1,8 @@
 import {
   Card,
-  CardContent,
   CardMedia,
   Container,
   Grid,
-  Paper,
-  Button,
   Typography,
   Divider,
   Link,
@@ -15,7 +12,7 @@ import { AuthContext } from "context";
 import React, { useContext, useState } from "react";
 import { useStyles } from "./profile-page-styles";
 
-import { StatisticsBar } from "./components/statistics-bar";
+import { StatisticsBar } from "./components";
 import {
   ContactsPanel,
   WishlistPanel,
@@ -26,34 +23,10 @@ import {
   BookShelfPanel,
 } from "./components";
 
-import { PremiumDialog } from "components/premium-dialog";
-import { PurchaseCoinsDialog } from "components/purchase-coins-dialog";
-
 const ProfilePage = () => {
   const classes = useStyles();
   const { user } = useContext(AuthContext);
-  const [isPremiumDialogOpen, setPremiumDialogOpen] = useState(false);
-  const [isPurchaseDialogOpen, setPurchaseDialogOpen] = useState(false);
   const [displayViewIndex, setDisplayViewIndex] = useState<number>(1);
-
-  const handleOpenPremiumDialog = () => {
-    setPremiumDialogOpen(true);
-  };
-
-  const handleClosePremiumDialog = () => {
-    setPremiumDialogOpen(false);
-  };
-
-  const handleOpenPurchaseDialog = () => {
-    setPurchaseDialogOpen(true);
-  };
-
-  const handleClosePurchaseDialog = () => {
-    setPurchaseDialogOpen(false);
-  };
-
-  console.log("user:", user);
-  console.log(user?.firstName);
 
   if (!user) {
     return <p>User not logged</p>;
@@ -94,22 +67,6 @@ const ProfilePage = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={3}>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleOpenPurchaseDialog}
-              >
-                Buy Coins
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleOpenPremiumDialog}
-              >
-                Premium
-              </Button>
-            </Grid>
           </Grid>
 
           <Divider />
@@ -128,15 +85,6 @@ const ProfilePage = () => {
         <ContactsPanel index={7} displayIndex={displayViewIndex} />
       </Container>
 
-      <PremiumDialog
-        open={isPremiumDialogOpen}
-        onClose={handleClosePremiumDialog}
-      />
-
-      <PurchaseCoinsDialog
-        open={isPurchaseDialogOpen}
-        onClose={handleClosePurchaseDialog}
-      />
     </div>
   );
 };

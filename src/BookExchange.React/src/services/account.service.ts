@@ -1,7 +1,5 @@
-import { Account, User } from "../types";
-import { fetchApi } from "./fetchApi";
+import { Account } from "../types";
 import { fetchIdentity } from "./fetchIdentity";
-const API_BASE_URL = `https://localhost:5001/api`;
 
 const SignUp = async (userData: Account.SignUpData) => {
   const requestOptions = {
@@ -12,8 +10,7 @@ const SignUp = async (userData: Account.SignUpData) => {
     body: JSON.stringify(userData),
   };
 
-  const result = fetchIdentity(`/api/identity/register`, requestOptions);
-  return result;
+  return fetchIdentity(`/api/identity/register`, requestOptions);
 };
 
 const RequestToken = async (

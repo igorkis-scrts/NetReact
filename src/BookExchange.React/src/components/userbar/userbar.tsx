@@ -50,7 +50,7 @@ const Userbar = () => {
           <>
             <RouterLink href="/profile">
               {" "}
-              Welcome {authContext.user?.username}!
+              Hello, {authContext.user?.username}!
             </RouterLink>
 
             {getNavItems(navDataLoggedIn)}

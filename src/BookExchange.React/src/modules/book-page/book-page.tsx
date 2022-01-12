@@ -33,7 +33,7 @@ import { useFetch } from "hooks";
 import { AuthContext } from "context";
 import { ImageUtils } from "utils";
 
-const API_BASE_URL = `https://localhost:5002/`;
+const API_BASE_URL = `https://localhost:6002/`;
 
 type BookDetailsProps = {
   title: string;
