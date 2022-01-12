@@ -77,7 +77,7 @@ namespace BookExchange.API
                );
 
                services.AddDbContext<BookExchangeDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("BookExchangaDatabase"),
+                    options.UseSqlServer(Configuration.GetConnectionString("BookExchange"),
                     x => x.MigrationsAssembly(typeof(BookExchangeDbContext).Assembly.FullName)));
 
                //var authOptions = services.ConfigureAuthOptions(Configuration);

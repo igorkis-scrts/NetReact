@@ -20,7 +20,7 @@ namespace BookExchange.Infrastructure.Persistance
                    .Build();
 
                optionsBuilder
-                    .UseSqlServer(configuration.GetConnectionString("BookExchangaDatabase"));
+                    .UseSqlServer(configuration.GetConnectionString("BookExchange"));
 
                return new BookExchangeDbContext(optionsBuilder.Options);
           }
