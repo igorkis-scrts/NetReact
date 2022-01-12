@@ -13,8 +13,6 @@ BookExchangeApp is a fully functioning application that allows users to exchange
 ## Key Features 
 * Integration with ElasticSearch for smart search of books (via keywords inside the title/description/author)
 * Authentication as a service (IdentityServer4).
-* Integration with payment systems (PayPal)
-
 
 ## Basic Functionality
 - Post/request/add book to wishlist
