@@ -25,7 +25,7 @@ namespace BookExchange.IdentityServer
                          Id="1"
                     };
 
-                    IdentityResult result = userManager.CreateAsync(user, "mysecreT1!").Result;
+                    IdentityResult result = userManager.CreateAsync(user, "mysecreT1!").GetAwaiter().GetResult();
 
                     if (result.Succeeded)
                     {
@@ -41,7 +41,7 @@ namespace BookExchange.IdentityServer
                          Email = "dimatrubca@outlook.com",
                     };
 
-                    IdentityResult result = userManager.CreateAsync(user, "mysecreT1!").Result;
+                    IdentityResult result = userManager.CreateAsync(user, "mysecreT1!").GetAwaiter().GetResult();
                }
 
                if (userManager.FindByEmailAsync("igor431thelast@gmail.com").Result == null)
@@ -52,7 +52,7 @@ namespace BookExchange.IdentityServer
                          Email = "igor431@outlook.com",
                     };
 
-                    IdentityResult result = userManager.CreateAsync(user, "mysecreT1!").Result;
+                    IdentityResult result = userManager.CreateAsync(user, "mysecreT1!").GetAwaiter().GetResult();
                }
           }
      }

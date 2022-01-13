@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace BookExchange.Infrastructure.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,8 +99,7 @@ namespace BookExchange.Infrastructure.Migrations
                         name: "FK_BookAuthor_Books_BookId1",
                         column: x => x.BookId1,
                         principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -223,8 +224,7 @@ namespace BookExchange.Infrastructure.Migrations
                         name: "FK_Posts_Users_PostedById",
                         column: x => x.PostedById,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace BookExchange.IdentityServer.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -159,12 +161,12 @@ namespace BookExchange.IdentityServer.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "eb7e4baf-459b-4a1e-980c-6cea16bbf720", "0d388f2f-efff-463b-92f1-f6d027edd1db", "admin", "ADMIN" });
+                values: new object[] { "11e28508-9ac9-4b3f-87ec-3ed821a738f8", "78586151-0967-4a2e-aaf3-4a1f7e101d2b", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "2a23b7e5-44b2-485e-a0d9-a608358d1064", "df2f9dbe-2f0b-444c-a95c-c018b3e883fe", "user", "USER" });
+                values: new object[] { "5cb27f6d-e65b-4e18-86a0-d7b169f79e9e", "e1978d4d-7bcb-4df7-9306-9980a809d341", "user", "USER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
