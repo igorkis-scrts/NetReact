@@ -1,11 +1,8 @@
 ﻿using BookExchange.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace BookExchange.Infrastructure.Persistance.Configurations
+namespace BookExchange.Infrastructure.Persistence.Configurations
 {
      class BookAuthorConfig : IEntityTypeConfiguration<BookAuthor>
      {

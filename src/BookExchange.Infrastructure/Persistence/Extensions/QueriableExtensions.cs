@@ -12,7 +12,7 @@ using AutoMapper;
 using System.Reflection;
 using System.Linq.Dynamic.Core;
 
-namespace BookExchange.Infrastructure.Persistance.Extensions
+namespace BookExchange.Infrastructure.Persistence.Extensions
 {
      public static class QueriableExtensions
      {

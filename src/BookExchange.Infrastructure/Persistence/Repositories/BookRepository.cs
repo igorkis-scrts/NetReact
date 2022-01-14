@@ -11,7 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace BookExchange.Infrastructure.Persistance.Repositories
+namespace BookExchange.Infrastructure.Persistence.Repositories
 {
      public class BookRepository : RepositoryBase<Book>, IBookRepository
      {

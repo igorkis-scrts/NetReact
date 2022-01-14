@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookExchange.Infrastructure.Persistance.Configurations
+namespace BookExchange.Infrastructure.Persistence.Configurations
 {
      public class CategoryConfig : IEntityTypeConfiguration<Category>
      {

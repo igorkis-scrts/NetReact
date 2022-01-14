@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookExchange.Infrastructure.Persistance.Repositories
+namespace BookExchange.Infrastructure.Persistence.Repositories
 {
      public class WishlistRepository : RepositoryBase<Wishlist>, IWishlistRepository
      {

@@ -4,7 +4,7 @@ using BookExchange.Domain.Filter;
 using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
 using BookExchange.Domain.Wrappers;
-using BookExchange.Infrastructure.Persistance.Extensions;
+using BookExchange.Infrastructure.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookExchange.Infrastructure.Persistance.Repositories
+namespace BookExchange.Infrastructure.Persistence.Repositories
 {
      public class RequestRepository : RepositoryBase<Request>, IRequestRepository
      {

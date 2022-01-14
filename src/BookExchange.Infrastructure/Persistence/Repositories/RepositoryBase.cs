@@ -3,7 +3,7 @@ using BookExchange.Domain.Filter;
 using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
 using BookExchange.Domain.Wrappers;
-using BookExchange.Infrastructure.Persistance.Extensions;
+using BookExchange.Infrastructure.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using static BookExchange.Domain.Extensions;
 
-namespace BookExchange.Infrastructure.Persistance.Repositories
+namespace BookExchange.Infrastructure.Persistence.Repositories
 {
      public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseEntity
      {

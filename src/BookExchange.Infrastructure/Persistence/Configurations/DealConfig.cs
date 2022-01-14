@@ -6,23 +6,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookExchange.Infrastructure.Persistance.Configurations
+namespace BookExchange.Infrastructure.Persistence.Configurations
 {
-     public class PostConfig : IEntityTypeConfiguration<Post>
+     public class DealConfig : IEntityTypeConfiguration<Deal>
      {
-          public void Configure(EntityTypeBuilder<Post> builder)
+          public void Configure(EntityTypeBuilder<Deal> builder)
           {
                builder.Property(x => x.TimeAdded)
+                    .IsRequired()
                     .HasDefaultValueSql("getdate()");
 
-               builder.Property(x => x.Status)
-                    .HasDefaultValue(PostStatus.Active)
-                    .HasConversion(
-                         x => x.ToString(),
-                         x => (PostStatus)Enum.Parse(typeof(PostStatus), x));
 
-               builder.Property(x => x.Condition)
+               builder.Property(x => x.DealStatus)
                     .HasConversion<string>()
+                    .HasDefaultValue(DealStatus.InDelivery)
                     .HasColumnType("varchar")
                     .HasMaxLength(50);
           }

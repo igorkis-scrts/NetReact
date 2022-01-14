@@ -1,9 +1,9 @@
 ﻿using BookExchange.Domain.Models;
-using BookExchange.Infrastructure.Persistance.Configurations;
+using BookExchange.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System.Data.Common;     
+using System.Data.Common;
 
-namespace BookExchange.Infrastructure.Persistance
+namespace BookExchange.Infrastructure.Persistence
 {
      public class BookExchangeDbContext : DbContext
      {

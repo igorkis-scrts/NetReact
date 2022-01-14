@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookExchange.Infrastructure.Persistance.Configurations
+namespace BookExchange.Infrastructure.Persistence.Configurations
 {
      public class AuthorConfig : IEntityTypeConfiguration<Author>
      {

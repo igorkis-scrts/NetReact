@@ -1,6 +1,6 @@
 ﻿using BookExchange.Application.Books.Events;
 using BookExchange.Domain.Models;
-using BookExchange.Infrastructure.Persistance;
+using BookExchange.Infrastructure.Persistence;
 using MediatR;
 using System;
 using System.Collections.Generic;

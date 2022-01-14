@@ -9,9 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BookExchange.Infrastructure.Persistance.Extensions;
+using BookExchange.Infrastructure.Persistence.Extensions;
 
-namespace BookExchange.Infrastructure.Persistance.Repositories
+namespace BookExchange.Infrastructure.Persistence.Repositories
 {
      public class UserRepository : RepositoryBase<User>, IUserRepository
      {

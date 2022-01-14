@@ -7,7 +7,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookExchange.Infrastructure.Persistance
+namespace BookExchange.Infrastructure.Persistence
 {
      public class BookExchangeDbContextFactory : IDesignTimeDbContextFactory<BookExchangeDbContext>
      {
