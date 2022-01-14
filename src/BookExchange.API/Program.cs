@@ -1,5 +1,3 @@
-using System.Configuration;
-using System.Net.Mime;
 using BookExchange.API.Configuration;
 using BookExchange.Application.Common;
 using BookExchange.Application.Common.Exceptions;
@@ -110,7 +108,6 @@ builder.Services.AddScoped<DbContext, BookExchangeDbContext>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
-builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBookReviewRepository, BookReviewRepository>();
 builder.Services.AddScoped<IRequestRepository, RequestRepository>();

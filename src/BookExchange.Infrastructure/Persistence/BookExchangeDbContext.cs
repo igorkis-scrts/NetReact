@@ -2,13 +2,14 @@
 using BookExchange.Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
+using System.Linq;
 
 namespace BookExchange.Infrastructure.Persistence
 {
      public class BookExchangeDbContext : DbContext
      {
           private readonly string _connectionString;
-          private DbConnection _connection;
+          private readonly DbConnection _connection;
 
           public DbSet<User> Users { get; set; }
           public DbSet<Post> Posts { get; set; }
@@ -17,7 +18,6 @@ namespace BookExchange.Infrastructure.Persistence
           public DbSet<Request> Requests { get; set; }
           public DbSet<Bookmark> Bookmarks { get; set; }
           public DbSet<Author> Authors { get; set; }
-          public DbSet<Payment> Payments { get; set; }
           public DbSet<BookReview> BookReviews { get; set; }
           public DbSet<Deal> Deals { get; set; }
 
@@ -52,7 +52,7 @@ namespace BookExchange.Infrastructure.Persistence
           protected override void OnModelCreating(ModelBuilder modelBuilder)
           {
                base.OnModelCreating(modelBuilder);
-
+               
                modelBuilder.ApplyConfiguration(new UserConfig());
                modelBuilder.ApplyConfiguration(new UserContactConfig());
                modelBuilder.ApplyConfiguration(new PostConfig());

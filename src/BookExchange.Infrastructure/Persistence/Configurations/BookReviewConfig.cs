@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace BookExchange.Infrastructure.Persistence.Configurations
 {
-     public class BookReviewConfig : IEntityTypeConfiguration<BookReview>
-     {
-          public void Configure(EntityTypeBuilder<BookReview> builder)
-          {
-              // builder.Property(x => x.Id).ValueGeneratedNever();
-              // builder.Property(x => x.UserId).HasDefaultValue(1);
-             //  builder.Ignore(x => x.Id);
-          }
-     }
+	public class BookReviewConfig : IEntityTypeConfiguration<BookReview>
+	{
+		public void Configure(EntityTypeBuilder<BookReview> builder)
+		{
+			builder.Property(p => p.Rating).HasColumnType("decimal(18,4)");
+			// builder.Property(x => x.Id).ValueGeneratedNever();
+			// builder.Property(x => x.UserId).HasDefaultValue(1);
+			//  builder.Ignore(x => x.Id);
+		}
+	}
 }
