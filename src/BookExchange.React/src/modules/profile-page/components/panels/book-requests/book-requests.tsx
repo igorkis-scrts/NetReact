@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSnackbar } from "notistack";
-import { useHistory } from "react-router";
 
 import { PaginatedView } from "components/paginated-view";
 import { RequestListCard } from "components/cards";
@@ -10,7 +9,6 @@ import { PanelProps } from "./../";
 const BookRequestsPanel = ({ index, displayIndex }: PanelProps) => {
   const { enqueueSnackbar } = useSnackbar();
   const [updateComponent, setUpdateComponent] = useState<number>(0);
-  const history = useHistory();
 
   const approveRequest = async (requestId: number) => {
     try {

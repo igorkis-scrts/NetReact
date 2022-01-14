@@ -1,33 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Avatar,
   Button,
   Container,
-  Dialog,
-  DialogTitle,
   Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
   Paper,
   Typography,
 } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 
-import { Divider } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 import { UserService } from "services";
 
-import { useDemoData } from "@material-ui/x-grid-data-generator";
 import Box from "@material-ui/core/Box";
-import Rating from "@material-ui/lab/Rating";
-
-import PersonIcon from "@material-ui/icons/Person";
-import AddIcon from "@material-ui/icons/Add";
-import ListItemText from "@material-ui/core/ListItemText";
 
 import { useStyles } from "./book-page.styles";
 import { BookService } from "../../services";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { PostsGrid } from "./components";
 import { useFetch } from "hooks";
 import { AuthContext } from "context";
@@ -46,15 +34,10 @@ type BookDetailsProps = {
   publisher: string;
 };
 
-interface RouteParams {
-  id: string;
-}
-
 const BookDetails = (props: any) => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
   const { user } = useContext(AuthContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -63,7 +46,7 @@ const BookDetails = (props: any) => {
     isLoading,
   } = useFetch(BookService.GetBookById);
 
-  const { id: bookId } = useParams<RouteParams>();
+  const { id: bookId } = useParams<{id: string}>();
 
   useEffect(() => {
     if (isNaN(Number(bookId))) {
@@ -94,7 +77,7 @@ const BookDetails = (props: any) => {
       return;
     }
 
-    history.push("/posts/add/" + book.id);
+    navigate("/posts/add/" + book.id);
   };
 
   if (isLoading) {

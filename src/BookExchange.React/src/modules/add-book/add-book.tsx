@@ -9,6 +9,7 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 import { useStyles } from "./add-book.styles";
@@ -17,7 +18,6 @@ import { BookService } from "../../services";
 import { UploadFile } from "components/upload-file";
 import { Autocomplete } from "@material-ui/lab";
 import { AuthorsService, CategoryService } from "services";
-import { useHistory } from "react-router";
 import { useSnackbar } from "notistack";
 
 const schema = yup.object().shape({
@@ -40,7 +40,7 @@ const AddBook = () => {
     Category.Category[]
   >([]);
   const [currentFile, setCurrentFile] = useState();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -79,10 +79,10 @@ const AddBook = () => {
       var book = await BookService.AddBook(data);
 
       enqueueSnackbar("Book Created Successfully", { variant: "success" });
-      history.push("/book/" + book.id);
+      navigate("/book/" + book.id);
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
-      history.push("/");
+      navigate("/");
     }
   };
 

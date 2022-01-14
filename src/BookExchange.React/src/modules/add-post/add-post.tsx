@@ -14,13 +14,9 @@ import { useStyles } from "./add-post.styles";
 import { BookCard } from "./components";
 import { PostForm } from "./components";
 
-interface RouteParams {
-  bookId: string;
-}
-
 const AddPost = () => {
   const classes = useStyles();
-  const { bookId } = useParams<RouteParams>();
+  const { bookId } = useParams<{bookId: string}>();
   console.log(bookId);
 
   return (

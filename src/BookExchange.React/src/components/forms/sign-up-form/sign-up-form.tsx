@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useSnackbar } from "notistack";
-import { useHistory } from "react-router";
 
 import {
   Button,
@@ -11,6 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -37,7 +37,7 @@ const schema = yup.object().shape({
 const SignUpForm = () => {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -71,7 +71,7 @@ const SignUpForm = () => {
 
       await UserService.CreateProfile();
       authContext.fetchCurrentUser();
-      history.push("/profile");
+      navigate("/profile");
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }

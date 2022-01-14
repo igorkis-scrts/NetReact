@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 
 import { Navbar } from "../../components/navbar";
 import { Userbar } from "../../components/userbar";
@@ -15,39 +15,33 @@ import { AddPost } from "../../modules/add-post";
 
 import { PurchaseCoinsCallback, CancelPaymentCallback } from "../../callbacks";
 
-interface RouterContainerProps {
-  children: React.ReactNode;
-}
-
 const RouterContainer = () => {
   return (
-    <Router>
+    <>
       <Navbar />
       <h1>...</h1>
       <Userbar />
-      <Switch>
+      <Routes>
         <Route
-          exact
           path="/callbacks/single-payment/finish"
-          component={PurchaseCoinsCallback}
+          element={<PurchaseCoinsCallback/>}
         />
         <Route
-          exact
           path="/callbacks/single-payment/cancel"
-          component={CancelPaymentCallback}
+          element={CancelPaymentCallback}
         />
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/sign-in" component={SignInPage} />
-        <Route exact path="/sign-up" component={SignUpPage} />
-        <Route exact path="/profile" component={ProfilePage} />
-        <Route exact path="/search" render={(props) => <SearchBooks />} />
-        <Route exact path="/book/:id" component={BookDetails} />
-        <Route exact path="/post-book" component={PostBooks} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/sign-in" element={<SignInPage/>} />
+        <Route path="/sign-up" element={<SignUpPage/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
+        <Route path="/search" element={<SearchBooks />} />
+        <Route path="/book/:id" element={<BookDetails/>} />
+        <Route path="/post-book" element={<PostBooks/>} />
 
-        <Route exact path="/add-book" component={AddBook} />
-        <Route exact path="/posts/add/:bookId" component={AddPost} />
-      </Switch>
-    </Router>
+        <Route path="/add-book" element={<AddBook/>} />
+        <Route path="/posts/add/:bookId" element={<AddPost/>} />
+      </Routes>
+    </>
   );
 };
 

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Container, Typography } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 import { PaymentService } from "../services";
 import { useSnackbar } from "notistack";
-import { useHistory } from "react-router";
 
 const CancelPaymentCallback = (props: any) => {
   const { enqueueSnackbar } = useSnackbar();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const cancelPayment = async () => {
@@ -17,7 +17,7 @@ const CancelPaymentCallback = (props: any) => {
       } catch (e) {
         console.log(e);
       }
-      history.push("/profile");
+      navigate("/profile");
     };
 
     cancelPayment();

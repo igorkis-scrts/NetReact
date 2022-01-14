@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Typography } from "@material-ui/core";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
-import { useHistory } from "react-router";
 
 import { PaymentService } from "../services";
 import { AuthContext } from "context";
@@ -14,7 +13,7 @@ function useQuery() {
 const PurchaseCoinsCallback = (props: any) => {
   const [message, setMessage] = useState<string>("Processing payment...");
   const { enqueueSnackbar } = useSnackbar();
-  const history = useHistory();
+  const navigate = useNavigate();
   const authContext = useContext(AuthContext);
 
   let query = useQuery();
@@ -38,7 +37,7 @@ const PurchaseCoinsCallback = (props: any) => {
       } catch (e) {
         console.log(e);
       }
-      history.push("/profile");
+      navigate("/profile");
     };
 
     finishPayment();

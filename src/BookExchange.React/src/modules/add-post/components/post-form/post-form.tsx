@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Post } from "types";
 import { PostService } from "services";
 import { useStyles } from "./post-form.styles";
@@ -16,7 +17,6 @@ import { AuthContext } from "context";
 import { VariantType, useSnackbar } from "notistack";
 import Condition from "yup/lib/Condition";
 import { Autocomplete } from "@material-ui/lab";
-import { useHistory } from "react-router";
 
 interface PostFormParams {
   bookId: number;
@@ -26,7 +26,7 @@ const PostForm = ({ bookId }: PostFormParams) => {
   const classes = useStyles();
   const { user } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -55,7 +55,7 @@ const PostForm = ({ bookId }: PostFormParams) => {
     try {
       await PostService.CreatePost(data);
       enqueueSnackbar("Book added to bookshelf", { variant: "success" });
-      history.push("/profile");
+      navigate("/profile");
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
