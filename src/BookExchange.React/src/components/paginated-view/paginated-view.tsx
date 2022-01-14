@@ -134,17 +134,14 @@ const PaginatedView = <
           ))}
         </Grid>
       )}
-      {console.log("Table", data.totalRecords, rowsPerPage, page)}
       <TablePagination
-        component="div"
         count={data.totalRecords}
         page={page - 1}
-        onChangePage={handleChangePage}
-        rowsPerPage={rowsPerPage}
+        onPageChange={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
         rowsPerPageOptions={[2, 3, 4]}
-      />
-      {console.log("rendered")}
+        rowsPerPage={rowsPerPage}
+        />
     </div>
   );
 };

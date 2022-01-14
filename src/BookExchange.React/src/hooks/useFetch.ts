@@ -15,8 +15,7 @@ const useFetch = <T>(service: (...args: any[]) => Promise<T>) => {
         const response = await service(...args);
 
         setData(response);
-      } catch (error) {
-        console.log("Error", error);
+      } catch (error: any) {
         enqueueSnackbar(error.message, { variant: "error" });
       } finally {
         setLoading(false);

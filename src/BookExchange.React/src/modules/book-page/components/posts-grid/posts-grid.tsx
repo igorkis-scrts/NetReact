@@ -53,7 +53,7 @@ const PostsGrid = ({ bookId }: PostsGridProps) => {
     try {
       var result = await UserService.RequestPost(user.id, postId);
       enqueueSnackbar("Reqeust sent successfully!", { variant: "success" });
-    } catch (e) {
+    } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
   };

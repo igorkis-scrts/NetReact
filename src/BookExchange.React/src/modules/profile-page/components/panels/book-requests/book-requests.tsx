@@ -19,7 +19,7 @@ const BookRequestsPanel = ({ index, displayIndex }: PanelProps) => {
         variant: "success",
       });
       setUpdateComponent(Math.random());
-    } catch (e) {
+    } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
   };

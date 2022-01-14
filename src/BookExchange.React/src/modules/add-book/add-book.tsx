@@ -13,7 +13,7 @@ import * as yup from "yup";
 
 import { useStyles } from "./add-book.styles";
 import { Author, Category, Book } from "types";
-import { BookService } from "../../services/books.service";
+import { BookService } from "../../services";
 import { UploadFile } from "components/upload-file";
 import { Autocomplete } from "@material-ui/lab";
 import { AuthorsService, CategoryService } from "services";
@@ -80,7 +80,7 @@ const AddBook = () => {
 
       enqueueSnackbar("Book Created Successfully", { variant: "success" });
       history.push("/book/" + book.id);
-    } catch (e) {
+    } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
       history.push("/");
     }

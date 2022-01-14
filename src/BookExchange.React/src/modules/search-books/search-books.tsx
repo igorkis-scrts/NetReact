@@ -99,14 +99,13 @@ const SearchBooks = () => {
         </Grid>
       )}
       <TablePagination
-        component="div"
         count={totalRecords}
         page={page - 1}
-        onChangePage={handleChangePage}
+        onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
         rowsPerPageOptions={[1, 2, 3, 5, 10]}
-      />{" "}
+      />
     </Container>
   );
 };

@@ -83,7 +83,7 @@ const BookDetails = (props: any) => {
     try {
       var result = await UserService.AddBookToWishlist(user.id, Number(bookId));
       enqueueSnackbar("Book Added To WishList", { variant: "success" });
-    } catch (e) {
+    } catch (e:any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
   };

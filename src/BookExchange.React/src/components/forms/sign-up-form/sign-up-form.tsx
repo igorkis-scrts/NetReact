@@ -72,7 +72,7 @@ const SignUpForm = () => {
       await UserService.CreateProfile();
       authContext.fetchCurrentUser();
       history.push("/profile");
-    } catch (e) {
+    } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
   };

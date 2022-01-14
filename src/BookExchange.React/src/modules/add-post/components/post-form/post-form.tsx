@@ -56,7 +56,7 @@ const PostForm = ({ bookId }: PostFormParams) => {
       await PostService.CreatePost(data);
       enqueueSnackbar("Book added to bookshelf", { variant: "success" });
       history.push("/profile");
-    } catch (e) {
+    } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
   };
