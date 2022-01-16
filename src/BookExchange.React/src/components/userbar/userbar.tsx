@@ -1,4 +1,4 @@
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { Link as RouterLink } from "@material-ui/core";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context";
@@ -48,17 +48,10 @@ const Userbar = () => {
           <>{getNavItems(navData)}</>
         ) : (
           <>
-            <RouterLink href="/profile">
-              {" "}
-              Hello, {authContext.user?.username}!
-            </RouterLink>
+            <RouterLink href="/profile"> Hello, {authContext.user?.username}!</RouterLink>
 
             {getNavItems(navDataLoggedIn)}
-            <RouterLink
-              href="/"
-              className={classes.linkItem}
-              onClick={authContext.logout}
-            >
+            <RouterLink href="/" className={classes.linkItem} onClick={authContext.logout}>
               Sign Out
             </RouterLink>
           </>
