@@ -1,4 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
+import React, { useEffect } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -8,26 +10,24 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useSnackbar } from "notistack";
 
-import { Button, SortDirection, Box, Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { PostService } from "services/posts.service";
-import { PostsFilter } from "filters";
 import { useFetch } from "hooks";
 import { Post } from "types";
 import { useStyles } from "./posts-grid-styles";
-import { AuthContext } from "context";
 import { UserService } from "services";
 
 interface PostsGridProps {
   bookId: number;
 }
 
-const PostsGrid = ({ bookId }: PostsGridProps) => {
+const PostsGrid = observer(({ bookId }: PostsGridProps) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-  const { user } = useContext(AuthContext);
+  const { auth } = useStores();
 
   const {
-    data: data,
+    data,
     fetch: fetchData,
     isLoading: isDataLoading,
   } = useFetch(PostService.GetPosts);
@@ -45,13 +45,13 @@ const PostsGrid = ({ bookId }: PostsGridProps) => {
   }, []);
 
   const handleRequestPost = async (postId: number) => {
-    if (!user) {
+    if (!auth!.user) {
       enqueueSnackbar("Please sign in first", { variant: "error" });
       return;
     }
 
     try {
-      var result = await UserService.RequestPost(user.id, postId);
+      const result = await UserService.RequestPost(auth!.user.id, postId);
       enqueueSnackbar("Reqeust sent successfully!", { variant: "success" });
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
@@ -75,7 +75,7 @@ const PostsGrid = ({ bookId }: PostsGridProps) => {
             <TableRow>
               <TableCell>Posted By</TableCell>
               <TableCell>Book Condition</TableCell>
-              <TableCell></TableCell>
+              <TableCell/>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -102,6 +102,6 @@ const PostsGrid = ({ bookId }: PostsGridProps) => {
       </TableContainer>
     </>
   );
-};
+});
 
 export { PostsGrid };

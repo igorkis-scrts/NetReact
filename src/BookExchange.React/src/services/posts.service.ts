@@ -1,4 +1,3 @@
-import { PostsFilter } from "filters";
 import { fetchApi } from "./fetchApi";
 import { Post, Common } from "types";
 import { ServiceUtils } from "utils";

@@ -7,9 +7,10 @@ import {
   Divider,
   Link,
 } from "@material-ui/core";
-import { AuthContext } from "context";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
 
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useStyles } from "./profile-page-styles";
 
 import { StatisticsBar } from "./components";
@@ -23,9 +24,11 @@ import {
   BookShelfPanel,
 } from "./components";
 
-const ProfilePage = () => {
+const ProfilePage = observer(() => {
   const classes = useStyles();
-  const { user } = useContext(AuthContext);
+  const { auth } = useStores();
+  const user = auth!.user;
+
   const [displayViewIndex, setDisplayViewIndex] = useState<number>(1);
 
   if (!user) {
@@ -87,6 +90,6 @@ const ProfilePage = () => {
 
     </div>
   );
-};
+});
 
 export { ProfilePage };

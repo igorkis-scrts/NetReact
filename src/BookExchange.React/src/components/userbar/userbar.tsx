@@ -1,7 +1,8 @@
 import { Container } from "@material-ui/core";
 import { Link as RouterLink } from "@material-ui/core";
-import React, { useContext } from "react";
-import { AuthContext } from "../../context";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
+import React from "react";
 import { useStyles } from "./userbar.styles";
 
 interface NavData {
@@ -27,9 +28,10 @@ const navDataLoggedIn: NavData[] = [
   },
 ];
 
-const Userbar = () => {
+const Userbar = observer(() => {
   const classes = useStyles();
-  const authContext = useContext(AuthContext);
+  const { auth } = useStores();
+  const { user, isLoggedIn } = auth!;
 
   const getNavItems = (data: NavData[]) => {
     return data.map(({ label, href }) => {
@@ -41,17 +43,21 @@ const Userbar = () => {
     });
   };
 
+  const handleOnClick = () => {
+    auth!.signOut();
+  }
+
   return (
     <>
       <Container className={classes.root}>
-        {!authContext.isLoggedIn ? (
+        {!isLoggedIn ? (
           <>{getNavItems(navData)}</>
         ) : (
           <>
-            <RouterLink href="/profile"> Hello, {authContext.user?.username}!</RouterLink>
+            <RouterLink href="/profile"> Hello, {user?.username}!</RouterLink>
 
             {getNavItems(navDataLoggedIn)}
-            <RouterLink href="/" className={classes.linkItem} onClick={authContext.logout}>
+            <RouterLink href="/" className={classes.linkItem} onClick={handleOnClick}>
               Sign Out
             </RouterLink>
           </>
@@ -59,6 +65,6 @@ const Userbar = () => {
       </Container>
     </>
   );
-};
+});
 
 export { Userbar };

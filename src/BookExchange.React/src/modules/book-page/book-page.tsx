@@ -1,11 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  Button,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
+import React, { useEffect } from "react";
+import { Button, Container, Grid, Paper, Typography } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 
 import { useNavigate } from "react-router-dom";
@@ -18,35 +14,17 @@ import { BookService } from "../../services";
 import { useParams } from "react-router";
 import { PostsGrid } from "./components";
 import { useFetch } from "hooks";
-import { AuthContext } from "context";
 import { ImageUtils } from "utils";
 
-const API_BASE_URL = `https://localhost:6002/`;
-
-type BookDetailsProps = {
-  title: string;
-  isbn: string;
-  authors: string[];
-  categories: string[];
-  description: string;
-  imagePath: string;
-  published: string;
-  publisher: string;
-};
-
-const BookDetails = (props: any) => {
+const BookDetails = observer(() => {
   const classes = useStyles();
-  const { user } = useContext(AuthContext);
+  const { auth } = useStores();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  const {
-    data: book,
-    fetch: fetchBook,
-    isLoading,
-  } = useFetch(BookService.GetBookById);
+  const { data: book, fetch: fetchBook, isLoading } = useFetch(BookService.GetBookById);
 
-  const { id: bookId } = useParams<{id: string}>();
+  const { id: bookId } = useParams<{ id: string }>();
 
   useEffect(() => {
     if (isNaN(Number(bookId))) {
@@ -58,21 +36,21 @@ const BookDetails = (props: any) => {
   }, [bookId]);
 
   const handleAddToWishlist = async () => {
-    if (!user) {
+    if (!auth!.user) {
       enqueueSnackbar("Please sign in first", { variant: "error" });
       return;
     }
 
     try {
-      var result = await UserService.AddBookToWishlist(user.id, Number(bookId));
+      var result = await UserService.AddBookToWishlist(auth!.user.id, Number(bookId));
       enqueueSnackbar("Book Added To WishList", { variant: "success" });
-    } catch (e:any) {
+    } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
   };
 
   const handleAddToBookshelf = async () => {
-    if (!user || !book) {
+    if (!auth!.user || !book) {
       enqueueSnackbar("Please sign in first", { variant: "error" });
       return;
     }
@@ -94,11 +72,7 @@ const BookDetails = (props: any) => {
       <Paper className={classes.bookPaper}>
         <Grid container spacing={4}>
           <Grid item className={classes.bookInfo} md={9}>
-            <Typography
-              variant="h5"
-              component="h1"
-              className={classes.bookTitle}
-            >
+            <Typography variant="h5" component="h1" className={classes.bookTitle}>
               {book.title}
             </Typography>
             {book.details?.publishedYear && (
@@ -167,6 +141,6 @@ const BookDetails = (props: any) => {
       </Paper>
     </Container>
   );
-};
+});
 
 export { BookDetails };

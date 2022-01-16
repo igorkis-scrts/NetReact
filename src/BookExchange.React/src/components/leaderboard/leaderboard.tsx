@@ -2,15 +2,12 @@ import React, { useEffect } from "react";
 
 import {
   Avatar,
-  Checkbox,
   Grid,
   List,
   ListItem,
   ListItemAvatar,
-  Box,
   ListItemSecondaryAction,
   ListItemText,
-  ListSubheader,
   Typography,
 } from "@material-ui/core";
 
@@ -42,7 +39,7 @@ const Leaderboard = () => {
       </Typography>
 
       <List dense>
-        <Grid container justify="space-between" className={classes.header}>
+        <Grid container justifyContent="space-between" className={classes.header}>
           <Grid item>
             <Typography variant="h6">Username</Typography>
           </Grid>
@@ -69,21 +66,6 @@ const Leaderboard = () => {
           );
         })}
 
-        {/* <Grid container>
-          <Grid item xs={1}>
-            <Grid container justify="center" alignItems="center">
-              <Typography variant="h6">Rank</Typography>
-            </Grid>{" "}
-          </Grid>
-          <Grid item xs={9}>
-            <Typography variant="h6">Username</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Grid container justify="center" alignItems="center">
-              <Typography variant="h6">Exchanged Books</Typography>
-            </Grid>{" "}
-          </Grid>
-        </Grid> */}
       </List>
     </div>
   );

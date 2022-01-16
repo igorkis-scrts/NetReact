@@ -1,23 +1,16 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  TablePagination,
-  Typography,
-} from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
+import { Box, Grid, IconButton, TablePagination, Typography } from "@material-ui/core";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
+import React, { useEffect, useState } from "react";
 import { useStyles } from "./paginated-view.styles";
 import ViewComfyIcon from "@material-ui/icons/ViewComfy";
 import ReorderIcon from "@material-ui/icons/Reorder";
 
 import { Common, Book, Post, Request, Deal } from "types";
 import { useFetch } from "hooks";
-import { AuthContext } from "context";
 import { CardProps } from "components/cards";
 
-interface PaginatedViewProps<
-  TData extends Book.Book | Post.Post | Deal.Deal | Request.Request
-> {
+interface PaginatedViewProps<TData extends Book.Book | Post.Post | Deal.Deal | Request.Request> {
   title: string;
   listCard: React.FC<CardProps<TData>>;
   squareCard: React.FC<CardProps<TData>>;
@@ -26,47 +19,34 @@ interface PaginatedViewProps<
   cardActionText?: string;
 }
 
-const PaginatedView = <
-  TData extends Book.Book | Post.Post | Deal.Deal | Request.Request
->(
-  props: PaginatedViewProps<TData>
-) => {
-  const [page, setPage] = useState<number>(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  // const [data, setData] = useState<TData[]>();
-  const [isListView, setListView] = useState<boolean>(true);
-  const { user } = useContext(AuthContext);
+type GenericData = Book.Book | Post.Post | Deal.Deal | Request.Request;
+
+const PaginatedView = observer(function RHFTaxpayerSelection<TData extends GenericData>(props: PaginatedViewProps<TData>) {
+  const [ page, setPage ] = useState<number>(1);
+  const [ rowsPerPage, setRowsPerPage ] = useState<number>(10);
+  const [ isListView, setListView ] = useState<boolean>(true);
 
   const classes = useStyles();
+  const { auth } = useStores();
 
-  const {
-    data,
-    fetch: fetchData,
-    isLoading: isDataLoading,
-  } = useFetch(props.service);
+  const { data, fetch: fetchData, isLoading: isDataLoading } = useFetch(props.service);
 
   const ListCard = props.listCard;
   const SquareCard = props.squareCard;
 
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
+  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   useEffect(() => {
-    console.log("User: ", user, user?.id);
-    fetchData(user?.id, rowsPerPage, page);
+    fetchData(auth!.user?.id, rowsPerPage, page);
     //eslint-disable-next-line
-  }, [page, rowsPerPage]);
+  }, [ page, rowsPerPage ]);
 
   if (isDataLoading) {
     return <div>Loading data...</div>;
@@ -78,8 +58,6 @@ const PaginatedView = <
 
   return (
     <div>
-      {console.log(props.title)}
-      {console.log(data)}
       <Grid container justify="space-between">
         <Grid item>
           <Typography variant="h5">{props.title}</Typography>
@@ -105,31 +83,19 @@ const PaginatedView = <
         </Grid>
       </Grid>
 
-      <Grid
-        container
-        justify="flex-end"
-        className={classes.filterIconsContainer}
-      ></Grid>
+      <Grid container justify="flex-end" className={classes.filterIconsContainer} />
 
       {isListView ? (
         data.data?.map((item) => (
           <Box my={3} key={item.id}>
-            <ListCard
-              cardItem={item}
-              action={props.cardAction}
-              actionText={props.cardActionText}
-            />
+            <ListCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
           </Box>
         ))
       ) : (
         <Grid container spacing={4}>
           {data.data?.map((item) => (
             <Grid item sm={3} key={item.id}>
-              <SquareCard
-                cardItem={item}
-                action={props.cardAction}
-                actionText={props.cardActionText}
-              />
+              <SquareCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
             </Grid>
           ))}
         </Grid>
@@ -139,11 +105,11 @@ const PaginatedView = <
         page={page - 1}
         onPageChange={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
-        rowsPerPageOptions={[2, 3, 4]}
+        rowsPerPageOptions={[ 2, 3, 4 ]}
         rowsPerPage={rowsPerPage}
-        />
+      />
     </div>
   );
-};
+});
 
 export { PaginatedView };

@@ -62,7 +62,7 @@ const SearchBooks = () => {
       />
       <Grid
         container
-        justify="flex-end"
+        justifyContent="flex-end"
         className={classes.filterIconsContainer}
       >
         <IconButton

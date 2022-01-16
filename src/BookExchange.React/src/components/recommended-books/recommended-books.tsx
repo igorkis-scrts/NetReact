@@ -1,36 +1,32 @@
 import { Box, Typography } from "@material-ui/core";
-import { AuthContext } from "context";
+import { useStores } from "@stores/useStores";
 import { useFetch } from "hooks";
-import React, { useContext, useEffect } from "react";
+import { observer } from "mobx-react";
+import React, { useEffect } from "react";
 import { UserService } from "services";
 import { useStyles } from "./recommended-books.styles";
 import { BookListCard } from "components/cards";
 
-const RecommendedBooks = () => {
+const RecommendedBooks = observer(() => {
   const classes = useStyles();
-  const { user } = useContext(AuthContext);
+  const { auth } = useStores();
 
-  const {
-    data: books,
-    fetch: fetchBook,
-    isLoading,
-  } = useFetch(UserService.GetRecommendedBooks);
+  const { data: books, fetch: fetchBook, isLoading } = useFetch(UserService.GetRecommendedBooks);
 
   useEffect(() => {
-    console.log(user);
-    if (!user) {
+    if (!auth!.user) {
       return;
     }
 
-    fetchBook(user.id);
-  }, [user, fetchBook]);
+    fetchBook(auth!.user.id);
+  }, [ auth!.user, fetchBook]);
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
 
-  if (!user) {
-    return <></>;
+  if (! auth!.user) {
+    return null;
   }
 
   return (
@@ -43,6 +39,6 @@ const RecommendedBooks = () => {
       ))}
     </div>
   );
-};
+});
 
 export { RecommendedBooks };

@@ -89,13 +89,13 @@ const StatisticsBar = ({ setDisplayViewIndex, userId }: StatisticsBarProps) => {
   }
 
   return (
-    <Grid container className={classes.root} justify="space-between">
+    <Grid container className={classes.root} justifyContent="space-between">
       {statisticsData.map((item, index) => (
         <Grid item key={index} xs={2}>
           <Grid
             container
             direction="column"
-            justify="center"
+            justifyContent="center"
             alignContent="center"
           >
             <Grid item xs={12} className={classes.statisticsItem}>

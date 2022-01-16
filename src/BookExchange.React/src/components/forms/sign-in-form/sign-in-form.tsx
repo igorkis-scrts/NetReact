@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import { useStores } from "@stores/useStores";
+import React from "react";
 import {
   Button,
-  FormControlLabel,
   Grid,
   Link,
-  Paper,
   TextField,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
@@ -14,8 +13,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useStyles } from "./sign-in-form.styles";
 import { Account } from "../../../types";
-import { AccountService, UserService } from "../../../services";
-import { AuthContext } from "../../../context";
 import { useSnackbar } from "notistack";
 
 const schema = yup.object().shape({
@@ -25,7 +22,7 @@ const schema = yup.object().shape({
 
 const SignInForm = () => {
   const classes = useStyles();
-  const authContext = useContext(AuthContext);
+  const { auth } = useStores();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -39,19 +36,9 @@ const SignInForm = () => {
 
   const onSubmit = async (data: Account.SignInData) => {
     try {
-      const { access_token, expires_in } = await AccountService.RequestToken(
-        data.username,
-        data.password
-      );
+      await auth!.signIn(data.username, data.password);
+      await auth!.fetchCurrentUser();
 
-      const expirationTime = new Date(
-        new Date().getTime() + Number(expires_in) * 1000
-      );
-      console.log(`Expiration time: `, expirationTime);
-
-      authContext.login(access_token, expirationTime);
-
-      await authContext.fetchCurrentUser();
       navigate("/profile");
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
@@ -101,7 +88,7 @@ const SignInForm = () => {
       >
         Sign In
       </Button>
-      <Grid container justify="flex-end">
+      <Grid container justifyContent="flex-end">
         <Grid item>
           <Link href="sign-up" variant="body2">
             Don't have an account? Sign up

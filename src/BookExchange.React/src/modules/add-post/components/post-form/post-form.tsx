@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
+import React, { useEffect } from "react";
 import {
   Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   TextField,
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
@@ -13,26 +11,22 @@ import { Post } from "types";
 import { PostService } from "services";
 import { useStyles } from "./post-form.styles";
 import { useFetch } from "hooks";
-import { AuthContext } from "context";
-import { VariantType, useSnackbar } from "notistack";
-import Condition from "yup/lib/Condition";
+import { useSnackbar } from "notistack";
 import { Autocomplete } from "@material-ui/lab";
 
 interface PostFormParams {
   bookId: number;
 }
 
-const PostForm = ({ bookId }: PostFormParams) => {
+const PostForm = observer(({ bookId }: PostFormParams) => {
   const classes = useStyles();
-  const { user } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
+  const { auth } = useStores();
   const navigate = useNavigate();
 
   const {
-    register,
     handleSubmit,
     control,
-    formState: { errors },
   } = useForm<Post.CreatePost>();
 
   const {
@@ -47,10 +41,10 @@ const PostForm = ({ bookId }: PostFormParams) => {
 
   const onSubmit = async (data: Post.CreatePost) => {
     console.log("on submit post", data);
-    if (!user) return;
+    if (!auth!.user) return;
 
     data.bookId = bookId;
-    data.postedById = user?.id;
+    data.postedById = auth!.user?.id;
 
     try {
       await PostService.CreatePost(data);
@@ -90,6 +84,6 @@ const PostForm = ({ bookId }: PostFormParams) => {
       </Button>{" "}
     </form>
   );
-};
+});
 
 export { PostForm };

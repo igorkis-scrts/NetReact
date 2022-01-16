@@ -8,19 +8,14 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useContext, useEffect, useState } from "react";
+import { useStores } from "@stores/useStores";
+import { observer } from "mobx-react";
+import React, { useState } from "react";
+import { User } from "../../../../../types";
 import { useStyles } from "./contacts.styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from "react-country-region-selector";
-import { AuthContext } from "context";
-import { Account, User } from "types";
-import { AccountService } from "services";
 import { PanelProps } from "./../";
 
 const schema = yup.object().shape({
@@ -34,20 +29,18 @@ const schema = yup.object().shape({
   street: yup.string().required(),
 });
 
-const ContactsPanel = ({ index, displayIndex }: PanelProps) => {
+const ContactsPanel = observer(({ index, displayIndex }: PanelProps) => {
   const classes = useStyles();
-  const authContext = useContext(AuthContext);
+  const { auth } = useStores();
   const [isUpdatingContacts, setUpdatingContacts] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<User.User>({
     resolver: yupResolver(schema),
   });
-  //   useEffect(() => {});
 
-  const updateUserDetails = async (data: User.User) => {};
+  const updateUserDetails = async () => {};
 
   const handleModifyContacts = () => {
     setUpdatingContacts(true);
@@ -73,34 +66,34 @@ const ContactsPanel = ({ index, displayIndex }: PanelProps) => {
               //   {authContext.user?.firstName ? value={authContext.user?.firstName} : ''}
               label="First Name"
               fullWidth
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={3}>
             <TextField
               {...register("lastName")}
               disabled={!isUpdatingContacts}
-              value={authContext.user?.lastName || "Unknown"}
+              value={auth!.user?.lastName || "Unknown"}
               label="Last Name"
               fullWidth
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={6}>
             <TextField
               {...register("userContact.email")}
               disabled={!isUpdatingContacts}
-              value={authContext.user?.userContact?.email || "Unknown"}
+              value={auth!.user?.userContact?.email || "Unknown"}
               label="Email"
               fullWidth
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={4}>
             <TextField
               {...register("userContact.phoneNumber")}
               disabled={!isUpdatingContacts}
-              value={authContext.user?.userContact?.phoneNumber || "unknown"}
+              value={auth!.user?.userContact?.phoneNumber || "unknown"}
               label="Phone number"
               fullWidth
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={3}>
             <InputLabel id="demo-simple-select-label">Country</InputLabel>
@@ -124,28 +117,28 @@ const ContactsPanel = ({ index, displayIndex }: PanelProps) => {
             <TextField
               {...register("userContact.region")}
               disabled={!isUpdatingContacts}
-              value={authContext.user?.userContact?.region || "unknown"}
+              value={auth!.user?.userContact?.region || "unknown"}
               label="Region"
               fullWidth
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={3}>
             <TextField
               {...register("userContact.city")}
               disabled={!isUpdatingContacts}
-              value={authContext.user?.userContact?.city || "unknown"}
+              value={auth!.user?.userContact?.city || "unknown"}
               label="City"
               fullWidth
-            ></TextField>
+            />
           </Grid>
           <Grid item xs={3}>
             <TextField
               {...register("userContact.streetAddress")}
               disabled={!isUpdatingContacts}
-              value={authContext.user?.userContact?.streetAddress || "unknown"}
+              value={auth!.user?.userContact?.streetAddress || "unknown"}
               label="Street"
               fullWidth
-            ></TextField>
+            />
           </Grid>
         </Grid>
         <Button variant="contained" color="primary" type="submit">
@@ -155,6 +148,6 @@ const ContactsPanel = ({ index, displayIndex }: PanelProps) => {
       <Typography variant="h2">Preferences</Typography>
     </Paper>
   );
-};
+});
 
 export { ContactsPanel };

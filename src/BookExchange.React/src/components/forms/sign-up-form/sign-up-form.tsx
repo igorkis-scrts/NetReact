@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import { useStores } from "@stores/useStores";
+import React from "react";
 import { useSnackbar } from "notistack";
 
 import {
@@ -16,8 +17,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useStyles } from "./sign-up-form.styles";
 import { Account } from "types";
-import { AccountService, UserService } from "services";
-import { AuthContext } from "context";
 
 const schema = yup.object().shape({
   username: yup
@@ -36,7 +35,7 @@ const schema = yup.object().shape({
 
 const SignUpForm = () => {
   const classes = useStyles();
-  const authContext = useContext(AuthContext);
+  const { auth } = useStores();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -52,25 +51,9 @@ const SignUpForm = () => {
     console.log(data);
 
     try {
-      const result = await AccountService.SignUp(data);
-      console.log(result);
+      await auth!.signUp(data);
+      await auth!.fetchCurrentUser();
 
-      const resultToken = await AccountService.RequestToken(
-        data.username,
-        data.password
-      );
-      const token = resultToken.access_token;
-      const expirationTime = new Date(
-        new Date().getTime() + Number(resultToken.expires_in) * 1000
-      );
-
-      console.log(resultToken);
-      console.log(token, expirationTime);
-
-      authContext.login(token, expirationTime);
-
-      await UserService.CreateProfile();
-      authContext.fetchCurrentUser();
       navigate("/profile");
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
@@ -156,7 +139,7 @@ const SignUpForm = () => {
       >
         Sign Up
       </Button>
-      <Grid container justify="flex-end">
+      <Grid container justifyContent="flex-end">
         <Grid item>
           <Link href="/sign-in" variant="body2">
             Already have an account? Sign in

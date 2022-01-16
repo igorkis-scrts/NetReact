@@ -1,14 +1,10 @@
 import React from "react";
 import { Container, Paper, Typography, Box } from "@material-ui/core";
-import bookImage from "images/Books-Upstairs.jpg";
-import book2 from "images/book2.png";
 import book6 from "images/book6.png";
-import Image from "material-ui-image";
 
 import { useStyles } from "./home-page-styles";
 import { HeaderInstructions } from "./components";
 import { Leaderboard } from "components/leaderboard";
-import { classicNameResolver } from "typescript";
 import { RecommendedBooks } from "components/recommended-books";
 
 const HomePage = () => {

@@ -24,7 +24,7 @@ const HeaderInstructions = () => {
   return (
     <Container>
       <Paper className={classes.root}>
-        <Grid container spacing={5} justify="center" alignItems="center">
+        <Grid container spacing={5} justifyContent="center" alignItems="center">
           <Grid item sm={3} className={classes.rightBorder}>
             <Typography variant="h4">Post Books</Typography>
             <Typography className="instruction-text" variant="body1">
