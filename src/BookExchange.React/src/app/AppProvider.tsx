@@ -1,28 +1,21 @@
-// import { createAppTheme } from "@config/themes/createAppTheme";
-import { SnackbarProvider, useSnackbar } from "notistack";
-// import { LoaderBlock } from "@shared/Loaders/LoaderBlock";
+import { observer } from "mobx-react";
+import { SnackbarProvider } from "notistack";
 import React, { useEffect, ReactNode } from "react";
-// import { ToastContainer } from "react-toastify";
-// import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
-// import { CssBaseline } from "@mui/material";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 
+import { createAppTheme } from "@config/themes/createAppTheme";
+import { LoaderBlock } from "@shared/Loaders/LoaderBlock";
 import { useStores } from "@stores/useStores";
-import { ThemeProvider } from "@material-ui/core";
-import { Navbar } from "../components/navbar";
-import { Userbar } from "../components/userbar";
-
-// import "react-toastify/dist/ReactToastify.css";
-// import { Layout } from "./components/Layout/Layout";
-
-import { theme } from "../theme";
+import { Layout } from "./components/Layout/Layout";
 
 interface IAppProviderProps {
   children: ReactNode;
 }
 
-// const appTheme = createAppTheme();
+const appTheme = createAppTheme();
 
-const AppProvider = (props: IAppProviderProps) => {
+const AppProvider = observer((props: IAppProviderProps) => {
   const { app, auth } = useStores();
   const { children } = props;
 
@@ -33,42 +26,41 @@ const AppProvider = (props: IAppProviderProps) => {
 
     auth!.trySilentLogin();
 
-    // Promise.all([
-    //   auth!.trySilentLogin()
-    // ]).then(() => {
-    //   // notifications?.persistentNotify(message, "success");
-    // }).catch((e: any) => {
-    //   console.log(e);
-    //   throw e;
-    // });
+    Promise.all([
+      auth!.trySilentLogin(),
+      app!.initialize()
+    ]).then(() => {
+      // notifications?.persistentNotify(message, "success");
+    }).catch((e: any) => {
+      console.log(e);
+      throw e;
+    });
   }, []);
 
   const render = () => {
-    // if (!app.isAppInitialized) {
-    //   return <LoaderBlock isLoading={true} />;
-    // }
+    if (!app!.isAppInitialized) {
+      return <LoaderBlock isLoading={true} />;
+    }
 
-    // return <Layout>{children}</Layout>;
-
-    return children;
+    return <Layout>{children}</Layout>;
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider
-        maxSnack={3}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-      >
-          <Navbar />
-          <h1>...</h1>
-          <Userbar />
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={appTheme}>
+        <SnackbarProvider
+          maxSnack={3}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+        >
+          <CssBaseline />
           {render()}
-      </SnackbarProvider>
-    </ThemeProvider>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
-};
+});
 
 export { AppProvider };

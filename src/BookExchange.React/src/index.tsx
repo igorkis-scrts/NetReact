@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "mobx-react";
 
-import App from "./App";
+import { App } from "@app/App";
 import { configureApp } from "@config/configureApp";
 
 import "./index.css";
