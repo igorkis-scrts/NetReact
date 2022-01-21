@@ -1,4 +1,4 @@
-import { IRootState } from "@config/State/IRootState";
+import { IRootState } from "@config/state/IRootState";
 import { MobXProviderContext } from "mobx-react";
 import { useContext } from "react";
 

@@ -7,8 +7,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useSnackbar } from "notistack";
-import { Account } from "../../../../../types";
-import { appUrls } from "../../../../appUrls";
+import { appUrls } from "@app/appUrls";
+import { Account } from "../../../../../../types";
 import { SubmitButton, LinkButton, Form } from "../../Auth.styled";
 
 const schema = yup.object().shape({

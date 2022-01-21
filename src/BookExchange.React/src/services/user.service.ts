@@ -16,10 +16,6 @@ const CreateProfile = async () => {
   });
 };
 
-const GetUserStats = async (id: number) => {
-  return fetchApi<User.UserStats>(`/user/${id}/stats`);
-};
-
 const GetRequestsToUser = async (
   userId: number,
   pageSize: number,
@@ -111,7 +107,6 @@ const UserService = {
   GetCurrentUser,
   GetWishedBooks,
   CreateProfile,
-  GetUserStats,
   GetRequestsToUser,
   GetRequestsFromUser,
   GetUserBookshelf,

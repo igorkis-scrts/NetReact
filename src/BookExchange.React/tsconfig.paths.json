@@ -6,6 +6,7 @@
       "@app/*": ["app/*"],
       "@config/*": ["config/*"],
       "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"],
       "@models/*": ["app/models/*"],
       "@shared/*": ["app/shared/*"],
       "@stores/*": ["app/stores/*"],

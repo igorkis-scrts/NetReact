@@ -1,18 +1,18 @@
-import { Home } from "@Pages/Home/Home";
+import { UserProfile } from "@Pages/UserProfile/UserProfile";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { appUrls } from "../appUrls";
-import { SignIn } from "../components/Auth/SignIn/SignIn";
-import { SignUp } from "../components/Auth/SignUp/SignUp";
+import { SignIn } from "@Pages/Auth/SignIn/SignIn";
+import { SignUp } from "@Pages/Auth/SignUp/SignUp";
+import { Home } from "@Pages/Home/Home";
 
 const AppRouter = () => {
   return (
     <Routes>
       <Route path={appUrls.rootPath} element={<Home />} />
-      {/*<Route path="/" element={<HomePage />} />*/}
       <Route path={appUrls.signIn} element={<SignIn />} />
       <Route path={appUrls.signUp} element={<SignUp />} />
-      {/*<Route path="/profile" element={<ProfilePage />} />*/}
+      <Route path={appUrls.profile} element={<UserProfile />} />
       {/*<Route path="/search" element={<SearchBooks />} />*/}
       {/*<Route path="/book/:id" element={<BookDetails />} />*/}
       {/*<Route path="/post-book" element={<PostBooks />} />*/}

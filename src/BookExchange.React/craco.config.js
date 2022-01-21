@@ -20,6 +20,7 @@ module.exports = {
       "@api": path.resolve(__dirname, "src/api/"),
       "@app": path.resolve(__dirname, "src/app/"),
       "@utils": path.resolve(__dirname, "src/utils/"),
+      "@hooks": path.resolve(__dirname, "src/hooks/"),
       "@models": path.resolve(__dirname, "src/app/models/"),
       "@config": path.resolve(__dirname, "src/config/"),
       "@shared": path.resolve(__dirname, "src/app/shared/"),

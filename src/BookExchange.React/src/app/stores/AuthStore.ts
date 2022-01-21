@@ -78,7 +78,9 @@ export class AuthStore {
   public async fetchCurrentUser() {
     const response = await UserService.GetCurrentUser();
     if (response) {
-      this.user = response;
+      runInAction(() => {
+        this.user = response;
+      });
       localStorage.setItem("user", JSON.stringify(response));
     }
   }
