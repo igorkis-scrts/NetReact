@@ -1,5 +1,5 @@
 import { fetchApi } from "./fetchApi";
-import { Deal } from "types";
+import { Deal } from "app/types";
 
 const ConfirmDelivery = async (id: number, pageSize: number, page: number) => {
   const requestOptions = {

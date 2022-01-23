@@ -1,5 +1,6 @@
 import { UserApi } from "@api/User.api";
-import { Grid, Typography, Link } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import { LinkButton } from "@shared/Styles/LinkButton";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useFetch } from "@hooks/useFetch";
 import { IStatisticsItem } from "./models/IStatisticsItem";
@@ -80,14 +81,14 @@ const StatisticsBar = ({ setDisplayViewIndex, userId }: IStatisticsBarProps) => 
         <Grid item key={index} xs={2}>
           <Grid container direction="column" justifyContent="center" alignContent="center">
             <StatisticsItemGrid item xs={12}>
-              <Link href="#" onClick={item.onClick}>
+              <LinkButton onClick={item.onClick}>
                 <Typography variant="h5" component="span">
                   {item.count}
                 </Typography>
-              </Link>
+              </LinkButton>
             </StatisticsItemGrid>
             <Grid item xs={12}>
-              <Typography>{item.name}</Typography>
+              <Typography align="center">{item.name}</Typography>
             </Grid>
           </Grid>
         </Grid>

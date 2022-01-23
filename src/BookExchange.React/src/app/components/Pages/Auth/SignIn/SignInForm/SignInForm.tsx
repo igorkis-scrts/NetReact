@@ -8,8 +8,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useSnackbar } from "notistack";
 import { appUrls } from "@app/appUrls";
-import { Account } from "../../../../../../types";
-import { SubmitButton, LinkButton, Form } from "../../Auth.styled";
+import { Account } from "../../../../../types";
+import { SubmitButton, Form } from "../../Auth.styled";
+import { LinkButton } from "@shared/Styles/LinkButton";
 
 const schema = yup.object().shape({
   username: yup.string().required("Username is required"),
@@ -84,7 +85,7 @@ const SignInForm = () => {
       <Grid container justifyContent="flex-end">
         <Grid item>
           <LinkButton disableRipple onClick={onSignUp}>
-            Don't have an account? Sign up
+            Don&apos;t have an account? Sign up
           </LinkButton>
         </Grid>
       </Grid>

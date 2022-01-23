@@ -1,6 +1,6 @@
 const objectToQueryParams = (obj: any) => {
-  var result = "";
-  for (var key in obj) {
+  let result = "";
+  for (const key in obj) {
     if (key != "") {
       result += "&";
     }
@@ -10,7 +10,7 @@ const objectToQueryParams = (obj: any) => {
 };
 
 const objectToQueryString = (params: any) => {
-  var esc = encodeURIComponent;
+  const esc = encodeURIComponent;
   return Object.keys(params)
     .filter((k) => {
       if (!params[k]) return false;

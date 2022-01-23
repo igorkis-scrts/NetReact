@@ -23,7 +23,7 @@ module.exports = {
       "@hooks": path.resolve(__dirname, "src/hooks/"),
       "@models": path.resolve(__dirname, "src/app/models/"),
       "@config": path.resolve(__dirname, "src/config/"),
-      "@shared": path.resolve(__dirname, "src/app/shared/"),
+      "@shared": path.resolve(__dirname, "src/app/components/shared/"),
       "@stores": path.resolve(__dirname, "src/app/stores/"),
       "@Pages": path.resolve(__dirname, "src/app/components/Pages/"),
     },

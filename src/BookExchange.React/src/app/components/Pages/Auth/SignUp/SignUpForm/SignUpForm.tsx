@@ -1,4 +1,5 @@
 import { Grid, TextField, FormControlLabel, Checkbox } from "@mui/material";
+import { LinkButton } from "@shared/Styles/LinkButton";
 import { useStores } from "@stores/useStores";
 import React from "react";
 import { useSnackbar } from "notistack";
@@ -7,9 +8,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Account } from "../../../../../../types";
+import { Account } from "../../../../../types";
 import { appUrls } from "@app/appUrls";
-import { SubmitButton, LinkButton, Form } from "../../Auth.styled";
+import { SubmitButton, Form } from "../../Auth.styled";
 
 const schema = yup.object().shape({
   username: yup

@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import { useState } from "react";
 import { StatisticsBar } from "./StatisticsBar/StatisticsBar";
 import { ProfileTopCard, ProfileRootGrid } from "./UserProfile.styled";
+import { WishlistPanel } from "./WishlistPanel/WishlistPanel";
 
 const UserProfile = observer(() => {
   const [displayViewIndex, setDisplayViewIndex] = useState<number>(1);
@@ -52,7 +53,7 @@ const UserProfile = observer(() => {
           <StatisticsBar setDisplayViewIndex={setDisplayViewIndex} userId={user?.id} />
         </ProfileTopCard>
 
-        {/*<WishlistPanel index={1} displayIndex={displayViewIndex} />*/}
+        <WishlistPanel index={1} displayIndex={displayViewIndex} />
         {/*<RequestedBooksPanel index={2} displayIndex={displayViewIndex} />*/}
         {/*<AwaitedBooksPanel index={3} displayIndex={displayViewIndex} />*/}
         {/*<BookShelfPanel index={4} displayIndex={displayViewIndex} />*/}

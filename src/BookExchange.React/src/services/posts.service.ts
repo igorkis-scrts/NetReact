@@ -1,5 +1,5 @@
 import { fetchApi } from "./fetchApi";
-import { Post, Common } from "types";
+import { Post, Common } from "app/types";
 import { ServiceUtils } from "utils";
 
 const API_BASE_URL = `https://localhost:5001/api/`;

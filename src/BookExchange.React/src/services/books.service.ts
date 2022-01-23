@@ -1,4 +1,4 @@
-import { Book, Category, Common } from "../types";
+import { Book, Common } from "@app/types";
 
 import { fetchApi } from "./fetchApi";
 
@@ -47,7 +47,7 @@ const AddBook = async (book: Book.CreateBook) => {
 
 // todo: check dependencies and remove method (transfered to ServiceUtils)
 const getQueryString = (params: any) => {
-  var esc = encodeURIComponent;
+  const esc = encodeURIComponent;
   return Object.keys(params)
     .filter((k) => {
       if (!params[k]) return false;

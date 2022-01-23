@@ -1,6 +1,6 @@
 import { makeObservable, observable, action, runInAction, computed, reaction } from "mobx";
 import { UserService, AccountService } from "../../services";
-import { User, Account } from "../../types";
+import { User, Account } from "../types";
 
 export class AuthStore {
   private _logoutTimerId: NodeJS.Timeout | null = null;

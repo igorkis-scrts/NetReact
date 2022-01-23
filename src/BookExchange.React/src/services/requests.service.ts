@@ -1,5 +1,5 @@
 import { fetchApi } from "./fetchApi";
-import { Request } from "types";
+import { Request } from "app/types";
 
 const AcceptRequest = async (id: number) => {
   const requestOptions = {

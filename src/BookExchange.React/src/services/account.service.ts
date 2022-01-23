@@ -1,4 +1,4 @@
-import { Account } from "../types";
+import { Account } from "../app/types";
 import { fetchIdentity } from "./fetchIdentity";
 
 const SignUp = async (userData: Account.SignUpData) => {

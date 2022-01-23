@@ -3,7 +3,7 @@ const fetchApi = <TResponse>(
   config: any = {}
 ): Promise<TResponse> => {
   if (!config) config = {};
-  if (!config.hasOwnProperty("headers")) {
+  if (!Object.prototype.hasOwnProperty.call(config, "headers")) {
     config.headers = {};
   }
   config.headers["Authorization"] = getUserToken();

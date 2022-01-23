@@ -8,7 +8,7 @@
       "@utils/*": ["utils/*"],
       "@hooks/*": ["hooks/*"],
       "@models/*": ["app/models/*"],
-      "@shared/*": ["app/shared/*"],
+      "@shared/*": ["app/components/shared/*"],
       "@stores/*": ["app/stores/*"],
       "@Pages/*": ["app/components/Pages/*"]
     }

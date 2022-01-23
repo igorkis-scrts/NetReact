@@ -1,13 +1,8 @@
 import { fetchApi } from "./fetchApi";
-import { User, Book, Common, Post, Request, Deal } from "types";
+import { User, Book, Common, Post, Request, Deal } from "app/types";
 
 const GetCurrentUser = (): Promise<User.User> => {
   return fetchApi<User.User>(`/user/current-user`);
-};
-const GetWishedBooks = (userId: number, pageSize: number, page: number) => {
-  return fetchApi<Common.PaginatedResult<Book.Book>>(
-    `/user/${userId}/books/wished?pageSize=${pageSize}&pageNumber=${page}`
-  );
 };
 
 const CreateProfile = async () => {
@@ -105,7 +100,6 @@ const GetRecommendedBooks = (userId: number) => {
 
 const UserService = {
   GetCurrentUser,
-  GetWishedBooks,
   CreateProfile,
   GetRequestsToUser,
   GetRequestsFromUser,

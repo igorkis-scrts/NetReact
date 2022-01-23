@@ -1,5 +1,5 @@
 import { fetchApi } from "./fetchApi";
-import { Category } from "types";
+import { Category } from "app/types";
 
 const GetAll = async () => {
   return fetchApi<Category.Category[]>("/category");

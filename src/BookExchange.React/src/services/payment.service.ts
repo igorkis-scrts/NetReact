@@ -1,5 +1,5 @@
 import { fetchApi } from "./fetchApi";
-import { Payment } from "types";
+import { Payment } from "app/types";
 
 const FinishSinglePayment = (payerId: string, paymentId: string) => {
   const requestOptions = {
