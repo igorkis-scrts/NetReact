@@ -2,6 +2,7 @@ import { Container, Grid, CardMedia, Typography, Link, Divider } from "@mui/mate
 import { useStores } from "@stores/useStores";
 import { observer } from "mobx-react";
 import { useState } from "react";
+import { RequestedBooksPanel } from "./RequestedBooksPanel/RequestedBooksPanel";
 import { StatisticsBar } from "./StatisticsBar/StatisticsBar";
 import { ProfileTopCard, ProfileRootGrid } from "./UserProfile.styled";
 import { WishlistPanel } from "./WishlistPanel/WishlistPanel";
@@ -54,7 +55,7 @@ const UserProfile = observer(() => {
         </ProfileTopCard>
 
         <WishlistPanel index={1} displayIndex={displayViewIndex} />
-        {/*<RequestedBooksPanel index={2} displayIndex={displayViewIndex} />*/}
+        <RequestedBooksPanel index={2} displayIndex={displayViewIndex} />
         {/*<AwaitedBooksPanel index={3} displayIndex={displayViewIndex} />*/}
         {/*<BookShelfPanel index={4} displayIndex={displayViewIndex} />*/}
         {/*<BookRequestsPanel index={5} displayIndex={displayViewIndex} />*/}

@@ -21,16 +21,6 @@ const GetRequestsToUser = async (
   );
 };
 
-const GetRequestsFromUser = async (
-  userId: number,
-  pageSize: number,
-  page: number
-) => {
-  return fetchApi<Common.PaginatedResult<Request.Request>>(
-    `/user/${userId}/requests/from?pageSize=${pageSize}&pageNumber=${page}`
-  );
-};
-
 const GetDealsToUser = async (
   userId: number,
   pageSize: number,
@@ -102,7 +92,6 @@ const UserService = {
   GetCurrentUser,
   CreateProfile,
   GetRequestsToUser,
-  GetRequestsFromUser,
   GetUserBookshelf,
   GetDealsToUser,
   GetDealsFromUser,
