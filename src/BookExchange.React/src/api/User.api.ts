@@ -1,4 +1,4 @@
-import { Common, Book, Request } from "@app/types";
+import { Common, Book, Request, Deal } from "@app/types";
 import { UserStats } from "@Pages/UserProfile/StatisticsBar/models/UserStats";
 import { ApiBase } from "@utils/api/ApiBase";
 import { ApiResponse } from "@utils/api/ApiResponse";
@@ -26,6 +26,17 @@ export class UserApi extends ApiBase {
   ): Promise<ApiResponse<Common.PaginatedResult<Request.Request>>> {
     return await UserApi.get<Common.PaginatedResult<Request.Request>>(
       `/user/${userId}/requests/from?pageSize=${pageSize}&pageNumber=${page}`,
+      true
+    );
+  }
+
+  public static async getDealsToUser(
+    userId: number,
+    pageSize: number,
+    page: number
+  ): Promise<ApiResponse<Common.PaginatedResult<Deal.Deal>>> {
+    return await UserApi.get<Common.PaginatedResult<Deal.Deal>>(
+      `/user/${userId}/deals/to?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
   }

@@ -7,6 +7,7 @@ namespace BookExchange.Domain.DTOs
 {
      public class DealDto
      {
+          public int Id { get; set; }
           public int PostId { get; set; }
           public int BookTakerId { get; set; }
           public string DealStatus { get; set; }

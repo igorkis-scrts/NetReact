@@ -49,7 +49,8 @@ namespace BookExchange.Infrastructure.Persistence.Extensions
 
                return new PagedResponse<TDto>(listResult, paginationFilter.PageNumber, paginationFilter.PageSize)
                {
-                    TotalRecords = total
+                    TotalRecords = total,
+                    TotalPages = total / paginationFilter.PageSize
                };
           }
 

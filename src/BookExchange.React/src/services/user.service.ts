@@ -21,16 +21,6 @@ const GetRequestsToUser = async (
   );
 };
 
-const GetDealsToUser = async (
-  userId: number,
-  pageSize: number,
-  page: number
-) => {
-  return fetchApi<Common.PaginatedResult<Deal.Deal>>(
-    `/user/${userId}/deals/to?pageSize=${pageSize}&pageNumber=${page}`
-  );
-};
-
 const GetDealsFromUser = async (
   userId: number,
   pageSize: number,
@@ -93,7 +83,6 @@ const UserService = {
   CreateProfile,
   GetRequestsToUser,
   GetUserBookshelf,
-  GetDealsToUser,
   GetDealsFromUser,
   AddBookToWishlist,
   RequestPost,

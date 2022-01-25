@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "mobx-react";
 
@@ -12,7 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 
 const configuration = configureApp();
 
-ReactDOM.render(
+render(
   <React.StrictMode>
     <Provider {...configuration.stores}>
       <BrowserRouter>

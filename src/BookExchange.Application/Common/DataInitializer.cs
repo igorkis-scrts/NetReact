@@ -2,11 +2,7 @@
 using BookExchange.Domain.Models;
 using BookExchange.Infrastructure.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookExchange.Application.Common
 {
@@ -312,7 +308,7 @@ namespace BookExchange.Application.Common
 
                if (!context.Deals.Any())
                {
-                    context.Deals.Add(new Deal { BookTakerId = 1, PostId = 6, DealStatus=DealStatus.InDelivery });
+                    context.Deals.Add(new Deal { BookTakerId = 1, PostId = 6, DealStatus = DealStatus.InDelivery });
                     context.Deals.Add(new Deal { BookTakerId = 1, PostId = 2, DealStatus = DealStatus.Delivered });
                }
 

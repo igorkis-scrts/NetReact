@@ -39,6 +39,7 @@ namespace BookExchange.Application.Request.Commands
                {
                     var deal = new Deal
                     {
+                         Id = request.Id,
                          BookTakerId = request.UserId,
                          PostId = request.PostId,
                          DealStatus = DealStatus.InDelivery,

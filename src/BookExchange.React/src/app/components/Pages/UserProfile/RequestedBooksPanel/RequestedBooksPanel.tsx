@@ -1,13 +1,9 @@
 import { UserApi } from "@api/User.api";
 import { RequestListCard } from "@shared/Cards/RequestListCard/RequestListCard";
+import { IPanelProps } from "../models/IPanelProps";
 import { PaginatedView } from "../PaginatedView/PaginatedView";
 
-interface IRequestedBooksPanelProps {
-  index: number;
-  displayIndex: number;
-}
-
-const RequestedBooksPanel = ({ index, displayIndex }: IRequestedBooksPanelProps) => {
+const RequestedBooksPanel = ({ index, displayIndex }: IPanelProps) => {
   return (
     <div hidden={displayIndex !== index}>
       <PaginatedView

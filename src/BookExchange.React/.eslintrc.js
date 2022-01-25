@@ -20,21 +20,7 @@ module.exports = {
       node: {
         extensions: [".js", ".jsx", ".ts", ".tsx"],
         moduleDirectory: ["node_modules", "src/"],
-      },
-      alias: {
-        map: [
-          ["app", "./src/app"],
-          ["api", "./src/api"],
-          ["config", "./src/config"],
-          ["utils", "./src/utils"],
-          ["hooks", "./src/hooks"],
-          ["models", "./src/app/models"],
-          ["shared", "./src/app/components/shared"],
-          ["stores", "./src/app/stores"],
-          ["Pages", "./src/app/components/Pages"]
-        ],
-        extensions: [".ts", ".js", ".jsx", ".json"],
-      },
+      }
     },
     react: {
       version: "detect",

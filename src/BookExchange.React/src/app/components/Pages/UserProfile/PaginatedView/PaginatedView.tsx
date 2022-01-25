@@ -106,7 +106,7 @@ const PaginatedView = <TData extends GenericData>(props: IPaginatedViewProps<TDa
 
       <BottomListControls container justifyContent="flex-start" alignItems="center">
         <Grid item>
-          <Pagination count={data.totalRecords / rowsPerPage} page={page} onChange={handleChangePage} />
+          <Pagination count={data.totalPages > 0 ? data.totalPages : 1} page={page} onChange={handleChangePage} />
         </Grid>
         <Grid item>
           <Select value={rowsPerPage?.toString()} label="Rows per Page" onChange={handleChangeRowsPerPage}>
