@@ -1,9 +1,9 @@
+import { SignIn } from "@Pages/Auth/SignIn/SignIn";
+import { SignUp } from "@Pages/Auth/SignUp/SignUp";
 import { UserProfile } from "@Pages/UserProfile/UserProfile";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { appUrls } from "../appUrls";
-import { SignIn } from "@Pages/Auth/SignIn/SignIn";
-import { SignUp } from "@Pages/Auth/SignUp/SignUp";
 import { Home } from "@Pages/Home/Home";
 
 const AppRouter = () => {

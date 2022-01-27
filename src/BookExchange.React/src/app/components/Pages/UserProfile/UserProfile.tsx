@@ -2,11 +2,14 @@ import { Container, Grid, CardMedia, Typography, Link, Divider } from "@mui/mate
 import { useStores } from "@stores/useStores";
 import { observer } from "mobx-react";
 import { useState } from "react";
-import { AwaitedBooksPanel } from "./AwaitedBooksPanel/AwaitedBooksPanel";
-import { RequestedBooksPanel } from "./RequestedBooksPanel/RequestedBooksPanel";
+import { AwaitedBooksPanel } from "./Panels/AwaitedBooksPanel/AwaitedBooksPanel";
+import { BookRequestsPanel } from "./Panels/BookRequestsPanel/BookRequestsPanel";
+import { BookShelfPanel } from "./Panels/BookShelfPanel/BookShelfPanel";
+import { RequestedBooksPanel } from "./Panels/RequestedBooksPanel/RequestedBooksPanel";
+import { SentBooksPanel } from "./Panels/SentBooksPanel/SentBooksPanel";
 import { StatisticsBar } from "./StatisticsBar/StatisticsBar";
 import { ProfileTopCard, ProfileRootGrid } from "./UserProfile.styled";
-import { WishlistPanel } from "./WishlistPanel/WishlistPanel";
+import { WishlistPanel } from "./Panels/WishlistPanel/WishlistPanel";
 
 const UserProfile = observer(() => {
   const [displayViewIndex, setDisplayViewIndex] = useState<number>(1);
@@ -58,10 +61,9 @@ const UserProfile = observer(() => {
         <WishlistPanel index={1} displayIndex={displayViewIndex} />
         <RequestedBooksPanel index={2} displayIndex={displayViewIndex} />
         <AwaitedBooksPanel index={3} displayIndex={displayViewIndex} />
-        {/*<BookShelfPanel index={4} displayIndex={displayViewIndex} />*/}
-        {/*<BookRequestsPanel index={5} displayIndex={displayViewIndex} />*/}
-        {/*<SentBooksPanel index={6} displayIndex={displayViewIndex} />*/}
-        {/*<ContactsPanel index={7} displayIndex={displayViewIndex} />*/}
+        <BookShelfPanel index={4} displayIndex={displayViewIndex} />
+        <BookRequestsPanel index={5} displayIndex={displayViewIndex} />
+        <SentBooksPanel index={6} displayIndex={displayViewIndex} />
       </Container>
     </div>
   );

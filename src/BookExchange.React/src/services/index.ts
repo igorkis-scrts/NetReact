@@ -6,5 +6,4 @@ export * from "./authors.service";
 export * from "./category.service";
 export * from "./wishlist.service";
 export * from "./payment.service";
-export * from "./requests.service";
 export * from "./deal.service";

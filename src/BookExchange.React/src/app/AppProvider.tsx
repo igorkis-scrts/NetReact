@@ -5,7 +5,7 @@ import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 import { createAppTheme } from "@config/themes/createAppTheme";
-import { LoaderBlock } from "@shared/Loaders/LoaderBlock";
+import { LoaderBlock } from "@shared/atoms/Loaders/LoaderBlock";
 import { useStores } from "@stores/useStores";
 import { Layout } from "./components/Layout/Layout";
 

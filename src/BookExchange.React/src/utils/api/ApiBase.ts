@@ -25,6 +25,29 @@ export class ApiBase {
     return apiResponse;
   }
 
+  protected static async put<TResponseData = any>(
+    url: string,
+    resolveError = false
+  ): Promise<ApiResponse<TResponseData>> {
+    const apiResponse = new ApiResponse<TResponseData>();
+
+    await axios
+      .put<TResponseData>(`${API_BASE_URL}/api${url}`, {
+        headers: {
+          Authorization: this.getUserToken(),
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response: any) => {
+        apiResponse.data = response.data;
+      })
+      .catch((reason: AxiosError) => {
+        this.resolveError(reason, apiResponse, resolveError);
+      });
+
+    return apiResponse;
+  }
+
   private static resolveError(reason: AxiosError, apiResponse: ApiResponse, resolveError: boolean): void {
     if (resolveError) {
       apiResponse.error = reason.message;

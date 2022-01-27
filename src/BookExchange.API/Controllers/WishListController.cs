@@ -3,11 +3,7 @@ using BookExchange.Application.WishList.Queries;
 using BookExchange.Domain.Filter;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookExchange.API.Controllers

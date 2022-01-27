@@ -12,6 +12,10 @@ import { Account } from "../../../../../types";
 import { appUrls } from "@app/appUrls";
 import { SubmitButton, Form } from "../../Auth.styled";
 
+interface ISignUpFormProps {
+  closeDialog?: () => void;
+}
+
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -22,12 +26,10 @@ const schema = yup.object().shape({
     .string()
     .required("No password provided")
     .min(8, "Password should contain at least 8 characters"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
+  confirmPassword: yup.string().oneOf([yup.ref("password"), null], "Passwords must match"),
 });
 
-const SignUpForm = () => {
+const SignUpForm = ({ closeDialog }: ISignUpFormProps) => {
   const { auth } = useStores();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -46,6 +48,9 @@ const SignUpForm = () => {
       await auth!.fetchCurrentUser();
 
       navigate("/profile");
+      if (typeof closeDialog === "function") {
+        closeDialog();
+      }
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
@@ -53,6 +58,9 @@ const SignUpForm = () => {
 
   const onSignUp = () => {
     navigate(appUrls.signIn);
+    if (typeof closeDialog === "function") {
+      closeDialog();
+    }
   };
 
   return (
@@ -125,11 +133,7 @@ const SignUpForm = () => {
           />
         </Grid>
       </Grid>
-      <SubmitButton
-        type="submit"
-        fullWidth
-        variant="contained"
-      >
+      <SubmitButton type="submit" fullWidth variant="contained">
         Sign Up
       </SubmitButton>
       <Grid container justifyContent="flex-end">

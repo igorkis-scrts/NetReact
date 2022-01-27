@@ -1,4 +1,5 @@
 import { Grid, TextField } from "@mui/material";
+import { LinkButton } from "@shared/Styles/LinkButton";
 import { useStores } from "@stores/useStores";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -8,16 +9,19 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useSnackbar } from "notistack";
 import { appUrls } from "@app/appUrls";
-import { Account } from "../../../../../types";
+import { Account } from "@app/types";
 import { SubmitButton, Form } from "../../Auth.styled";
-import { LinkButton } from "@shared/Styles/LinkButton";
+
+interface ISignInFormProps {
+  closeDialog?: () => void;
+}
 
 const schema = yup.object().shape({
   username: yup.string().required("Username is required"),
   password: yup.string().required("No password provided"),
 });
 
-const SignInForm = () => {
+const SignInForm = ({ closeDialog }: ISignInFormProps) => {
   const { auth } = useStores();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -36,6 +40,9 @@ const SignInForm = () => {
       await auth!.fetchCurrentUser();
 
       navigate(appUrls.profile);
+      if (typeof closeDialog === "function") {
+        closeDialog();
+      }
     } catch (e: any) {
       enqueueSnackbar(e.message, { variant: "error" });
     }
@@ -43,6 +50,9 @@ const SignInForm = () => {
 
   const onSignUp = () => {
     navigate(appUrls.signUp);
+    if (typeof closeDialog === "function") {
+      closeDialog();
+    }
   };
 
   return (

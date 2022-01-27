@@ -14,7 +14,7 @@ const NavbarLinkButton = (props: INavbarTabButtonProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  let isActive = location.pathname === url;
+  const isActive = location.pathname === url;
 
   const handleRedirect = () => {
     if (!isActive) {

@@ -1,11 +1,11 @@
 import { Theme } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { overrideMuiPalette } from "./overrides/overrideMuiPalette";
+import { overrideTypography } from "./overrides/overrideTypography";
 
 export function createAppTheme(): Theme {
-  const overriddenPalette = overrideMuiPalette();
-
   return createTheme({
-    palette: overriddenPalette,
+    palette: overrideMuiPalette(),
+    typography: overrideTypography()
   });
 }
