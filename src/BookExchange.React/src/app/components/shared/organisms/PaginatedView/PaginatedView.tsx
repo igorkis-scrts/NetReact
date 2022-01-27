@@ -10,12 +10,14 @@ import {
   Select,
   SelectChangeEvent,
   MenuItem,
+  Skeleton,
+  Card,
 } from "@mui/material";
 import { useStores } from "@stores/useStores";
 import { ApiResponse } from "@utils/api/ApiResponse";
 import { useState, useEffect, FC, ChangeEvent } from "react";
 import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
-import { BottomListControls } from "./PaginatedView.styled";
+import { BottomListControls, LoadingSkeletonContent, LoadingSkeletonTypography } from "./PaginatedView.styled";
 
 interface IPaginatedViewProps<TData extends Book.Book | Post.Post | Deal.Deal | Request.Request> {
   title: string;
@@ -55,7 +57,28 @@ const PaginatedView = <TData extends GenericData>(props: IPaginatedViewProps<TDa
   }, [page, rowsPerPage]);
 
   if (isDataLoading) {
-    return <div>Loading data...</div>;
+    return (
+      <>
+        <Grid container justifyContent="space-between" alignItems="center">
+          <Grid item>
+            <LoadingSkeletonTypography variant="h5">
+              {props.title}
+            </LoadingSkeletonTypography>
+          </Grid>
+        </Grid>
+
+        <Card>
+          <LoadingSkeletonContent>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton animation="wave" />
+            <Skeleton animation="wave" />
+            <Skeleton animation={false} />
+            <Skeleton animation={false} />
+          </LoadingSkeletonContent>
+        </Card>
+      </>
+    );
   }
 
   if (data == null) {
@@ -106,7 +129,11 @@ const PaginatedView = <TData extends GenericData>(props: IPaginatedViewProps<TDa
 
       <BottomListControls container justifyContent="flex-start" alignItems="center">
         <Grid item>
-          <Pagination count={data.totalPages > 0 ? data.totalPages : 1} page={page} onChange={handleChangePage} />
+          <Pagination
+            count={data.totalPages > 0 ? data.totalPages : 1}
+            page={page}
+            onChange={handleChangePage}
+          />
         </Grid>
         <Grid item>
           <Select value={rowsPerPage?.toString()} label="Rows per Page" onChange={handleChangeRowsPerPage}>
