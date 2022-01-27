@@ -3,7 +3,6 @@ import { AppRouter } from "./routing/AppRouter";
 import React from "react";
 
 import "./assets/styles/fonts.scss";
-import "./App.css";
 
 const App = () => {
   return (

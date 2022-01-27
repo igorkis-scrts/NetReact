@@ -6,8 +6,6 @@ import { Provider } from "mobx-react";
 import { App } from "@app/App";
 import { configureApp } from "@config/configureApp";
 
-import "./index.css";
-
 import reportWebVitals from "./reportWebVitals";
 
 const configuration = configureApp();
