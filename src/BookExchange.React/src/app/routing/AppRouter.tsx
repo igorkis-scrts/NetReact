@@ -1,12 +1,13 @@
-import { SignIn } from "@Pages/Auth/SignIn/SignIn";
-import { SignUp } from "@Pages/Auth/SignUp/SignUp";
-import { UserProfile } from "@Pages/UserProfile/UserProfile";
-import React from "react";
+import React, { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { appUrls } from "../appUrls";
-import { Home } from "@Pages/Home/Home";
 import { Layout } from "../components/Layout/Layout";
 import { AuthRoute } from "./AuthRoute/AuthRoute";
+
+const SignIn = lazy(() => import("@Pages/Auth/SignIn"));
+const SignUp = lazy(() => import("@Pages/Auth/SignUp"));
+const Home = lazy(() => import("@Pages/Home"));
+const UserProfile = lazy(() => import("@Pages/UserProfile"));
 
 const AppRouter = () => {
   return (
@@ -19,7 +20,6 @@ const AppRouter = () => {
         <Route path={appUrls.profile} element={<AuthRoute />}>
           <Route path={appUrls.profile} element={<UserProfile />} />
         </Route>
-        {/*<AuthRoute path={appUrls.addBook} element={<Home />} />*/}
         {/*<Route path="/search" element={<SearchBooks />} />*/}
         {/*<Route path="/book/:id" element={<BookDetails />} />*/}
         {/*<Route path="/post-book" element={<PostBooks />} />*/}

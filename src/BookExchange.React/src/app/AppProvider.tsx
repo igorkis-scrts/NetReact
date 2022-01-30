@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import { SnackbarProvider } from "notistack";
-import React, { useEffect, ReactNode } from "react";
+import React, { Suspense, useEffect, ReactNode } from "react";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
@@ -49,7 +49,9 @@ const AppProvider = observer((props: IAppProviderProps) => {
           }}
         >
           <CssBaseline />
-          {render()}
+          <Suspense fallback={<LoaderBlock isLoading={true}/>}>
+            {render()}
+          </Suspense>
         </SnackbarProvider>
       </ThemeProvider>
     </StyledEngineProvider>
