@@ -3,7 +3,7 @@ import { LinkButton } from "@shared/Styles/LinkButton";
 import { useStores } from "@stores/useStores";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -24,7 +24,10 @@ const schema = yup.object().shape({
 const SignInForm = ({ closeDialog }: ISignInFormProps) => {
   const { auth } = useStores();
   const navigate = useNavigate();
+  const location = useLocation();
   const { enqueueSnackbar } = useSnackbar();
+
+  const from = (location.state as any)?.from?.pathname || "/";
 
   const {
     register,
@@ -39,7 +42,7 @@ const SignInForm = ({ closeDialog }: ISignInFormProps) => {
       await auth!.signIn(data.username, data.password);
       await auth!.fetchCurrentUser();
 
-      navigate(appUrls.profile);
+      navigate(from, { replace: true });
       if (typeof closeDialog === "function") {
         closeDialog();
       }
