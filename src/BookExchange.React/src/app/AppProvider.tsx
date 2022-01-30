@@ -7,7 +7,6 @@ import { CssBaseline } from "@mui/material";
 import { createAppTheme } from "@config/themes/createAppTheme";
 import { LoaderBlock } from "@shared/atoms/Loaders/LoaderBlock";
 import { useStores } from "@stores/useStores";
-import { Layout } from "./components/Layout/Layout";
 
 interface IAppProviderProps {
   children: ReactNode;
@@ -26,13 +25,7 @@ const AppProvider = observer((props: IAppProviderProps) => {
 
     auth!.trySilentLogin();
 
-    Promise.all([
-      auth!.trySilentLogin(),
-      app!.initialize()
-    ]).then(() => {
-      // notifications?.persistentNotify(message, "success");
-    }).catch((e: any) => {
-      console.log(e);
+    Promise.all([auth!.trySilentLogin(), app!.initialize()]).catch((e: any) => {
       throw e;
     });
   }, []);
@@ -42,7 +35,7 @@ const AppProvider = observer((props: IAppProviderProps) => {
       return <LoaderBlock isLoading={true} />;
     }
 
-    return <Layout>{children}</Layout>;
+    return children;
   };
 
   return (

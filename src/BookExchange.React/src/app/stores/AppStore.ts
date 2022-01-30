@@ -11,15 +11,15 @@ export class AppStore {
     });
   }
 
-  public initialize(): Promise<string> {
-    return new Promise<string>((resolve) => {
+  public initialize(): Promise<void> {
+    return new Promise<void>((resolve) => {
       setTimeout(() => {
         runInAction(() => {
           this.isAppInitialized = true;
         });
       }, 1000);
 
-      resolve("App has been initialized.");
+      resolve();
     }).catch((error) => {
       // notify(error, "error");
       throw error;

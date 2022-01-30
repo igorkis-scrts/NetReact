@@ -1,11 +1,8 @@
 import { Grid, styled } from "@mui/material";
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 import { Navbar } from "./Navbar/Navbar";
-
-interface ILayoutProps {
-  children: React.ReactNode;
-}
 
 const ContentContainer = styled(Grid)(({ theme }) => ({
   boxSizing: "border-box",
@@ -16,12 +13,12 @@ const ContentContainer = styled(Grid)(({ theme }) => ({
   marginTop: theme.spacing(4),
 }));
 
-const Layout = ({ children }: ILayoutProps) => {
+const Layout = () => {
   return (
     <Grid container sx={{ height: "100%" }}>
       <Navbar />
       <ContentContainer item>
-        {children}
+        <Outlet/>
       </ContentContainer>
     </Grid>
   );
