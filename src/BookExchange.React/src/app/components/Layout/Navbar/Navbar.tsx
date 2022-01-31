@@ -24,23 +24,13 @@ const tabs: INavbarTab[] = [
 const authTabs: INavbarTab[] = [
   {
     id: 0,
-    title: "Post Book",
-    url: appUrls.postBook,
+    title: "Books",
+    url: appUrls.books,
   },
   {
     id: 1,
-    title: "Add Book",
-    url: appUrls.addBook,
-  },
-  {
-    id: 2,
-    title: "Search Books",
+    title: "Search",
     url: appUrls.searchBooks,
-  },
-  {
-    id: 3,
-    title: "Books",
-    url: appUrls.books,
   },
 ];
 
