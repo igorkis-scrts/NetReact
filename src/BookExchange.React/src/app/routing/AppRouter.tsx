@@ -8,11 +8,13 @@ const SignIn = lazy(() => import("@Pages/Auth/SignIn"));
 const SignUp = lazy(() => import("@Pages/Auth/SignUp"));
 const Home = lazy(() => import("@Pages/Home"));
 const UserProfile = lazy(() => import("@Pages/UserProfile"));
+const NotFound = lazy(() => import("@Pages/NotFound"));
 
 const AppRouter = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
+        <Route path="*" element={<NotFound />} />
         <Route path={appUrls.rootPath} element={<Home />} />
         <Route path={appUrls.signIn} element={<SignIn />} />
         <Route path={appUrls.signUp} element={<SignUp />} />

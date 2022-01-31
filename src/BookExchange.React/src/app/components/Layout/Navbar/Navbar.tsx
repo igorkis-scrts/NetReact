@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 import React from "react";
 
 import { INavbarTab } from "./models/INavbarTab";
+import { FixedAppBar } from "./Navbar.styled";
 import { NavbarHomeLogo } from "./NavbarHomeLogo/NavbarHomeLogo";
 import { appUrls } from "@app/appUrls";
 
@@ -47,7 +48,7 @@ const Navbar = observer(() => {
   const { auth } = useStores();
 
   return (
-    <AppBar position="static">
+    <FixedAppBar position="static">
       <Toolbar>
         <Grid container direction="row" wrap="nowrap" justifyContent="space-between">
           <Grid container alignItems="center" wrap="nowrap">
@@ -65,7 +66,7 @@ const Navbar = observer(() => {
           </Grid>
         </Grid>
       </Toolbar>
-    </AppBar>
+    </FixedAppBar>
   );
 });
 
