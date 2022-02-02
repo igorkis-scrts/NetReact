@@ -178,7 +178,7 @@ namespace BookExchange.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -242,33 +242,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("Deals");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("PaymentServiceReference")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PaymentStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>
@@ -361,11 +334,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Points")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(10,2)")
-                        .HasDefaultValue(0m);
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -563,17 +531,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("BookTaker");
 
                     b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.Payment", b =>
-                {
-                    b.HasOne("BookExchange.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>

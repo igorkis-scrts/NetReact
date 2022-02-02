@@ -1,15 +1,10 @@
-﻿using AutoMapper;
-using BookExchange.Domain.DTOs;
-using BookExchange.Domain.Filter;
-using BookExchange.Domain.Interfaces;
+﻿using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
-using BookExchange.Domain.Wrappers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace BookExchange.Infrastructure.Persistence.Repositories
 {

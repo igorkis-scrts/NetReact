@@ -11,9 +11,8 @@ namespace BookExchange.Application.Common
           public static void SeedDatabase(BookExchangeDbContext context, IMediator mediator)
           {
                context.Database.EnsureCreated();
-
-
-               // create 3 users
+               
+               // create 4 users
                if (!context.Users.Any())
                {
                     var user1 = new User
@@ -24,30 +23,40 @@ namespace BookExchange.Application.Common
                          IdentityId = "1",
                          UserContact = new UserContact { Email = "dimatrubca@gmail.com" }
                     };
-
-
+                    
                     var user2 = new User
+                    {
+                         Username = "igorkis",
+                         FirstName = "Igor",
+                         LastName = "Kiselev",
+                         IdentityId = "2",
+                         UserContact = new UserContact { Email = "igorkisf636cf51cef00bf14a4820f57b645c2d@gmail.com" }
+                    };
+
+
+                    var user3 = new User
                     {
                          Username = "valentin",
                          FirstName = "Valentin",
                          LastName = "Korotkevichi",
-                         IdentityId = "2",
+                         IdentityId = "3",
                          UserContact = new UserContact { Email = "dimatrubca@outlook.com" },
                     };
-                    var user3 = new User
+                    
+                    var user4 = new User
                     {
                          Username = "igor431",
                          FirstName = "Igor",
                          LastName = "Korotkevichi",
-                         IdentityId = "3",
+                         IdentityId = "4",
                          UserContact = new UserContact { Email = "igor431@outlook.com" },
                     };
 
                     context.Users.Add(user1);
-                    context.SaveChanges();
                     context.Users.Add(user2);
-                    context.SaveChanges();
                     context.Users.Add(user3);
+                    context.Users.Add(user4);
+                    context.SaveChanges();
                }
 
                context.SaveChanges();
