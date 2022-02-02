@@ -1,4 +1,4 @@
-import { Container, Grid, CardMedia, Typography, Link, Divider } from "@mui/material";
+import { Container, Grid, CardMedia, Typography, Divider } from "@mui/material";
 import { useStores } from "@stores/useStores";
 import { observer } from "mobx-react";
 import { useState } from "react";
@@ -33,22 +33,12 @@ const UserProfile = observer(() => {
             <Grid item xs={8}>
               <Grid container>
                 <Grid item xs={12}>
-                  <Typography>
-                    {user?.firstName} {user?.lastName} ({user?.username})
+                  <Typography variant="h5">{user?.username}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="body2">
+                    {user?.firstName} {user?.lastName}
                   </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography>Book Coins: {user?.points}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Link
-                    href="#"
-                    onClick={() => {
-                      setDisplayViewIndex(7);
-                    }}
-                  >
-                    View details
-                  </Link>
                 </Grid>
               </Grid>
             </Grid>

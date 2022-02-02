@@ -11,7 +11,6 @@ namespace BookExchange.Domain.Models
           public string Username { get; set; }
           public string FirstName { get; set; }
           public string LastName { get; set; }
-          public decimal Points { get; set; }
           public virtual UserContact UserContact { get; set; } 
           public virtual ICollection<Post> Posts { get; set; }
           public virtual ICollection<Post> BookmarkedPosts { get; set; }

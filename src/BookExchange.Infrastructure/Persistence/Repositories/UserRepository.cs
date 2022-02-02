@@ -60,7 +60,7 @@ namespace BookExchange.Infrastructure.Persistence.Repositories
 
           public List<User> GetTopUsers(int topN)
           {
-               var topUsers = _entitites.OrderByDescending(x => x.Points).Take(topN).Take(topN).ToList();
+               var topUsers = _entitites.Take(topN).Take(topN).ToList();
 
                return topUsers;
           }

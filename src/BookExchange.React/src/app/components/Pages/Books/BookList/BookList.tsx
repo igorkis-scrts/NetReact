@@ -1,45 +1,33 @@
-import { Book, Post, Deal, Request, Common } from "@app/types";
+import { BookApi } from "@api/Book.api";
 import { useFetch } from "@hooks/useFetch";
-import { ViewComfy, Filter } from "@mui/icons-material";
+import { Filter, ViewComfy } from "@mui/icons-material";
 import {
+  SelectChangeEvent,
   Grid,
   Typography,
   IconButton,
   Box,
   Pagination,
   Select,
-  SelectChangeEvent,
   MenuItem,
 } from "@mui/material";
-import { useStores } from "@stores/useStores";
-import { ApiResponse } from "@utils/api/ApiResponse";
-import { useState, useEffect, FC, ChangeEvent } from "react";
-import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
-import { BookSkeletons } from "./BookSkeletons/BookSkeletons";
-import { BottomListControls } from "./PaginatedView.styled";
+import { BookListCard } from "@shared/organisms/Cards/BookListCard/BookListCard";
+import { BookSquareCard } from "@shared/organisms/Cards/BookSquareCard/BookSquareCard";
+import { BookSkeletons } from "@shared/organisms/PaginatedView/BookSkeletons/BookSkeletons";
+import { BottomListControls } from "@shared/organisms/PaginatedView/PaginatedView.styled";
+import { useState, ChangeEvent, useEffect } from "react";
 
-interface IPaginatedViewProps<TData extends Book.Book | Post.Post | Deal.Deal | Request.Request> {
-  title: string;
-  listCard: FC<ICardProps<TData>>;
-  squareCard: FC<ICardProps<TData>>;
-  service: (...args: any) => Promise<ApiResponse<Common.PaginatedResult<TData>>>;
+interface IBookListProps {
   cardAction?: (id: number) => void;
   cardActionText?: string;
 }
 
-type GenericData = Book.Book | Post.Post | Deal.Deal | Request.Request;
-
-const PaginatedView = function PaginatedView<TData extends GenericData>(props: IPaginatedViewProps<TData>) {
+const BookList = (props: IBookListProps) => {
   const [page, setPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(2);
   const [isListView, setListView] = useState<boolean>(true);
 
-  const { auth } = useStores();
-
-  const { data, fetch: fetchData, isLoading: isDataLoading } = useFetch(props.service);
-
-  const ListCard = props.listCard;
-  const SquareCard = props.squareCard;
+  const { data, fetch: fetchData, isLoading: isDataLoading } = useFetch(BookApi.getAll);
 
   const handleChangePage = (event: ChangeEvent<unknown>, newPage: number) => {
     setPage(newPage);
@@ -51,12 +39,14 @@ const PaginatedView = function PaginatedView<TData extends GenericData>(props: I
   };
 
   useEffect(() => {
-    fetchData(auth!.user?.id, rowsPerPage, page);
-    //eslint-disable-next-line
+    fetchData({
+      pageNumber: page,
+      pageSize: rowsPerPage,
+    });
   }, [page, rowsPerPage]);
 
   if (isDataLoading) {
-    return <BookSkeletons title={props.title} />;
+    return <BookSkeletons title="Books" />;
   }
 
   if (data == null) {
@@ -67,7 +57,7 @@ const PaginatedView = function PaginatedView<TData extends GenericData>(props: I
     <>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
-          <Typography variant="h5">{props.title}</Typography>
+          <Typography variant="h5">Books</Typography>
         </Grid>
         <Grid item>
           <IconButton
@@ -92,14 +82,14 @@ const PaginatedView = function PaginatedView<TData extends GenericData>(props: I
       {isListView ? (
         data.data?.map((item) => (
           <Box my={3} key={item.id}>
-            <ListCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
+            <BookListCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
           </Box>
         ))
       ) : (
         <Grid container spacing={4}>
           {data.data?.map((item) => (
             <Grid item sm={3} key={item.id}>
-              <SquareCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
+              <BookSquareCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
             </Grid>
           ))}
         </Grid>
@@ -125,4 +115,4 @@ const PaginatedView = function PaginatedView<TData extends GenericData>(props: I
   );
 };
 
-export { PaginatedView };
+export { BookList };

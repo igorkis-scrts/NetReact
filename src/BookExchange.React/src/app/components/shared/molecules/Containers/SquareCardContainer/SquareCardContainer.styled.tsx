@@ -5,7 +5,7 @@ export const CardRoot = styled(Card)(() => ({
 }));
 
 export const CardContentSquare = styled(CardContent)(() => ({
-  height: 140,
+  height: 160,
   overflow: "hidden",
 }));
 

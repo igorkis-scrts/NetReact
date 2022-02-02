@@ -2,13 +2,9 @@
 using BookExchange.Application.Books.Commands;
 using BookExchange.Domain.Filter;
 using BookExchange.Application.Posts.Commands;
-using BookExchange.Application.Users.Commands;
 using BookExchange.Domain.DTOs;
 using BookExchange.Domain.Models;
 using BookExchange.Domain.Queries;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using BookExchange.Application.Posts.Queries;
 using BookExchange.Application.Authors.Commands;
 using BookExchange.Application.Books.Events;
@@ -84,9 +80,6 @@ namespace BookExchange.Application.Common.Mappings
 
                CreateMap<GetUserPostsQuery, PaginationFilter>();
                CreateMap<PaginationFilter, GetUserPostsQuery>();
-
-               CreateMap<User, TopUserDto>();
-               CreateMap<GetLeaderboardDto, GetTopUsersQuery>();
           }
      }
 }

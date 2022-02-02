@@ -6,7 +6,6 @@ using BookExchange.Application.Users.Queries;
 using BookExchange.Domain;
 using BookExchange.Domain.DTOs;
 using BookExchange.Domain.Filter;
-using BookExchange.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -84,20 +83,7 @@ namespace BookExchange.API.Controllers
 
                return Ok(response);
           }
-
-          [HttpGet("leaderboard")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetTopUsers([FromQuery] GetLeaderboardDto dto)
-          {
-               var query = _mapper.Map<GetTopUsersQuery>(dto);
-               var users = await _mediator.Send(query);
-
-               var response = _mapper.Map<List<TopUserDto>>(users);
-
-               return Ok(response);
-          }
-
-
+          
           [HttpGet("{id}/books/recommended")]
           [AllowAnonymous]
           public async Task<IActionResult> GetRecommendedBooks(int id, [FromQuery] int topN = 3)

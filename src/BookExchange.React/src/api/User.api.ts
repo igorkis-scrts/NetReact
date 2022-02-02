@@ -2,7 +2,6 @@ import { Common, Book, Request, Deal, Post } from "@app/types";
 import { UserStats } from "@Pages/UserProfile/StatisticsBar/models/UserStats";
 import { ApiBase } from "@utils/api/ApiBase";
 import { ApiResponse } from "@utils/api/ApiResponse";
-import { fetchApi } from "../services/fetchApi";
 
 export class UserApi extends ApiBase {
   public static async getUserStats(id: number): Promise<ApiResponse<UserStats>> {

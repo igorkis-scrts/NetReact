@@ -1,4 +1,4 @@
-import { Account } from "../app/types";
+import { Account } from "@app/types";
 import { fetchIdentity } from "./fetchIdentity";
 
 const SignUp = async (userData: Account.SignUpData) => {
@@ -10,7 +10,7 @@ const SignUp = async (userData: Account.SignUpData) => {
     body: JSON.stringify(userData),
   };
 
-  return fetchIdentity(`/api/identity/register`, requestOptions);
+  return fetchIdentity("/api/identity/register", requestOptions);
 };
 
 const RequestToken = async (
@@ -31,7 +31,7 @@ const RequestToken = async (
     }),
   };
 
-  return fetchIdentity(`/connect/token`, requestOptions);
+  return fetchIdentity("/connect/token", requestOptions);
 };
 
 const AccountService = {

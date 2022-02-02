@@ -1,9 +1,17 @@
-import { Typography, Link } from "@mui/material";
+import { Typography } from "@mui/material";
 import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { Book } from "@app/types";
 import { ListCardContainer } from "@shared/molecules/Containers/ListCardContainer/ListCardContainer";
+import { useNavigate } from "react-router-dom";
+import { LinkButton } from "../../../Styles/LinkButton";
 
 const BookListCard = ({ cardItem: book, action, actionText }: ICardProps<Book.Book>) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/books/" + book.id);
+  };
+
   return (
     <ListCardContainer
       action={() => {
@@ -13,9 +21,9 @@ const BookListCard = ({ cardItem: book, action, actionText }: ICardProps<Book.Bo
       imagePath={`${book.thumbnailPath}`}
     >
       <Typography component="h5" variant="h5">
-        <Link href={"book/" + book.id} style={{ textDecoration: "none" }} color="inherit">
+        <LinkButton color="inherit" style={{ textDecoration: "none" }} onClick={handleClick}>
           {book.title}
-        </Link>
+        </LinkButton>
       </Typography>
       {book.authors?.length !== 0 && (
         <Typography variant="subtitle1" color="textSecondary">

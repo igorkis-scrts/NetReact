@@ -14,9 +14,6 @@ const GetBooksBySearch = async (searchTerm: string) => {
   );
 };
 
-const GetBookById = async (id: number) => {
-  return fetchApi<Book.Book>(`/book/${id}?includeDetails=true`);
-};
 
 // check bellow
 const GetBooksByISBN = async (isbns: string[]): Promise<Book.Book[]> => {
@@ -70,7 +67,6 @@ const getQueryString = (params: any) => {
 
 const BookService = {
   GetBooks,
-  GetBookById,
   GetBooksByISBN,
   GetBooksBySearch,
   AddBook,

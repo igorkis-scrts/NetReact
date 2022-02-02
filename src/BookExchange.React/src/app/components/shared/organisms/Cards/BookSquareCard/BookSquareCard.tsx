@@ -1,9 +1,18 @@
-import { Typography, Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import { Typography } from "@mui/material";
 import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { Book } from "@app/types";
 import { SquareCardContainer } from "@shared/molecules/Containers/SquareCardContainer/SquareCardContainer";
+import { LinkButton } from "@shared/Styles/LinkButton";
 
 const BookSquareCard = ({ cardItem: book, action, actionText }: ICardProps<Book.Book>) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/books/" + book.id);
+  };
+
   return (
     <SquareCardContainer
       action={() => {
@@ -12,11 +21,9 @@ const BookSquareCard = ({ cardItem: book, action, actionText }: ICardProps<Book.
       actionText={actionText}
       imagePath={book.thumbnailPath}
     >
-      <Typography gutterBottom variant="h5" component="h2">
-        <Link href={"book/" + book.id} style={{ textDecoration: "none" }} color="inherit">
-          {book.title}
-        </Link>
-      </Typography>
+      <LinkButton color="inherit" style={{ textDecoration: "none" }} onClick={handleClick}>
+        {book.title}
+      </LinkButton>
       <Typography variant="subtitle1" color="textSecondary">
         by {book.authors?.map((a) => a.name).join(", ")}
       </Typography>

@@ -4,7 +4,7 @@ import React from "react";
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { appUrls } from "../../appUrls";
 
-const AuthRoute = observer(() => {
+const AuthProtection = observer(() => {
   const { auth } = useStores();
   const location = useLocation();
 
@@ -15,4 +15,4 @@ const AuthRoute = observer(() => {
   return <Outlet />;
 });
 
-export { AuthRoute };
+export { AuthProtection };

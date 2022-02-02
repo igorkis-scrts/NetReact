@@ -9,17 +9,8 @@ import { appUrls } from "@app/appUrls";
 
 import { NavbarLinkButton } from "./NavbarLinkButton/NavbarLinkButton";
 import { Userbar } from "./Userbar/Userbar";
-import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
-
-const tabs: INavbarTab[] = [
-  {
-    id: 0,
-    title: "Home",
-    url: appUrls.rootPath,
-  },
-];
 
 const authTabs: INavbarTab[] = [
   {
@@ -43,9 +34,6 @@ const Navbar = observer(() => {
         <Grid container direction="row" wrap="nowrap" justifyContent="space-between">
           <Grid container alignItems="center" wrap="nowrap">
             <NavbarHomeLogo />
-            {tabs.map((tab) => (
-              <NavbarLinkButton key={tab.id} title={tab.title} url={tab.url} />
-            ))}
             {auth!.isLoggedIn && authTabs.map((tab) => (
               <NavbarLinkButton key={tab.id} title={tab.title} url={tab.url} />
             ))}

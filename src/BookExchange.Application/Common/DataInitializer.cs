@@ -21,7 +21,6 @@ namespace BookExchange.Application.Common
                          Username = "dimatrubca",
                          FirstName = "Dima",
                          LastName = "Trubca",
-                         Points = 10,
                          IdentityId = "1",
                          UserContact = new UserContact { Email = "dimatrubca@gmail.com" }
                     };
@@ -32,7 +31,6 @@ namespace BookExchange.Application.Common
                          Username = "valentin",
                          FirstName = "Valentin",
                          LastName = "Korotkevichi",
-                         Points = 5,
                          IdentityId = "2",
                          UserContact = new UserContact { Email = "dimatrubca@outlook.com" },
                     };
@@ -41,7 +39,6 @@ namespace BookExchange.Application.Common
                          Username = "igor431",
                          FirstName = "Igor",
                          LastName = "Korotkevichi",
-                         Points = 5,
                          IdentityId = "3",
                          UserContact = new UserContact { Email = "igor431@outlook.com" },
                     };

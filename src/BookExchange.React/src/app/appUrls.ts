@@ -6,5 +6,6 @@ export const appUrls = {
   searchBooks: "/search",
   postBook: "/post-book",
   addBook: "/add-book",
-  books: "/books"
+  books: "/books/",
+  bookDetails: "/books/:id"
 };
