@@ -11,7 +11,7 @@ const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminGifsicle = require("imagemin-gifsicle");
 const imageminJpegtran = require("imagemin-jpegtran");
 const imageminOptipng = require("imagemin-optipng");
-const imageminSvgo = require("imagemin-svgo");
+
 module.exports = {
   webpack: {
     alias: {
@@ -47,8 +47,11 @@ module.exports = {
     },
     plugins: [
       // ...whenProd(() => [new BundleAnalyzerPlugin()], []),
-      ...whenProd(
-        () => [
+      ...whenProd(async () => {
+        const imagemin = import('imagemin');
+        const imageminSvgo = import('imagemin-svgo')
+
+        return [
           new ImageminPlugin({
             test: /\.(jpe?g|png|gif|svg)$/i,
             imageminOptions: {
@@ -62,15 +65,24 @@ module.exports = {
                 imageminOptipng({
                   optimizationLevel: 5,
                 }),
-                imageminSvgo({
-                  removeViewBox: true,
+                await imagemin(["images/*.svg"], {
+                  destination: "build/images",
+                  plugins: [
+                    imageminSvgo({
+                      plugins: [
+                        {
+                          name: "removeViewBox",
+                          active: false,
+                        },
+                      ],
+                    }),
+                  ],
                 }),
               ],
             },
           }),
-        ],
-        []
-      ),
+        ];
+      }, []),
 
       // ...whenDev(() => [new CircularDependencyPlugin({
       //     exclude: /a\.js|node_modules/,
