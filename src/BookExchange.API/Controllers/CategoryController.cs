@@ -38,7 +38,7 @@ namespace BookExchange.API.Controllers
 
           [HttpPost]
           public async Task<IActionResult> Post([FromBody] string categoryName) {
-               var category = await _mediator.Send(new CreateCategoryCommand { Label = categoryName });
+               var category = await _mediator.Send(new CreateCategoryCommand { Name = categoryName });
 
                var result = _mapper.Map<CategoryDto>(category);
 

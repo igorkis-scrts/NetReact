@@ -50,7 +50,7 @@ namespace BookExchange.Service.Services
                     predicates.Add(b => b.ISBN.Equals(request.ISBN));
                }
 
-               if (request.Categories.Count != null && request.Categories.Count != 0)
+               if (request.Categories.Count != 0)
                {
                     predicates.Add(b => b.Categories.Any(c => request.Categories.Contains(c.Id)));
                     includes.Add(b => b.Categories);

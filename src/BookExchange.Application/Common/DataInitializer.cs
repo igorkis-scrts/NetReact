@@ -65,15 +65,15 @@ namespace BookExchange.Application.Common
 
                if (!context.Set<Category>().Any())
                {
-                    context.Add(new Category { Label = "Novel" });
-                    context.Add(new Category { Label = "Fiction" });
+                    context.Add(new Category { Name = "Novel" });
+                    context.Add(new Category { Name = "Fiction" });
                     context.SaveChanges();
-                    context.Add(new Category { Label = "Non-Fiction" });
+                    context.Add(new Category { Name = "Non-Fiction" });
                     context.SaveChanges();
-                    context.Add(new Category { Label = "War story" });
-                    context.Add(new Category { Label = "Thriller" });
-                    context.Add(new Category { Label = "Contemporary" });
-                    context.Add(new Category { Label = "Science" });
+                    context.Add(new Category { Name = "War story" });
+                    context.Add(new Category { Name = "Thriller" });
+                    context.Add(new Category { Name = "Contemporary" });
+                    context.Add(new Category { Name = "Science" });
                     context.SaveChanges();
                }
 
@@ -360,7 +360,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book1.ShortDescription,
                     Description = book1.Details.Description,
                     Authors = book1.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book1.Categories?.Select(a => a.Label).ToList()
+                    Categories = book1.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -370,7 +370,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book2.ShortDescription,
                     Description = book2.Details.Description,
                     Authors = book2.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book2.Categories?.Select(a => a.Label).ToList()
+                    Categories = book2.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -380,7 +380,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book3.ShortDescription,
                     Description = book3.Details.Description,
                     Authors = book3.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book3.Categories?.Select(a => a.Label).ToList()
+                    Categories = book3.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -390,7 +390,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book4.ShortDescription,
                     Description = book4.Details.Description,
                     Authors = book4.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book4.Categories?.Select(a => a.Label).ToList()
+                    Categories = book4.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -400,7 +400,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book5.ShortDescription,
                     Description = book5.Details.Description,
                     Authors = book5.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book5.Categories?.Select(a => a.Label).ToList()
+                    Categories = book5.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -410,7 +410,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book6.ShortDescription,
                     Description = book6.Details.Description,
                     Authors = book6.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book6.Categories?.Select(a => a.Label).ToList()
+                    Categories = book6.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -420,7 +420,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book7.ShortDescription,
                     Description = book7.Details.Description,
                     Authors = book7.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book7.Categories?.Select(a => a.Label).ToList()
+                    Categories = book7.Categories?.Select(a => a.Name).ToList()
                });
           }
 

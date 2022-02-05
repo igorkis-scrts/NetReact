@@ -39,7 +39,7 @@ namespace BookExchange.API.Controllers
           }
 
 
-          [HttpPost()]
+          [HttpPost]
           public async Task<IActionResult> CreateUser()
           {
                var user = await _mediator.Send(new CreateUserCommand());
@@ -84,18 +84,6 @@ namespace BookExchange.API.Controllers
                return Ok(response);
           }
           
-          [HttpGet("{id}/books/recommended")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetRecommendedBooks(int id, [FromQuery] int topN = 3)
-          {
-               var books = await _mediator.Send(new GetRecommendedBooksQuery { Id = id, TopN = topN });
-
-               var response = _mapper.Map<List<BookDto>>(books);
-
-               return Ok(response);
-          }
-
-
           [HttpGet("{id}/books/wished")]
           public async Task<IActionResult> GetWishedBooks(int id, [FromQuery] BooksFilter filter)
           {

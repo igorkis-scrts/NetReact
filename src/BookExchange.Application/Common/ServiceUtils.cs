@@ -13,7 +13,7 @@ namespace BookExchange.Application.Common
 {
      public static class ServiceUtils
      {
-          public static async Task<string> SaveFile(IHostingEnvironment environment, IFormFile file, string directory)
+          public static async Task<string> SaveFile(IWebHostEnvironment environment, IFormFile file, string directory)
           {
                if (file == null || file.Length == 0) return null;
 
@@ -32,9 +32,9 @@ namespace BookExchange.Application.Common
                return bookRepository.GetBooksByCondition(b => b.ISBN == ISBN).Any();
           }
 
-          public static bool CheckBookCategoryExists(ICategoryRepository categoryRepository, string label)
+          public static bool CheckBookCategoryExists(ICategoryRepository categoryRepository, string name)
           {
-               return categoryRepository.GetAllByCondition(c => c.Label == label).Any();
+               return categoryRepository.GetAllByCondition(c => c.Name == name).Any();
           }
      }
 }

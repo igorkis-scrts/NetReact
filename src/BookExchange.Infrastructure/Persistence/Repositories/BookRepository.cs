@@ -12,7 +12,6 @@ namespace BookExchange.Infrastructure.Persistence.Repositories
      {
           public BookRepository(BookExchangeDbContext context) : base(context)
           {
-
           }
 
           public List<Book> GetBooksByCondition(Expression<Func<Book, bool>> predicate)
@@ -25,7 +24,5 @@ namespace BookExchange.Infrastructure.Persistence.Repositories
                return _entitites.Include(b => b.Details).Include(b => b.Authors).Include(b => b.Categories)
                               .Where(b => idList.Contains(b.Id)).AsEnumerable().OrderBy(x => idList.IndexOf(x.Id)).ToList();
           }
-
-
      }
 }

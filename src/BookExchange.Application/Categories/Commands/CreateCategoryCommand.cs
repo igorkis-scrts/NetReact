@@ -10,6 +10,6 @@ namespace BookExchange.Application.Categories.Commands
 {
      public class CreateCategoryCommand : IRequest<Category>
      {
-          public string Label { get; set; }
+          public string Name { get; set; }
      }
 }

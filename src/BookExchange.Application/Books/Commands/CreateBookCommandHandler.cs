@@ -19,14 +19,14 @@ namespace BookExchange.Application.Books.Commands
      class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Book>
      {
           private readonly IMediator _mediator;
-          private readonly IHostingEnvironment _environment;
+          private readonly IWebHostEnvironment _environment;
           private readonly IBookRepository _bookRepository;
           private readonly IRepositoryBase<Author> _bookAuthorsRepository;
           private readonly ICategoryRepository _bookCategoriesRepository;
 
           public CreateBookCommandHandler(IBookRepository bookRepository, 
                IRepositoryBase<Author> bookAuthorsRepository, ICategoryRepository bookCategoriesRepository, 
-               IHostingEnvironment environment, IMediator mediator)
+               IWebHostEnvironment environment, IMediator mediator)
           {
                _bookRepository = bookRepository;
                _bookAuthorsRepository = bookAuthorsRepository;
@@ -73,7 +73,7 @@ namespace BookExchange.Application.Books.Commands
                                         ShortDescription = book.ShortDescription,
                                         Description = book.Details.Description,
                                         Authors = book.Authors?.Select(a => a.Name).ToList(),
-                                        Categories = book.Categories?.Select(a => a.Label).ToList()
+                                        Categories = book.Categories?.Select(a => a.Name).ToList()
                                        }, cancellationToken); 
 
                return await Task.FromResult(book);

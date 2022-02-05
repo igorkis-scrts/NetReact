@@ -1,8 +1,6 @@
 using BookExchange.API.Configuration;
 using BookExchange.Application.Common;
 using BookExchange.Application.Common.Exceptions;
-using BookExchange.Application.Common.Interfaces;
-using BookExchange.Application.Common.Services;
 using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
 using BookExchange.Domain.ReadModel;
@@ -119,7 +117,6 @@ builder.Services.AddScoped<IRepositoryBase<BookDetails>, RepositoryBase<BookDeta
 builder.Services.AddScoped<IRepositoryBase<Wishlist>, RepositoryBase<Wishlist>>();
 
 builder.Services.AddScoped<IReadModelBookRepository, ElasticBookRepository>();
-builder.Services.AddScoped<IRecommendationService, RecommendationService>();
 
 builder.Services.AddMediatR(typeof(BookExchange.Application.Class1));
 builder.Services.AddAutoMapper(typeof(BookExchange.Application.Common.Mappings.MappingProfile).Assembly);
