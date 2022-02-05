@@ -4,8 +4,7 @@ export const appUrls = {
   signUp: "/sign-up",
   profile: "/profile",
   searchBooks: "/search",
-  postBook: "/post-book",
   addBook: "/add-book",
   books: "/books/",
-  bookDetails: "/books/:id"
+  bookDetails: "/books/:id",
 };

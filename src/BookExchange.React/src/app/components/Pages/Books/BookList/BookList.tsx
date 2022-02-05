@@ -1,6 +1,6 @@
 import { BookApi } from "@api/Book.api";
 import { useFetch } from "@hooks/useFetch";
-import { Filter, ViewComfy } from "@mui/icons-material";
+import { Filter, ViewComfy, Add } from "@mui/icons-material";
 import {
   SelectChangeEvent,
   Grid,
@@ -10,12 +10,17 @@ import {
   Pagination,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
+import { DialogContainer } from "@shared/atoms/ModalContainer/DialogContainer";
 import { BookListCard } from "@shared/organisms/Cards/BookListCard/BookListCard";
 import { BookSquareCard } from "@shared/organisms/Cards/BookSquareCard/BookSquareCard";
 import { BookSkeletons } from "@shared/organisms/PaginatedView/BookSkeletons/BookSkeletons";
 import { BottomListControls } from "@shared/organisms/PaginatedView/PaginatedView.styled";
-import { useState, ChangeEvent, useEffect } from "react";
+import { countPages } from "@utils/countPages";
+import Emitter from "@utils/Emitter";
+import React, { useState, ChangeEvent, useEffect } from "react";
+import AddBook from "../../AddBook";
 
 interface IBookListProps {
   cardAction?: (id: number) => void;
@@ -38,6 +43,10 @@ const BookList = (props: IBookListProps) => {
     setPage(0);
   };
 
+  const handleAddBookClick = () => {
+    Emitter.emit("add-book", true);
+  };
+
   useEffect(() => {
     fetchData({
       pageNumber: page,
@@ -58,6 +67,12 @@ const BookList = (props: IBookListProps) => {
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item>
           <Typography variant="h5">Books</Typography>
+        </Grid>
+
+        <Grid item>
+          <Button startIcon={<Add />} variant="contained" color="info" onClick={handleAddBookClick}>
+            Add Book
+          </Button>
         </Grid>
         <Grid item>
           <IconButton
@@ -98,7 +113,7 @@ const BookList = (props: IBookListProps) => {
       <BottomListControls container justifyContent="flex-start" alignItems="center">
         <Grid item>
           <Pagination
-            count={data.totalPages > 0 ? data.totalPages : 1}
+            count={countPages(data.totalRecords, data.pageSize)}
             page={page}
             onChange={handleChangePage}
           />
@@ -111,6 +126,10 @@ const BookList = (props: IBookListProps) => {
           </Select>
         </Grid>
       </BottomListControls>
+
+      <DialogContainer dialogName="add-book">
+        <AddBook closeDialog={() => Emitter.emit("add-book", false)}/>
+      </DialogContainer>
     </>
   );
 };

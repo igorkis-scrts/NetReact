@@ -1,13 +1,13 @@
 import { makeObservable, observable, action, runInAction, computed, reaction } from "mobx";
 import { UserService, AccountService } from "../../services";
-import { User, Account } from "../types";
+import { SignUpData, User } from "@app/types";
 
 export class AuthStore {
   private _logoutTimerId: NodeJS.Timeout | null = null;
 
   public token: string | null = null;
   public tokenExpirationTime: Date | null = null;
-  public user: User.User | null = null;
+  public user: User | null = null;
 
   get isLoggedIn(): boolean {
     return !!this.token;
@@ -50,7 +50,7 @@ export class AuthStore {
     this.storeAuth(access_token, expirationTime);
   }
 
-  public async signUp(signUpData: Account.SignUpData) {
+  public async signUp(signUpData: SignUpData) {
     await AccountService.SignUp(signUpData);
 
     const { access_token, expires_in } = await AccountService.RequestToken(

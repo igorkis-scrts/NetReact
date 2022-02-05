@@ -1,11 +1,11 @@
 import { CircularProgress, CircularProgressProps } from "@mui/material";
 import React from "react";
 
-interface ILoaderBlockOwnProps {
+interface ILoaderProps {
   isLoading: boolean;
 }
 
-type Props = ILoaderBlockOwnProps & CircularProgressProps;
+type Props = ILoaderProps & CircularProgressProps;
 
 const Loader = (props: Props) => {
   const { isLoading, ...rest } = props;

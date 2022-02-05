@@ -10,6 +10,7 @@ const Home = lazy(() => import("@Pages/Home"));
 const UserProfile = lazy(() => import("@Pages/UserProfile"));
 const Books = lazy(() => import("@Pages/Books"));
 const BookDetails = lazy(() => import("@Pages/BookDetails"));
+const AddBook = lazy(() => import("@Pages/AddBook"));
 const NotFound = lazy(() => import("@Pages/NotFound"));
 
 const AppRouter = () => {
@@ -29,10 +30,10 @@ const AppRouter = () => {
           <Route path=":id" element={<BookDetails />} />
         </Route>
         {/*<Route path="/search" element={<SearchBooks />} />*/}
-        {/*<Route path="/post-book" element={<PostBooks />} />*/}
 
-        {/*<Route path="/add-book" element={<AddBook />} />*/}
-        {/*<Route path="/posts/add/:bookId" element={<AddPost />} />*/}
+        <Route path={appUrls.addBook} element={<AuthProtection />}>
+          <Route path={appUrls.addBook} element={<AddBook />} />
+        </Route>
       </Route>
     </Routes>
   );

@@ -21,7 +21,7 @@ const NotFound = () => {
 
       <Grid item>
         <Typography>
-          Oops! Looks like that the page you&apos;re looking for does not exists.
+          Oops! Looks like that the page you&apos;re looking for does not exist.
         </Typography>
       </Grid>
       <Grid item>

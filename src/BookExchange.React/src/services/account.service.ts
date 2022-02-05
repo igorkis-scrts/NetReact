@@ -1,7 +1,7 @@
-import { Account } from "@app/types";
+import { SignUpData, TokenRequestResult } from "@app/types";
 import { fetchIdentity } from "./fetchIdentity";
 
-const SignUp = async (userData: Account.SignUpData) => {
+const SignUp = async (userData: SignUpData) => {
   const requestOptions = {
     method: "POST",
     headers: {
@@ -16,7 +16,7 @@ const SignUp = async (userData: Account.SignUpData) => {
 const RequestToken = async (
   username: string,
   password: string
-): Promise<Account.TokenRequestResult> => {
+): Promise<TokenRequestResult> => {
   const requestOptions = {
     method: "POST",
     headers: {

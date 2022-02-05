@@ -2,8 +2,9 @@ import { SignIn } from "@Pages/Auth/SignIn/SignIn";
 import { SignUp } from "@Pages/Auth/SignUp/SignUp";
 import { DialogContainer } from "@shared/atoms/ModalContainer/DialogContainer";
 import { useStores } from "@stores/useStores";
+import Emitter from "@utils/Emitter";
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import React from "react";
 import { appUrls } from "@app/appUrls";
 import { useNavigate } from "react-router-dom";
 import { NavbarButton } from "../Navbar.styled";
@@ -11,9 +12,6 @@ import { NavbarLinkButton } from "../NavbarLinkButton/NavbarLinkButton";
 import { Grid } from "@mui/material";
 
 const Userbar = observer(() => {
-  const [isSignInModalOpen, setSignInModalOpen] = useState<boolean>(false);
-  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false);
-
   const { auth } = useStores();
   const navigate = useNavigate();
   const { user, isLoggedIn } = auth!;
@@ -24,11 +22,11 @@ const Userbar = observer(() => {
   };
 
   const handleLogin = () => {
-    setSignInModalOpen(true);
+    Emitter.emit("sign-in", true);
   };
 
   const handleRegister = () => {
-    setIsSignUpModalOpen(true);
+    Emitter.emit("sign-up", true);
   };
 
   return (
@@ -53,12 +51,12 @@ const Userbar = observer(() => {
         </>
       )}
 
-      <DialogContainer isOpen={isSignInModalOpen} toggle={() => setSignInModalOpen(!isSignInModalOpen)}>
-        <SignIn closeDialog={() => setSignInModalOpen(false)} />
+      <DialogContainer dialogName="sign-in">
+        <SignIn closeDialog={() => Emitter.emit("sign-in", false)} />
       </DialogContainer>
 
-      <DialogContainer isOpen={isSignUpModalOpen} toggle={() => setIsSignUpModalOpen(!isSignUpModalOpen)}>
-        <SignUp closeDialog={() => setSignInModalOpen(false)} />
+      <DialogContainer dialogName="sign-up">
+        <SignUp closeDialog={() => Emitter.emit("sign-up", false)} />
       </DialogContainer>
     </>
   );

@@ -1,4 +1,4 @@
-import { Common, Book, Request, Deal, Post } from "@app/types";
+import { Book, Request, Deal, Post, PaginatedResult } from "@app/types";
 import { UserStats } from "@Pages/UserProfile/StatisticsBar/models/UserStats";
 import { ApiBase } from "@utils/api/ApiBase";
 import { ApiResponse } from "@utils/api/ApiResponse";
@@ -12,8 +12,8 @@ export class UserApi extends ApiBase {
     userId: number,
     pageSize: number,
     page: number
-  ): Promise<ApiResponse<Common.PaginatedResult<Book.Book>>> {
-    return await UserApi.get<Common.PaginatedResult<Book.Book>>(
+  ): Promise<ApiResponse<PaginatedResult<Book>>> {
+    return await UserApi.get<PaginatedResult<Book>>(
       `/user/${userId}/books/wished?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
@@ -23,8 +23,8 @@ export class UserApi extends ApiBase {
     userId: number,
     pageSize: number,
     page: number
-  ): Promise<ApiResponse<Common.PaginatedResult<Request.Request>>> {
-    return await UserApi.get<Common.PaginatedResult<Request.Request>>(
+  ): Promise<ApiResponse<PaginatedResult<Request>>> {
+    return await UserApi.get<PaginatedResult<Request>>(
       `/user/${userId}/requests/from?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
@@ -34,8 +34,8 @@ export class UserApi extends ApiBase {
     userId: number,
     pageSize: number,
     page: number
-  ): Promise<ApiResponse<Common.PaginatedResult<Request.Request>>> {
-    return await UserApi.get<Common.PaginatedResult<Request.Request>>(
+  ): Promise<ApiResponse<PaginatedResult<Request>>> {
+    return await UserApi.get<PaginatedResult<Request>>(
       `/user/${userId}/requests/to?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
@@ -45,8 +45,8 @@ export class UserApi extends ApiBase {
     userId: number,
     pageSize: number,
     page: number
-  ): Promise<ApiResponse<Common.PaginatedResult<Deal.Deal>>> {
-    return await UserApi.get<Common.PaginatedResult<Deal.Deal>>(
+  ): Promise<ApiResponse<PaginatedResult<Deal>>> {
+    return await UserApi.get<PaginatedResult<Deal>>(
       `/user/${userId}/deals/from?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
@@ -56,8 +56,8 @@ export class UserApi extends ApiBase {
     userId: number,
     pageSize: number,
     page: number
-  ): Promise<ApiResponse<Common.PaginatedResult<Deal.Deal>>> {
-    return await UserApi.get<Common.PaginatedResult<Deal.Deal>>(
+  ): Promise<ApiResponse<PaginatedResult<Deal>>> {
+    return await UserApi.get<PaginatedResult<Deal>>(
       `/user/${userId}/deals/to?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
@@ -67,8 +67,8 @@ export class UserApi extends ApiBase {
     userId: number,
     pageSize: number,
     page: number
-  ): Promise<ApiResponse<Common.PaginatedResult<Post.Post>>> {
-    return await UserApi.get<Common.PaginatedResult<Post.Post>>(
+  ): Promise<ApiResponse<PaginatedResult<Post>>> {
+    return await UserApi.get<PaginatedResult<Post>>(
       `/user/${userId}/posts/owned?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );

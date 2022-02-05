@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useSnackbar } from "notistack";
 import { appUrls } from "@app/appUrls";
-import { Account } from "@app/types";
+import { SignInData } from "../../../../../types";
 import { SubmitButton, Form } from "../../Auth.styled";
 
 interface ISignInFormProps {
@@ -33,11 +33,11 @@ const SignInForm = ({ closeDialog }: ISignInFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Account.SignInData>({
+  } = useForm<SignInData>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: Account.SignInData) => {
+  const onSubmit = async (data: SignInData) => {
     try {
       await auth!.signIn(data.username, data.password);
       await auth!.fetchCurrentUser();

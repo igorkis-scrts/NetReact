@@ -5,7 +5,7 @@ import { ListCardContainer } from "@shared/molecules/Containers/ListCardContaine
 import { useNavigate } from "react-router-dom";
 import { LinkButton } from "../../../Styles/LinkButton";
 
-const BookListCard = ({ cardItem: book, action, actionText }: ICardProps<Book.Book>) => {
+const BookListCard = ({ cardItem: book, action, actionText }: ICardProps<Book>) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -33,7 +33,7 @@ const BookListCard = ({ cardItem: book, action, actionText }: ICardProps<Book.Bo
 
       <Typography>ISBN: {book.isbn}</Typography>
       {book.categories.length !== 0 && (
-        <Typography>Categories: {book.categories?.map((c) => c.label).join(", ")}</Typography>
+        <Typography>Categories: {book.categories?.map((c) => c.name).join(", ")}</Typography>
       )}
     </ListCardContainer>
   );

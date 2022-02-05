@@ -6,7 +6,7 @@ import { Book } from "@app/types";
 import { SquareCardContainer } from "@shared/molecules/Containers/SquareCardContainer/SquareCardContainer";
 import { LinkButton } from "@shared/Styles/LinkButton";
 
-const BookSquareCard = ({ cardItem: book, action, actionText }: ICardProps<Book.Book>) => {
+const BookSquareCard = ({ cardItem: book, action, actionText }: ICardProps<Book>) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -28,7 +28,7 @@ const BookSquareCard = ({ cardItem: book, action, actionText }: ICardProps<Book.
         by {book.authors?.map((a) => a.name).join(", ")}
       </Typography>
       <Typography>ISBN: {book.isbn}</Typography>
-      <Typography>Categories: {book.categories?.map((c) => c.label).join(", ")}</Typography>
+      <Typography>Categories: {book.categories?.map((c) => c.name).join(", ")}</Typography>
     </SquareCardContainer>
   );
 };

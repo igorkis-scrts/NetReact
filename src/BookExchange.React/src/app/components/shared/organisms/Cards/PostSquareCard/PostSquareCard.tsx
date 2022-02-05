@@ -2,7 +2,7 @@ import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { Post } from "@app/types";
 import { SquareCardContainer } from "@shared/molecules/Containers/SquareCardContainer/SquareCardContainer";
 
-const PostSquareCard = ({ cardItem: post, action, actionText }: ICardProps<Post.Post>) => {
+const PostSquareCard = ({ cardItem: post, action, actionText }: ICardProps<Post>) => {
   return (
     <SquareCardContainer
       action={() => {

@@ -1,34 +1,31 @@
-import { Book, User, Condition } from "app/types/index";
-import { Common } from "./common.type";
+import { Book, PaginationFilter, User } from "@app/types";
 
-export declare module Post {
-  export type Post = {
-    id: number;
-    bookId: number;
-    postedById: number;
-    condition: string;
-    status: string;
-    timeAdded: Date;
+export type Post = {
+  id: number;
+  bookId: number;
+  postedById: number;
+  condition: string;
+  status: string;
+  timeAdded: Date;
 
-    book: Book.Book | null;
-    postedBy: User.User | null;
-  };
+  book: Book | null;
+  postedBy: User | null;
+};
 
-  export type CreatePost = {
-    bookId: number;
-    postedById: number;
-    condition: string;
-  };
+export type CreatePost = {
+  bookId: number;
+  postedById: number;
+  condition: string;
+};
 
-  export type PostsFilter = Common.PaginationFilter & {
-    [key: string]: any;
+export type PostsFilter = PaginationFilter & {
+  [key: string]: any;
 
-    includePostedBy?: boolean;
-    includeCondition?: boolean;
-    includeBook?: boolean;
-    status?: string;
-    bookId?: number;
-    condition?: string;
-    timeAdded?: Date;
-  };
-}
+  includePostedBy?: boolean;
+  includeCondition?: boolean;
+  includeBook?: boolean;
+  status?: string;
+  bookId?: number;
+  condition?: string;
+  timeAdded?: Date;
+};

@@ -5,7 +5,7 @@ import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 import { createAppTheme } from "@config/themes/createAppTheme";
-import { LoaderBlock } from "@shared/atoms/Loaders/LoaderBlock";
+import LoaderBlock from "@shared/atoms/Loaders/LoaderBlock";
 import { useStores } from "@stores/useStores";
 
 interface IAppProviderProps {
@@ -32,7 +32,7 @@ const AppProvider = observer((props: IAppProviderProps) => {
 
   const render = () => {
     if (!app!.isAppInitialized) {
-      return <LoaderBlock isLoading={true} />;
+      return <LoaderBlock />;
     }
 
     return children;
@@ -49,7 +49,7 @@ const AppProvider = observer((props: IAppProviderProps) => {
           }}
         >
           <CssBaseline />
-          <Suspense fallback={<LoaderBlock isLoading={true}/>}>
+          <Suspense fallback={<LoaderBlock />}>
             {render()}
           </Suspense>
         </SnackbarProvider>

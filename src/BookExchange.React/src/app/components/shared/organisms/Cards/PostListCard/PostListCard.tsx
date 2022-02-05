@@ -3,7 +3,7 @@ import { Post } from "@app/types";
 import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { CardRoot, Details, Content, Cover, Controls } from "./PostListCard.styled";
 
-const PostListCard = ({ cardItem }: ICardProps<Post.Post>) => {
+const PostListCard = ({ cardItem }: ICardProps<Post>) => {
   return (
     <CardRoot>
       <Details>
@@ -15,7 +15,7 @@ const PostListCard = ({ cardItem }: ICardProps<Post.Post>) => {
             Owner: {cardItem.postedBy?.username}
           </Typography>
           <Typography>ISBN: {cardItem.book?.isbn}</Typography>
-          <Typography>Categories: {cardItem.book?.categories?.map((c) => c.label).join(", ")}</Typography>
+          <Typography>Categories: {cardItem.book?.categories?.map((c: any) => c.name).join(", ")}</Typography>
           <Typography>Condition: {cardItem.condition}</Typography>
         </Content>
         <Controls>

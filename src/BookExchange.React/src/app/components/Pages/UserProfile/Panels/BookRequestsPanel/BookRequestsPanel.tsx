@@ -27,7 +27,7 @@ const BookRequestsPanel = ({ index, displayIndex }: IPanelProps) => {
         squareCard={RequestListCard}
         service={UserApi.getRequestsToUser}
         cardAction={approveRequest}
-        cardActionText="Aprove"
+        cardActionText="Approve"
       />
     </div>
   );

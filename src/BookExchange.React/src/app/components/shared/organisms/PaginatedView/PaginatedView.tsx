@@ -1,4 +1,4 @@
-import { Book, Post, Deal, Request, Common } from "@app/types";
+import { Book, Post, Deal, Request, PaginatedResult } from "@app/types";
 import { useFetch } from "@hooks/useFetch";
 import { ViewComfy, Filter } from "@mui/icons-material";
 import {
@@ -13,21 +13,22 @@ import {
 } from "@mui/material";
 import { useStores } from "@stores/useStores";
 import { ApiResponse } from "@utils/api/ApiResponse";
+import { countPages } from "@utils/countPages";
 import { useState, useEffect, FC, ChangeEvent } from "react";
 import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { BookSkeletons } from "./BookSkeletons/BookSkeletons";
 import { BottomListControls } from "./PaginatedView.styled";
 
-interface IPaginatedViewProps<TData extends Book.Book | Post.Post | Deal.Deal | Request.Request> {
+interface IPaginatedViewProps<TData extends Book | Post | Deal | Request> {
   title: string;
   listCard: FC<ICardProps<TData>>;
   squareCard: FC<ICardProps<TData>>;
-  service: (...args: any) => Promise<ApiResponse<Common.PaginatedResult<TData>>>;
+  service: (...args: any) => Promise<ApiResponse<PaginatedResult<TData>>>;
   cardAction?: (id: number) => void;
   cardActionText?: string;
 }
 
-type GenericData = Book.Book | Post.Post | Deal.Deal | Request.Request;
+type GenericData = Book | Post | Deal | Request;
 
 const PaginatedView = function PaginatedView<TData extends GenericData>(props: IPaginatedViewProps<TData>) {
   const [page, setPage] = useState<number>(1);
@@ -47,7 +48,7 @@ const PaginatedView = function PaginatedView<TData extends GenericData>(props: I
 
   const handleChangeRowsPerPage = (event: SelectChangeEvent) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    setPage(1);
   };
 
   useEffect(() => {
@@ -108,7 +109,7 @@ const PaginatedView = function PaginatedView<TData extends GenericData>(props: I
       <BottomListControls container justifyContent="flex-start" alignItems="center">
         <Grid item>
           <Pagination
-            count={data.totalPages > 0 ? data.totalPages : 1}
+            count={countPages(data.totalRecords, data.pageSize)}
             page={page}
             onChange={handleChangePage}
           />

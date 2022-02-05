@@ -1,17 +1,17 @@
 import { fetchApi } from "./fetchApi";
-import { User, Book, Common, Post } from "app/types";
+import { User, Post, PaginatedResult } from "app/types";
 
-const GetCurrentUser = (): Promise<User.User> => {
-  return fetchApi<User.User>("/user/current-user");
+const GetCurrentUser = (): Promise<User> => {
+  return fetchApi<User>("/user/current-user");
 };
 
 const CreateProfile = async () => {
-  return fetchApi<User.User>("/user", {
+  return fetchApi<User>("/user", {
     method: "POST",
   });
 };
 const GetUserBookshelf = async (userId: number, pageSize: number, page: number) => {
-  return fetchApi<Common.PaginatedResult<Post.Post>>(
+  return fetchApi<PaginatedResult<Post>>(
     `/user/${userId}/posts/owned?pageSize=${pageSize}&pageNumber=${page}`
   );
 };
@@ -44,23 +44,12 @@ const RequestPost = async (userId: number, postId: number) => {
   return fetchApi(`/user/${userId}/requests`, requestOptions);
 };
 
-const GetTopUsers = async (topN: number) => {
-  return fetchApi<User.LeaderboardData[]>(`/user/leaderboard?amount=${topN}`);
-};
-
-const GetRecommendedBooks = (userId: number) => {
-  console.log("get recom books", userId);
-  return fetchApi<Book.Book[]>(`/user/${userId}/books/recommended`);
-};
-
 const UserService = {
   GetCurrentUser,
   CreateProfile,
   GetUserBookshelf,
   AddBookToWishlist,
-  RequestPost,
-  GetTopUsers,
-  GetRecommendedBooks,
+  RequestPost
 };
 
 export { UserService };

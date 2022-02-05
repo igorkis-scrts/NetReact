@@ -3,7 +3,7 @@ import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { Request } from "@app/types";
 import { ListCardContainer } from "@shared/molecules/Containers/ListCardContainer/ListCardContainer";
 
-const RequestListCard = ({ cardItem: request, action, actionText }: ICardProps<Request.Request>) => {
+const RequestListCard = ({ cardItem: request, action, actionText }: ICardProps<Request>) => {
   if (request == null) {
     return <p>No request data</p>;
   }
@@ -23,7 +23,7 @@ const RequestListCard = ({ cardItem: request, action, actionText }: ICardProps<R
         by {request.post?.book?.authors?.map((a) => a.name).join(", ")}
       </Typography>
       <Typography>ISBN: {request.post?.book?.isbn}</Typography>
-      <Typography>Categories: {request.post?.book?.categories?.map((c) => c.label).join(", ")}</Typography>
+      <Typography>Categories: {request.post?.book?.categories?.map((c) => c.name).join(", ")}</Typography>
       <Typography>Status: {request.status}</Typography>
       <Typography>Book Owner: {request.post?.postedBy?.username}</Typography>
       <Typography>Requested by: {request.user.username}</Typography>

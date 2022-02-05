@@ -1,13 +1,11 @@
-import { User, Post } from "./index";
+import { User, Post } from "@app/types";
 
-export declare module Deal {
-  export type Deal = {
-    id: number;
-    postId: number;
-    bookTakerId: number;
-    dealStatus: string;
+export type Deal = {
+  id: number;
+  postId: number;
+  bookTakerId: number;
+  dealStatus: string;
 
-    bookTaker: User.User | null;
-    post: Post.Post | null;
-  };
-}
+  bookTaker: User | null;
+  post: Post | null;
+};

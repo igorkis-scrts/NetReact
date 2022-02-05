@@ -10,7 +10,7 @@ interface IAuthenticationProps {
 
 const Authentication = (props: IAuthenticationProps) => {
   return (
-    <Container sx={{padding: "0 !important"}} maxWidth="xs">
+    <Container sx={{ padding: "0 !important" }} maxWidth="xs">
       <MainPaper>
         <ProfileAvatar>
           <Lock />

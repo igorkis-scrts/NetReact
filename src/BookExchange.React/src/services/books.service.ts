@@ -1,27 +1,16 @@
-import { Book, Common } from "@app/types";
+import { Book, CreateBook, PaginatedResult } from "@app/types";
 
 import { fetchApi } from "./fetchApi";
 
-const GetBooks = (filters: Book.SearchFilters) => {
-  const str = getQueryString(filters);
-  console.log(str);
-  return fetchApi<Common.PaginatedResult<Book.Book>>("/book?" + str);
-};
-
 const GetBooksBySearch = async (searchTerm: string) => {
-  return fetchApi<Common.PaginatedResult<Book.Book>>(
+  return fetchApi<PaginatedResult<Book>>(
     `/book/smart-search?searchTerm=${searchTerm}`
   );
 };
 
 
-// check bellow
-const GetBooksByISBN = async (isbns: string[]): Promise<Book.Book[]> => {
-  return fetchApi<Book.Book[]>(`/book`);
-};
-
-const AddBook = async (book: Book.CreateBook) => {
-  let formData = new FormData();
+const AddBook = async (book: CreateBook) => {
+  const formData = new FormData();
   for (const [key, value] of Object.entries(book)) {
     if (value) {
       formData.append(key, <string | Blob>value);
@@ -39,35 +28,11 @@ const AddBook = async (book: Book.CreateBook) => {
   console.log(requestOptions);
   console.log(book.image);
 
-  return fetchApi<Book.Book>("/book", requestOptions);
+  return fetchApi<Book>("/book", requestOptions);
 };
 
-// todo: check dependencies and remove method (transfered to ServiceUtils)
-const getQueryString = (params: any) => {
-  const esc = encodeURIComponent;
-  return Object.keys(params)
-    .filter((k) => {
-      if (!params[k]) return false;
-      return true;
-    })
-    .map((k) => {
-      if (Array.isArray(params[k])) {
-        let result = "";
-        for (let item of params[k]) {
-          if (result !== "") result = "&" + result;
-          result += esc(k) + "=" + esc(item["id"]);
-        }
-        return result;
-      }
-
-      return esc(k) + "=" + esc(params[k]);
-    })
-    .join("&");
-};
 
 const BookService = {
-  GetBooks,
-  GetBooksByISBN,
   GetBooksBySearch,
   AddBook,
 };

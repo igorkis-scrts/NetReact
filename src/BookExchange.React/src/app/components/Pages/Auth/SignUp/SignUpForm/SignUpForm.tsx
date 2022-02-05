@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Account } from "../../../../../types";
+import { SignUpData } from "@app/types";
 import { appUrls } from "@app/appUrls";
 import { SubmitButton, Form } from "../../Auth.styled";
 
@@ -38,11 +38,11 @@ const SignUpForm = ({ closeDialog }: ISignUpFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Account.SignUpData>({
+  } = useForm<SignUpData>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: Account.SignUpData) => {
+  const onSubmit = async (data: SignUpData) => {
     try {
       await auth!.signUp(data);
       await auth!.fetchCurrentUser();

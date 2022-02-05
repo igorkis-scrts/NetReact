@@ -1,14 +1,11 @@
 import { User, Post } from "./index";
-import { Common } from "./common.type";
 
-export declare module Request {
-  export type Request = {
-    id: number;
-    postId: number;
-    useId: number;
-    status: string;
+export type Request = {
+  id: number;
+  postId: number;
+  useId: number;
+  status: string;
 
-    post: Post.Post;
-    user: User.User;
-  };
-}
+  post: Post;
+  user: User;
+};

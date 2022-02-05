@@ -3,7 +3,7 @@ import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { Deal } from "@app/types";
 import { ListCardContainer } from "@shared/molecules/Containers/ListCardContainer/ListCardContainer";
 
-const DealsListCard = ({ cardItem: deal, action, actionText }: ICardProps<Deal.Deal>) => {
+const DealsListCard = ({ cardItem: deal, action, actionText }: ICardProps<Deal>) => {
   return (
     <ListCardContainer
       action={() => {
