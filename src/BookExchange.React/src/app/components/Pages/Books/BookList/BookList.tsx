@@ -127,7 +127,7 @@ const BookList = (props: IBookListProps) => {
         </Grid>
       </BottomListControls>
 
-      <DialogContainer dialogName="add-book">
+      <DialogContainer dialogName="add-book" dialogTitle="Add New Book" disableBackdropClick>
         <AddBook closeDialog={() => Emitter.emit("add-book", false)}/>
       </DialogContainer>
     </>

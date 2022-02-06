@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-import { PageTitleTypography, RootPaper, SubmitButton } from "./AddBook.styled";
+import { RootPaper, SubmitButton } from "./AddBook.styled";
 
 const schema = yup.object().shape({
   title: yup.string().max(100).required("Title is required."),
@@ -26,7 +26,7 @@ const schema = yup.object().shape({
     .required("ISBN must contain 13 digits."),
   shortDescription: yup.string().required("Description is required."),
   authorIds: yup.array().of(yup.number().min(1)),
-  categoryIds: yup.array().of(yup.number().min(1))
+  categoryIds: yup.array().of(yup.number().min(1)),
 });
 
 interface IAddBookProps {
@@ -62,8 +62,6 @@ const AddBook = ({ closeDialog }: IAddBookProps) => {
   return (
     <Container sx={{ padding: "0 !important" }}>
       <RootPaper>
-        <PageTitleTypography variant="h5">Add New Book</PageTitleTypography>
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={4}>

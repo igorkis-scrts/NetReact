@@ -1,6 +1,5 @@
 import { styled } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 export const RootPaper = styled(Paper)(({ theme }) => ({
@@ -10,10 +9,7 @@ export const RootPaper = styled(Paper)(({ theme }) => ({
   paddingTop: theme.spacing(4),
   display: "flex",
   flexDirection: "column",
-}));
-
-export const PageTitleTypography = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
+  boxShadow: "none"
 }));
 
 export const SubmitButton = styled(Button)(({ theme }) => ({
