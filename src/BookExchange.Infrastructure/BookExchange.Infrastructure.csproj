@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ElasticSearch\Documents\" />
     <Folder Include="Migrations" />
   </ItemGroup>
 

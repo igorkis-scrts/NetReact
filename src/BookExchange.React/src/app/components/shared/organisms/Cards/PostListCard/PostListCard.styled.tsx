@@ -18,7 +18,7 @@ export const Cover = styled(CardMedia)(() => ({
   width: 151,
 }));
 
-export const Controls = styled("div")(({theme}) => ({
+export const Controls = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   paddingLeft: theme.spacing(2),

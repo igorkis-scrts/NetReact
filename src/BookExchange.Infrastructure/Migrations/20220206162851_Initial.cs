@@ -15,7 +15,7 @@ namespace BookExchange.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,33 +145,6 @@ namespace BookExchange.Infrastructure.Migrations
                         name: "FK_BookCategory_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookReviews",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    BookId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookReviews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BookReviews_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookReviews_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -368,16 +341,6 @@ namespace BookExchange.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookReviews_BookId",
-                table: "BookReviews",
-                column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookReviews_UserId",
-                table: "BookReviews",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Books_Isbn",
                 table: "Books",
                 column: "Isbn",
@@ -449,9 +412,6 @@ namespace BookExchange.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bookmarks");
-
-            migrationBuilder.DropTable(
-                name: "BookReviews");
 
             migrationBuilder.DropTable(
                 name: "Deals");

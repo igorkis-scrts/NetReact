@@ -24,7 +24,7 @@ module.exports = {
       "@config": path.resolve(__dirname, "src/config/"),
       "@shared": path.resolve(__dirname, "src/app/components/shared/"),
       "@stores": path.resolve(__dirname, "src/app/stores/"),
-      "@Pages": path.resolve(__dirname, "src/app/components/Pages/"),
+      "@Pages": path.resolve(__dirname, "src/app/components/Pages/")
     },
     configure: {
       module: {
@@ -37,23 +37,20 @@ module.exports = {
                 loader: require.resolve("ts-loader"),
                 options: {
                   transpileOnly: true,
-                  getCustomTransformers: () => ({ before: [tsNameof] }),
-                },
-              },
-            ],
-          },
-        ],
-      },
+                  getCustomTransformers: () => ({ before: [tsNameof] })
+                }
+              }
+            ]
+          }
+        ]
+      }
     },
     plugins: [
       // ...whenProd(() => [new BundleAnalyzerPlugin()], []),
-      ...whenProd(async () => {
-        const imagemin = import('imagemin');
-        const imageminSvgo = import('imagemin-svgo')
-
-        return [
+      ...whenProd(
+        () => [
           new ImageminPlugin({
-            test: /\.(jpe?g|png|gif|svg)$/i,
+            test: /\.(jpe?g|png|gif)$/i,
             imageminOptions: {
               plugins: [
                 imageminGifsicle({
@@ -65,29 +62,17 @@ module.exports = {
                 imageminOptipng({
                   optimizationLevel: 5,
                 }),
-                await imagemin(["images/*.svg"], {
-                  destination: "build/images",
-                  plugins: [
-                    imageminSvgo({
-                      plugins: [
-                        {
-                          name: "removeViewBox",
-                          active: false,
-                        },
-                      ],
-                    }),
-                  ],
-                }),
               ],
             },
           }),
-        ];
-      }, []),
+        ],
+        []
+      ),
 
       // ...whenDev(() => [new CircularDependencyPlugin({
       //     exclude: /a\.js|node_modules/,
       // })], [])
     ],
   },
-  plugins: [{ plugin: CracoEsbuildPlugin }],
+  plugins: [{ plugin: CracoEsbuildPlugin }]
 };

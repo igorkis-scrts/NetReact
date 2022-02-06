@@ -330,29 +330,7 @@ namespace BookExchange.Application.Common
                }
 
                context.SaveChanges();
-
-               // populate bookmarks table
-               if (!context.Bookmarks.Any())
-               {
-                    context.Bookmarks.Add(new Bookmark { UserId = 1, PostId = 4 });
-                    context.Bookmarks.Add(new Bookmark { UserId = 1, PostId = 3 });
-                    context.Bookmarks.Add(new Bookmark { UserId = 2, PostId = 2 });
-               }
-               context.SaveChanges();
-
-
-               // populate book reviews
-               if (!context.BookReviews.Any())
-               {
-                    context.BookReviews.Add(new BookReview { BookId = 1, UserId = 1, Rating = 5});
-                    context.BookReviews.Add(new BookReview { BookId = 1, UserId = 1, Rating = 4 });
-                    context.BookReviews.Add(new BookReview { BookId = 1, UserId = 1, Rating = 5 });
-                    context.BookReviews.Add(new BookReview { BookId = 2, UserId = 2, Rating = 4 });
-                    context.BookReviews.Add(new BookReview { BookId = 2, UserId = 2, Rating = 3 });
-               }
-
-               context.SaveChanges();
-
+               
                mediator.Publish(new BookCreatedEvent
                {
                     Id = book1.Id,

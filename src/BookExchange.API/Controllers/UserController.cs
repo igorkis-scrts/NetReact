@@ -14,159 +14,158 @@ using System.Threading.Tasks;
 
 namespace BookExchange.API.Controllers
 {
-     [Route("api/[controller]")]
-     [ApiController]
-     [Authorize("ApiScope")]
-     public class UserController : ControllerBase
-     {
+	[Route("api/[controller]")]
+	[ApiController]
+	[Authorize("ApiScope")]
+	public class UserController : ControllerBase
+	{
+		private readonly IMediator _mediator;
+		private readonly IMapper _mapper;
 
-          private readonly IMediator _mediator;
-          private readonly IMapper _mapper;
+		public UserController(IMediator mediator, IMapper mapper)
+		{
+			_mediator = mediator;
+			_mapper = mapper;
+		}
 
-          public UserController(IMediator mediator, IMapper mapper)
-          {
-               _mediator = mediator;
-               _mapper = mapper;
-          }
+		[HttpGet("current-user")]
+		public async Task<IActionResult> GetCurrentUser()
+		{
+			var user = await _mediator.Send(new GetCurrentUserQuery());
+			var result = _mapper.Map<UserDto>(user);
 
-          [HttpGet("current-user")]
-          public async Task<IActionResult> GetCurrentUser()
-          {
-               var user = await _mediator.Send(new GetCurrentUserQuery());
-               var result = _mapper.Map<UserDto>(user); 
-
-               return Ok(result);
-          }
-
-
-          [HttpPost]
-          public async Task<IActionResult> CreateUser()
-          {
-               await _mediator.Send(new CreateUserCommand());
-
-               return Ok();
-          }
-
-          [HttpGet("id")]
-          public async Task<IActionResult> GetUser(int id)
-          {
-               var user = await _mediator.Send(new GetUserQuery());
-               var result = _mapper.Map<UserDto>(user);
-
-               return Ok(result);
-          }
-
-          [HttpGet]
-          public async Task<IActionResult> GetAllUsers()
-          {
-               var users = await _mediator.Send(new GetUsersQuery());
-               var result = _mapper.Map<ICollection<UserDto>>(users);
-
-               return Ok(result);
-          }
-
-          [HttpDelete]
-          public async Task<IActionResult> DeleteUser()
-          {
-               await _mediator.Send(new DeleteUserCommand());
-
-               return NoContent();
-          }
-
-          [HttpGet("{id}/stats")]
-          public async Task<IActionResult> GetUserStats(int id)
-          {
-               var response = await _mediator.Send(new GetUserStatsQuery { UserId = id });
-
-               return Ok(response);
-          }
-          
-          [HttpGet("{id}/books/wished")]
-          public async Task<IActionResult> GetWishedBooks(int id, [FromQuery] BooksFilter filter)
-          {
-               var query = _mapper.Map<GetUserWishedBooksQuery>(filter);
-               query.UserId = id;
-               var response = await _mediator.Send(query);
-
-               return Ok(response);
-          }
-
-          [HttpPost("{id}/books/wished")]
-          public async Task<IActionResult> AddBookToWishlist(int id, [FromBody] WishListDto wishlistDto)
-          {
-               var response = await _mediator.Send(new AddToWishlistCommand { UserId = id, BookId = wishlistDto.BookId });
-
-               return Ok(response);
-          }
+			return Ok(result);
+		}
 
 
-          [HttpGet("{id}/posts/owned")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetUserActivePosts(int id, [FromQuery] PaginationFilter filter)
-          {
-               var query = _mapper.Map<GetUserPostsQuery>(filter);
-               query.UserId = id;
+		[HttpPost]
+		public async Task<IActionResult> CreateUser()
+		{
+			await _mediator.Send(new CreateUserCommand());
 
-               var response = await _mediator.Send(query);
+			return Ok();
+		}
 
-               return Ok(response);
-          }
+		[HttpGet("id")]
+		public async Task<IActionResult> GetUser(int id)
+		{
+			var user = await _mediator.Send(new GetUserQuery());
+			var result = _mapper.Map<UserDto>(user);
+
+			return Ok(result);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetAllUsers()
+		{
+			var users = await _mediator.Send(new GetUsersQuery());
+			var result = _mapper.Map<ICollection<UserDto>>(users);
+
+			return Ok(result);
+		}
+
+		[HttpDelete]
+		public async Task<IActionResult> DeleteUser()
+		{
+			await _mediator.Send(new DeleteUserCommand());
+
+			return NoContent();
+		}
+
+		[HttpGet("{id}/stats")]
+		public async Task<IActionResult> GetUserStats(int id)
+		{
+			var response = await _mediator.Send(new GetUserStatsQuery { UserId = id });
+
+			return Ok(response);
+		}
+
+		[HttpGet("{id}/books/wished")]
+		public async Task<IActionResult> GetWishedBooks(int id, [FromQuery] BooksFilter filter)
+		{
+			var query = _mapper.Map<GetUserWishedBooksQuery>(filter);
+			query.UserId = id;
+			var response = await _mediator.Send(query);
+
+			return Ok(response);
+		}
+
+		[HttpPost("{id}/books/wished")]
+		public async Task<IActionResult> AddBookToWishlist(int id, [FromBody] WishListDto wishlistDto)
+		{
+			var response = await _mediator.Send(new AddToWishlistCommand { UserId = id, BookId = wishlistDto.BookId });
+
+			return Ok(response);
+		}
 
 
-          [HttpPost("{id}/requests/")]
-          [AllowAnonymous]
-          public async Task<IActionResult> RequestPost(int id, [FromBody] CreateRequestDto requestDto)
-          {
-              var result = await _mediator.Send(new RequestPostCommand { UserId = id, PostId = requestDto.PostId});
+		[HttpGet("{id}/posts/owned")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetUserActivePosts(int id, [FromQuery] PaginationFilter filter)
+		{
+			var query = _mapper.Map<GetUserPostsQuery>(filter);
+			query.UserId = id;
 
-               return Ok(result);
-          }
+			var response = await _mediator.Send(query);
+
+			return Ok(response);
+		}
 
 
-          [HttpGet("{id}/requests/to")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetRequestsToUser(int id, [FromQuery] PaginationFilter filter)
-          {
-               var query = _mapper.Map<GetRequestsToUserQuery>(filter);
-               query.UserId = id;
-               var result = await _mediator.Send(query);
+		[HttpPost("{id}/requests/")]
+		[AllowAnonymous]
+		public async Task<IActionResult> RequestPost(int id, [FromBody] CreateRequestDto requestDto)
+		{
+			var result = await _mediator.Send(new RequestPostCommand { UserId = id, PostId = requestDto.PostId });
 
-               return Ok(result);
-          }
+			return Ok(result);
+		}
 
-          [HttpGet("{id}/requests/from")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetRequestsFromUser(int id, [FromQuery] PaginationFilter filter)
-          {
-               var query = _mapper.Map<GetRequestsFromUserQuery>(filter);
-               query.UserId = id;
-               var result = await _mediator.Send(query);
 
-               return Ok(result);
-          }
+		[HttpGet("{id}/requests/to")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetRequestsToUser(int id, [FromQuery] PaginationFilter filter)
+		{
+			var query = _mapper.Map<GetRequestsToUserQuery>(filter);
+			query.UserId = id;
+			var result = await _mediator.Send(query);
 
-          [HttpGet("{id}/deals/from")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetDealsFromUser(int id, [FromQuery] PaginationFilter filter)
-          {
-               var query = _mapper.Map<GetDealsFromUserQuery>(filter);
-               query.UserId = id;
+			return Ok(result);
+		}
 
-               var response = await _mediator.Send(query);
+		[HttpGet("{id}/requests/from")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetRequestsFromUser(int id, [FromQuery] PaginationFilter filter)
+		{
+			var query = _mapper.Map<GetRequestsFromUserQuery>(filter);
+			query.UserId = id;
+			var result = await _mediator.Send(query);
 
-               return Ok(response);
-          }
+			return Ok(result);
+		}
 
-          [HttpGet("{id}/deals/to")]
-          [AllowAnonymous]
-          public async Task<IActionResult> GetDealsToUser(int id, [FromQuery] PaginationFilter filter)
-          {
-               var query = _mapper.Map<GetDealsToUserQuery>(filter);
-               query.UserId = id;
+		[HttpGet("{id}/deals/from")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetDealsFromUser(int id, [FromQuery] PaginationFilter filter)
+		{
+			var query = _mapper.Map<GetDealsFromUserQuery>(filter);
+			query.UserId = id;
 
-               var response = await _mediator.Send(query);
+			var response = await _mediator.Send(query);
 
-               return Ok(response);
-          }
-     }
+			return Ok(response);
+		}
+
+		[HttpGet("{id}/deals/to")]
+		[AllowAnonymous]
+		public async Task<IActionResult> GetDealsToUser(int id, [FromQuery] PaginationFilter filter)
+		{
+			var query = _mapper.Map<GetDealsToUserQuery>(filter);
+			query.UserId = id;
+
+			var response = await _mediator.Send(query);
+
+			return Ok(response);
+		}
+	}
 }

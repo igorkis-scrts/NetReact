@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookExchange.Infrastructure.Migrations
 {
     [DbContext(typeof(BookExchangeDbContext))]
-    [Migration("20220206131802_Initial")]
+    [Migration("20220206162851_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,9 @@ namespace BookExchange.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -166,32 +168,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Bookmarks");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.BookReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,4)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BookReviews");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.Category", b =>
@@ -497,25 +473,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BookExchange.Domain.Models.BookReview", b =>
-                {
-                    b.HasOne("BookExchange.Domain.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookExchange.Domain.Models.User", "User")
-                        .WithMany("BookReviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BookExchange.Domain.Models.Deal", b =>
                 {
                     b.HasOne("BookExchange.Domain.Models.User", "BookTaker")
@@ -617,8 +574,6 @@ namespace BookExchange.Infrastructure.Migrations
 
             modelBuilder.Entity("BookExchange.Domain.Models.User", b =>
                 {
-                    b.Navigation("BookReviews");
-
                     b.Navigation("Posts");
 
                     b.Navigation("Requests");

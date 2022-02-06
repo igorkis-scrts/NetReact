@@ -16,6 +16,4 @@ export interface BooksFilter extends PaginationFilter {
   PageCount?: number;
   minPageCount?: number;
   maxPageCount?: number;
-
-  //TODO: authors and categories
 }

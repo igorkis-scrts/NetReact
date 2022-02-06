@@ -11,6 +11,6 @@ export const BookTitleTypography = styled(Typography)(({ theme }) => ({
   paddingBottom: theme.spacing(1),
 }));
 
-export const BookCoverImg = styled("img")(({ theme }) => ({
+export const BookCoverImg = styled("img")(() => ({
   width: "100%",
 }));
