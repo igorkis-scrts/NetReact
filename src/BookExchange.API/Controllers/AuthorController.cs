@@ -4,11 +4,8 @@ using BookExchange.Application.Authors.Queries;
 using BookExchange.Domain.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookExchange.API.Controllers
@@ -39,7 +36,7 @@ namespace BookExchange.API.Controllers
           [HttpPost]
           public async Task<IActionResult> Post([FromBody] CreateAuthorDto authorDto)
           {
-               var command = _mapper.Map<CreateAuthorCommand>(authorDto); // todo: create profile
+               var command = _mapper.Map<CreateAuthorCommand>(authorDto);
                var author = await _mediator.Send(command);
 
                var result = _mapper.Map<AuthorDto>(author);
@@ -50,7 +47,7 @@ namespace BookExchange.API.Controllers
           [HttpDelete("id")]
           public async Task<IActionResult> Delete(int id)
           {
-               var result = await _mediator.Send(new DeleteAuthorCommand { Id = id });
+               await _mediator.Send(new DeleteAuthorCommand { Id = id });
                return NoContent();
           }
      }

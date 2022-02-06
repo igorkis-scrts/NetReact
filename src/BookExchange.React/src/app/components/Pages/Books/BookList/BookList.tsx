@@ -19,20 +19,24 @@ import { BookSkeletons } from "@shared/organisms/PaginatedView/BookSkeletons/Boo
 import { BottomListControls } from "@shared/organisms/PaginatedView/PaginatedView.styled";
 import { countPages } from "@utils/countPages";
 import Emitter from "@utils/Emitter";
+import { useSnackbar } from "notistack";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import AddBook from "../../AddBook";
 
-interface IBookListProps {
-  cardAction?: (id: number) => void;
-  cardActionText?: string;
-}
-
-const BookList = (props: IBookListProps) => {
+const BookList = () => {
   const [page, setPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(2);
   const [isListView, setListView] = useState<boolean>(true);
+  const { enqueueSnackbar } = useSnackbar();
 
   const { data, fetch: fetchData, isLoading: isDataLoading } = useFetch(BookApi.getAll);
+
+  useEffect(() => {
+    fetchData({
+      pageNumber: page,
+      pageSize: rowsPerPage,
+    });
+  }, [page, rowsPerPage]);
 
   const handleChangePage = (event: ChangeEvent<unknown>, newPage: number) => {
     setPage(newPage);
@@ -47,12 +51,22 @@ const BookList = (props: IBookListProps) => {
     Emitter.emit("add-book", true);
   };
 
-  useEffect(() => {
-    fetchData({
-      pageNumber: page,
-      pageSize: rowsPerPage,
-    });
-  }, [page, rowsPerPage]);
+  const deleteBook = async (bookId: number) => {
+    try {
+      await BookApi.deleteBook(bookId);
+
+      await fetchData({
+        pageNumber: page,
+        pageSize: rowsPerPage,
+      });
+
+      enqueueSnackbar("Book has been deleted.", {
+        variant: "success",
+      });
+    } catch (e: any) {
+      enqueueSnackbar(e.message, { variant: "error" });
+    }
+  };
 
   if (isDataLoading) {
     return <BookSkeletons title="Books" />;
@@ -97,14 +111,14 @@ const BookList = (props: IBookListProps) => {
       {isListView ? (
         data.data?.map((item) => (
           <Box my={3} key={item.id}>
-            <BookListCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
+            <BookListCard cardItem={item} action={deleteBook} actionText="Delete" />
           </Box>
         ))
       ) : (
         <Grid container spacing={4}>
           {data.data?.map((item) => (
             <Grid item sm={3} key={item.id}>
-              <BookSquareCard cardItem={item} action={props.cardAction} actionText={props.cardActionText} />
+              <BookSquareCard cardItem={item} action={deleteBook} actionText="Delete" />
             </Grid>
           ))}
         </Grid>
@@ -128,7 +142,7 @@ const BookList = (props: IBookListProps) => {
       </BottomListControls>
 
       <DialogContainer dialogName="add-book" dialogTitle="Add New Book" disableBackdropClick>
-        <AddBook closeDialog={() => Emitter.emit("add-book", false)}/>
+        <AddBook closeDialog={() => Emitter.emit("add-book", false)} />
       </DialogContainer>
     </>
   );

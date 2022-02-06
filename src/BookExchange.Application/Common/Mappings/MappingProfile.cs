@@ -8,9 +8,7 @@ using BookExchange.Domain.Queries;
 using BookExchange.Application.Posts.Queries;
 using BookExchange.Application.Authors.Commands;
 using BookExchange.Application.Books.Events;
-using BookExchange.Application.WishList.Queries;
 using BookExchange.Application.Users.Queries;
-using BookExchange.Application.Request.Commands;
 using BookExchange.Application.Deals.Queries;
 using BookExchange.Application.Request.Queries;
 using BookExchange.Domain.ReadModel;
@@ -52,12 +50,7 @@ namespace BookExchange.Application.Common.Mappings
                CreateMap<BookCreatedEvent, ReadModelBook>();
 
                CreateMap<Wishlist, WishListDto>();
-               
-               CreateMap<WishlistFilter, GetUserWishlistQuery>();
-               CreateMap<GetUserWishlistQuery, PaginationFilter>();
 
-               //CreateMap<Dea
-               CreateMap<UpdateRequestDto, UpdateRequestCommand>();
                CreateMap<Domain.Models.Request, RequestDto>();
                
                CreateMap<Deal, DealDto>();

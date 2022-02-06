@@ -60,11 +60,10 @@ namespace BookExchange.API.Controllers
           public async Task<IActionResult> GetAllUsers()
           {
                var users = await _mediator.Send(new GetUsersQuery());
-               var result = _mapper.Map<ICollection<UserDto>>(users); // TODO: check syntax
+               var result = _mapper.Map<ICollection<UserDto>>(users);
 
                return Ok(result);
           }
-
 
           [HttpDelete]
           public async Task<IActionResult> DeleteUser()
@@ -73,8 +72,6 @@ namespace BookExchange.API.Controllers
 
                return NoContent();
           }
-
-
 
           [HttpGet("{id}/stats")]
           public async Task<IActionResult> GetUserStats(int id)

@@ -25,6 +25,10 @@ export class BookApi extends ApiBase {
 
     return await BookApi.post<Book>("/book", formData);
   }
+
+  public static async deleteBook(id: number): Promise<ApiResponse> {
+    return await BookApi.delete<Book>(`/book/${id}`, true);
+  }
 }
 
 // const GetBooksBySearch = async (searchTerm: string) => {

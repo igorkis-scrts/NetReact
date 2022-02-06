@@ -1,4 +1,3 @@
-using BookExchange.API.Configuration;
 using BookExchange.Application.Common;
 using BookExchange.Application.Common.Exceptions;
 using BookExchange.Domain.Interfaces;
@@ -98,8 +97,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers(options => { options.Filters.Add(new AuthorizeFilter()); });
 
-builder.Services.AddSingleton<ILogger>(svc => svc.GetRequiredService<ILogger<RequestTimeMiddleware>>());
-
 builder.Services.AddElasticSearch(builder.Configuration);
 
 builder.Services.AddScoped<DbContext, BookExchangeDbContext>();
@@ -118,6 +115,13 @@ builder.Services.AddScoped<IRepositoryBase<Wishlist>, RepositoryBase<Wishlist>>(
 
 builder.Services.AddScoped<IReadModelBookRepository, ElasticBookRepository>();
 
+builder.Services.AddTransient(provider =>
+{
+	var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+	const string categoryName = "Any";
+	return loggerFactory.CreateLogger(categoryName);
+});
+
 builder.Services.AddMediatR(typeof(BookExchange.Application.Class1));
 builder.Services.AddAutoMapper(typeof(BookExchange.Application.Common.Mappings.MappingProfile).Assembly);
 
@@ -134,12 +138,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-/*
-app.UseFileServer(new FileServerOptions { 
-     FileProvider = new PhysicalFileProvider(
-          Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
-     RequestPath = "/StaticFile"
-});*/
 
 app.UseRouting();
 app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

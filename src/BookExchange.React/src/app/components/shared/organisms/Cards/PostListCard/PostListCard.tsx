@@ -1,7 +1,7 @@
-import { Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Post } from "@app/types";
 import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
-import { CardRoot, Details, Content, Cover, Controls } from "./PostListCard.styled";
+import { CardRoot, Details, Content, Cover } from "./PostListCard.styled";
 
 const PostListCard = ({ cardItem }: ICardProps<Post>) => {
   return (
@@ -18,11 +18,6 @@ const PostListCard = ({ cardItem }: ICardProps<Post>) => {
           <Typography>Categories: {cardItem.book?.categories?.map((c: any) => c.name).join(", ")}</Typography>
           <Typography>Condition: {cardItem.condition}</Typography>
         </Content>
-        <Controls>
-          <Button size="small" variant="outlined" color="secondary">
-            Cancel
-          </Button>
-        </Controls>
       </Details>
       <Cover
         image="https://images-na.ssl-images-amazon.com/images/I/41TVwg27ujL._SX331_BO1,204,203,200_.jpg"
