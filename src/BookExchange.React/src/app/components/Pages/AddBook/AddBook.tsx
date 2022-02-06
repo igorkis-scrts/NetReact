@@ -3,10 +3,10 @@ import { BookApi } from "@api/Book.api";
 import { CategoryApi } from "@api/Category.api";
 import { CreateBook } from "@app/types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { RhfAutocomplete } from "@shared/molecules/RhfCategoryAutocomplete/RhfAutocomplete";
-import { UploadFile } from "@shared/molecules/UploadFile/UploadFile";
+import { RhfAutocomplete } from "@shared/molecules/RhfAutocomplete/RhfAutocomplete";
+import { FileInput } from "@shared/molecules/FileInput/FileInput";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -17,15 +17,16 @@ import TextField from "@mui/material/TextField";
 import { PageTitleTypography, RootPaper, SubmitButton } from "./AddBook.styled";
 
 const schema = yup.object().shape({
-  title: yup.string().max(100).required("Title is required"),
+  title: yup.string().max(100).required("Title is required."),
   isbn: yup
     .string()
-    .matches(/^\d+$/, "Only digits allowed")
+    .matches(/^\d+$/, "Only digits allowed.")
     .min(9)
     .max(13)
-    .required("ISBN must contain 13 digits"),
-  shortDescription: yup.string().required("Description is required"),
-  authorsId: yup.array().of(yup.number().min(1)),
+    .required("ISBN must contain 13 digits."),
+  shortDescription: yup.string().required("Description is required."),
+  authorIds: yup.array().of(yup.number().min(1)),
+  categoryIds: yup.array().of(yup.number().min(1))
 });
 
 interface IAddBookProps {
@@ -33,7 +34,6 @@ interface IAddBookProps {
 }
 
 const AddBook = ({ closeDialog }: IAddBookProps) => {
-  const [currentFile, setCurrentFile] = useState();
   const { enqueueSnackbar } = useSnackbar();
 
   const {
@@ -46,13 +46,10 @@ const AddBook = ({ closeDialog }: IAddBookProps) => {
   });
 
   const onSubmit = async (data: CreateBook) => {
-    console.log("submit");
-    data.image = currentFile;
-
     try {
       await BookApi.addBook(data);
 
-      enqueueSnackbar("Book Created Successfully", { variant: "success" });
+      enqueueSnackbar("Book has been successfully created.", { variant: "success" });
 
       if (typeof closeDialog === "function") {
         closeDialog();
@@ -92,7 +89,7 @@ const AddBook = ({ closeDialog }: IAddBookProps) => {
             <Grid item xs={5}>
               <RhfAutocomplete
                 control={control}
-                name="authorsId"
+                name="authorIds"
                 rules={{ required: true }}
                 getOptions={AuthorApi.getAll}
                 label="Authors"
@@ -124,7 +121,7 @@ const AddBook = ({ closeDialog }: IAddBookProps) => {
             <Grid item xs={3}>
               <RhfAutocomplete
                 control={control}
-                name="categoriesId"
+                name="categoryIds"
                 rules={{ required: true }}
                 getOptions={CategoryApi.getAll}
                 label="Categories"
@@ -160,7 +157,7 @@ const AddBook = ({ closeDialog }: IAddBookProps) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <UploadFile currentFile={currentFile} setCurrentFile={setCurrentFile} />
+              <FileInput label="Cover" control={control} name="image" />
             </Grid>
             <SubmitButton variant="contained" color="primary" type="submit">
               Submit

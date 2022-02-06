@@ -29,7 +29,7 @@ namespace BookExchange.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ISBN = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false),
+                    Isbn = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ThumbnailPath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -378,9 +378,9 @@ namespace BookExchange.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_ISBN",
+                name: "IX_Books_Isbn",
                 table: "Books",
-                column: "ISBN",
+                column: "Isbn",
                 unique: true);
 
             migrationBuilder.CreateIndex(

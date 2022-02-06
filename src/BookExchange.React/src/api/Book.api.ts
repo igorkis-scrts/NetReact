@@ -16,6 +16,13 @@ export class BookApi extends ApiBase {
   }
 
   public static async addBook(book: CreateBook): Promise<ApiResponse<Book>> {
-    return await BookApi.post<Book>("/book", book, true);
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(book)) {
+      if (value) {
+        formData.append(key, <string | Blob>value);
+      }
+    }
+
+    return await BookApi.post<Book>("/book", formData);
   }
 }

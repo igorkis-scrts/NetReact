@@ -27,9 +27,9 @@ namespace BookExchange.Application.Common
                return filePath;
           }
 
-          public static bool CheckBookWithIsbnExists(IBookRepository bookRepository, string ISBN)
+          public static bool CheckBookWithIsbnExists(IBookRepository bookRepository, string Isbn)
           {
-               return bookRepository.GetBooksByCondition(b => b.ISBN == ISBN).Any();
+               return bookRepository.GetBooksByCondition(b => b.Isbn == Isbn).Any();
           }
 
           public static bool CheckBookCategoryExists(ICategoryRepository categoryRepository, string name)

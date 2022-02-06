@@ -27,7 +27,7 @@ export type CreateBook = {
   publisher: string;
   pageCount: number;
   publishedYear: number;
-  authorsId: number[];
-  categoriesId: number[];
-  image: any;
+  authorIds: number[];
+  categoryIds: number[];
+  image: File;
 };

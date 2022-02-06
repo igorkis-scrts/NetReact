@@ -5,12 +5,8 @@ using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -39,8 +35,8 @@ namespace BookExchange.Application.Books.Commands
 
           public async Task<Book> Handle(CreateBookCommand request, CancellationToken cancellationToken)
           {
-               if (ServiceUtils.CheckBookWithIsbnExists(_bookRepository, request.ISBN)) {
-                    throw new BadRequestException($"Book with ISBN = {request.ISBN} already exists");
+               if (ServiceUtils.CheckBookWithIsbnExists(_bookRepository, request.Isbn)) {
+                    throw new BadRequestException($"Book with ISBN = {request.Isbn} already exists");
                }
 
                var uploadDirectory = Path.Combine("uploads", "books");
@@ -49,11 +45,11 @@ namespace BookExchange.Application.Books.Commands
                var book = new Book
                {
                     Title = request.Title,
-                    ISBN = request.ISBN,
+                    Isbn = request.Isbn,
                     ShortDescription = request.ShortDescription,
                     ThumbnailPath = imagePath,
-                    Authors = request.AuthorsId?.Select(id => _bookAuthorsRepository.GetById(id)).ToList(),
-                    Categories = request.CategoriesId?.Select(id => _bookCategoriesRepository.GetById(id)).ToList(),
+                    Authors = request.AuthorIds?.Select(id => _bookAuthorsRepository.GetById(id)).ToList(),
+                    Categories = request.CategoryIds?.Select(id => _bookCategoriesRepository.GetById(id)).ToList(),
                     Details = new BookDetails
                     {
                          Description = request.Description,
@@ -78,9 +74,5 @@ namespace BookExchange.Application.Books.Commands
 
                return await Task.FromResult(book);
           }
-
-
-
-
      }
 }

@@ -95,7 +95,7 @@ namespace BookExchange.Application.Common
 
                var book1 = new Book
                {
-                    ISBN = "9780786112517",
+                    Isbn = "9780786112517",
                     Title = "War and Peace",
                     ShortDescription = "War and Peace is a novel by the Russian author Leo Tolstoy, first published serially, then published in its entirety in 1869. It is regarded as one of Tolstoy's finest literary achievements and remains an internationally praised classic of world literature.",
                     ThumbnailPath = @"uploads\books\war-and-peace.jpg",
@@ -111,7 +111,7 @@ namespace BookExchange.Application.Common
 
                var book2 = new Book
                {
-                    ISBN = "9788807900501",
+                    Isbn = "9788807900501",
                     Title = "A Confession",
                     ShortDescription = "A Confession, or My Confession, is a short work on the subject of melancholia, philosophy and religion by the acclaimed Russian novelist Leo Tolstoy. It was written in 1879 to 1880, when Tolstoy was in his early fifties.",
                     ThumbnailPath = @"uploads\books\confession.jpg",
@@ -127,7 +127,7 @@ namespace BookExchange.Application.Common
 
                var book3 = new Book
                {
-                    ISBN = "9780786105236",
+                    Isbn = "9780786105236",
                     Title = "The Cossacks",
                     ShortDescription = "The Cossacks is a short novel by Leo Tolstoy, published in 1863 in the popular literary magazine The Russian Messenger",
                     ThumbnailPath = @"uploads\books\The-Cossacks-cover.jpg",
@@ -143,7 +143,7 @@ namespace BookExchange.Application.Common
 
                var book4 = new Book
                {
-                    ISBN = "9781455869749",
+                    Isbn = "9781455869749",
                     Title = "The Fault in Our Stars",
                     ShortDescription = "Two cancer-afflicted teenagers Hazel and Augustus meet at a cancer support group. The two of them embark on a journey to visit a reclusive author in Amsterdam.",
                     ThumbnailPath = @"uploads\books\ourstars.jpg",
@@ -159,7 +159,7 @@ namespace BookExchange.Application.Common
 
                var book5 = new Book
                {
-                    ISBN = "9781494506902",
+                    Isbn = "9781494506902",
                     Title = "Sapiens: A Brief History of Humankind",
                     ShortDescription = "Sapiens: A Brief History of Humankind is a book by Yuval Noah Harari, first published in Hebrew in Israel in 2011 based on a series of lectures Harari taught at The Hebrew University of Jerusalem, and in English in 2014",
                     ThumbnailPath = @"uploads\books\sapiens.jpg",
@@ -175,7 +175,7 @@ namespace BookExchange.Application.Common
 
                var book6 = new Book
                {
-                    ISBN = "9780552562966",
+                    Isbn = "9780552562966",
                     Title = "A Short History of Nearly Everything",
                     ShortDescription = "A Short History of Nearly Everything by American-British author Bill Bryson is a popular science book that explains some areas of science, using easily accessible language that appeals more to the general public than many other books dedicated to the subject",
                     ThumbnailPath = @"uploads\books\brief-history-of-nearly-everything.jpg",
@@ -192,7 +192,7 @@ namespace BookExchange.Application.Common
 
                var book7 = new Book
                {
-                    ISBN = "9780345331359",
+                    Isbn = "9780345331359",
                     Title = "Cosmos",
                     ShortDescription = "Cosmos is a 1980 popular science book by astronomer and Pulitzer Prize-winning author Carl Sagan. Its 13 illustrated chapters, corresponding to the 13 episodes of the Cosmos TV series, which the book was co-developed with and intended to complement, explore the mutual development of science and civilization.",
                     ThumbnailPath = @"uploads\books\cosmos.jpg",

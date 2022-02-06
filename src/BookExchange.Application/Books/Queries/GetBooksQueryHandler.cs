@@ -45,9 +45,9 @@ namespace BookExchange.Service.Services
                     predicates.Add(b => b.Title.Contains(request.Title));
                }
 
-               if (!string.IsNullOrEmpty(request.ISBN))
+               if (!string.IsNullOrEmpty(request.Isbn))
                {
-                    predicates.Add(b => b.ISBN.Equals(request.ISBN));
+                    predicates.Add(b => b.Isbn.Equals(request.Isbn));
                }
 
                if (request.Categories.Count != 0)

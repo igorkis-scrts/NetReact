@@ -46,7 +46,7 @@ namespace BookExchange.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ISBN")
+                    b.Property<string>("Isbn")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("varchar(13)");
@@ -64,7 +64,7 @@ namespace BookExchange.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ISBN")
+                    b.HasIndex("Isbn")
                         .IsUnique();
 
                     b.ToTable("Books");
