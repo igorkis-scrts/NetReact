@@ -26,7 +26,6 @@ namespace BookExchange.API.Controllers
           }
 
           [HttpGet("{id}")]
-          [AllowAnonymous]
           public async Task<IActionResult> Get(int id, bool includeDetails) {
                var book = await _mediator.Send(new GetBookQuery { Id=id, IncludeDetails=includeDetails });
                var bookDto = _mapper.Map<BookDto>(book);
@@ -36,7 +35,6 @@ namespace BookExchange.API.Controllers
 
 
           [HttpGet]
-          [AllowAnonymous]
           public async Task<IActionResult> GetAll([FromQuery] BooksFilter bookFilter) {
                var query = _mapper.Map<GetBooksQuery>(bookFilter);
                var result = await _mediator.Send(query);
@@ -45,7 +43,6 @@ namespace BookExchange.API.Controllers
           }
 
           [HttpGet("smart-search")]
-          [AllowAnonymous]
           public async Task<IActionResult> GetAll([FromQuery] string searchTerm) {
                SmartSearchBooksQuery query = new SmartSearchBooksQuery { SearchTerm = searchTerm };
                var result = await _mediator.Send(query);
@@ -54,11 +51,11 @@ namespace BookExchange.API.Controllers
           }
 
           [HttpPost]
-          [AllowAnonymous]    
-          public async Task<IActionResult> Post([FromForm] CreateBookCommand command) {
+          public async Task<IActionResult> Post([FromForm] CreateBookCommand command)
+          {
                var book = await _mediator.Send(command);
                var result = _mapper.Map<BookDto>(book);
-
+               
                return CreatedAtAction(nameof(Get), new { id = book.Id }, result);
           }
 
