@@ -9,7 +9,7 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
           public void Configure(EntityTypeBuilder<BookAuthor> builder)
           {
                builder.HasOne(b => b.Book)
-                    .WithMany()
+                    .WithMany(b => b.BookAuthor)
                     .HasForeignKey(b => b.BookId)
                     .OnDelete(DeleteBehavior.Cascade);
 

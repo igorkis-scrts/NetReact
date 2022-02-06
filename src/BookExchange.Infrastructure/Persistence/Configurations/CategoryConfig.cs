@@ -15,8 +15,6 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
           {
                builder.Property(x => x.Name)
                     .IsRequired();
-
-               
           }
      }
 }

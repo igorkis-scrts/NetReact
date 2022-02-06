@@ -20,8 +20,7 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
 
                builder.Property(x => x.LastName)
                     .HasMaxLength(100);
-
-
+               
                builder.Property(x => x.Username)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -50,7 +49,6 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
 
                builder.Property(x => x.RowVersion)
                     .IsRowVersion();
-
           }
      }
 }

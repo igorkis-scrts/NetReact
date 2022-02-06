@@ -86,9 +86,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
@@ -97,8 +94,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.HasIndex("AuthorId");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("BookId1");
 
                     b.ToTable("BookAuthor");
                 });
@@ -408,14 +403,10 @@ namespace BookExchange.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("BookExchange.Domain.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("BookAuthor")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BookExchange.Domain.Models.Book", null)
-                        .WithMany("BookAuthor")
-                        .HasForeignKey("BookId1");
 
                     b.Navigation("Author");
 

@@ -76,8 +76,7 @@ namespace BookExchange.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Order = table.Column<int>(type: "int", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
-                    AuthorId = table.Column<int>(type: "int", nullable: false),
-                    BookId1 = table.Column<int>(type: "int", nullable: true)
+                    AuthorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,11 +93,6 @@ namespace BookExchange.Infrastructure.Migrations
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookAuthor_Books_BookId1",
-                        column: x => x.BookId1,
-                        principalTable: "Books",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -318,11 +312,6 @@ namespace BookExchange.Infrastructure.Migrations
                 name: "IX_BookAuthor_BookId",
                 table: "BookAuthor",
                 column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookAuthor_BookId1",
-                table: "BookAuthor",
-                column: "BookId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookCategory_CategoryId",

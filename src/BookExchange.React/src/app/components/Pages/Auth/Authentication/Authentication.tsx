@@ -15,7 +15,7 @@ const Authentication = (props: IAuthenticationProps) => {
         <ProfileAvatar>
           <Lock />
         </ProfileAvatar>
-        <Typography component="h1" variant="h5">
+        <Typography variant="h5">
           {props.isSignIn ? "Sign In" : "Sign Up"}
         </Typography>
         {props.children}
