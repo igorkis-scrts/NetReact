@@ -42,7 +42,7 @@ namespace BookExchange.API.Controllers
           [HttpPost]
           public async Task<IActionResult> CreateUser()
           {
-               var user = await _mediator.Send(new CreateUserCommand());
+               await _mediator.Send(new CreateUserCommand());
 
                return Ok();
           }

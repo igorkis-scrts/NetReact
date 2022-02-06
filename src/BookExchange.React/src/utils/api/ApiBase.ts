@@ -27,7 +27,7 @@ export class ApiBase {
 
   protected static async post<TResponseData = any>(
     url: string,
-    request: unknown,
+    request?: unknown,
     resolveError = false
   ): Promise<ApiResponse<TResponseData>> {
     const apiResponse = new ApiResponse<TResponseData>();

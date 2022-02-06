@@ -26,3 +26,9 @@ export class BookApi extends ApiBase {
     return await BookApi.post<Book>("/book", formData);
   }
 }
+
+// const GetBooksBySearch = async (searchTerm: string) => {
+//   return fetchApi<PaginatedResult<Book>>(
+//     `/book/smart-search?searchTerm=${searchTerm}`
+//   );
+// };

@@ -1,5 +1,6 @@
+import { AccountApi } from "@api/Account.api";
+import { UserApi } from "@api/User.api";
 import { makeObservable, observable, action, runInAction, computed, reaction } from "mobx";
-import { UserService, AccountService } from "../../services";
 import { SignUpData, User } from "@app/types";
 
 export class AuthStore {
@@ -44,16 +45,17 @@ export class AuthStore {
   }
 
   public async signIn(username: string, password: string) {
-    const { access_token, expires_in } = await AccountService.RequestToken(username, password);
+    const { access_token, expires_in } = await AccountApi.requestToken(username, password);
+
     const expirationTime = new Date(new Date().getTime() + Number(expires_in) * 1000);
 
     this.storeAuth(access_token, expirationTime);
   }
 
   public async signUp(signUpData: SignUpData) {
-    await AccountService.SignUp(signUpData);
+    await AccountApi.signUp(signUpData);
 
-    const { access_token, expires_in } = await AccountService.RequestToken(
+    const { access_token, expires_in } = await AccountApi.requestToken(
       signUpData.username,
       signUpData.password
     );
@@ -62,7 +64,7 @@ export class AuthStore {
 
     this.storeAuth(access_token, expirationTime);
 
-    await UserService.CreateProfile();
+    await UserApi.createProfile();
   }
 
   public signOut() {
@@ -76,12 +78,13 @@ export class AuthStore {
   }
 
   public async fetchCurrentUser() {
-    const response = await UserService.GetCurrentUser();
-    if (response) {
+    const response = await UserApi.getCurrentUser();
+
+    if (!response.hasError()) {
       runInAction(() => {
-        this.user = response;
+        this.user = response.data!;
       });
-      localStorage.setItem("user", JSON.stringify(response));
+      localStorage.setItem("user", JSON.stringify(response.data!));
     }
   }
 

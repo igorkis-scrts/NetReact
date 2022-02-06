@@ -6,7 +6,6 @@ using BookExchange.Domain.DTOs;
 using BookExchange.Domain.Filter;
 using BookExchange.Domain.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

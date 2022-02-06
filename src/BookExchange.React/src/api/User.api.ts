@@ -1,4 +1,4 @@
-import { Book, Request, Deal, Post, PaginatedResult } from "@app/types";
+import { Book, Request, Deal, Post, PaginatedResult, User } from "@app/types";
 import { UserStats } from "@Pages/UserProfile/StatisticsBar/models/UserStats";
 import { ApiBase } from "@utils/api/ApiBase";
 import { ApiResponse } from "@utils/api/ApiResponse";
@@ -72,5 +72,13 @@ export class UserApi extends ApiBase {
       `/user/${userId}/posts/owned?pageSize=${pageSize}&pageNumber=${page}`,
       true
     );
+  }
+
+  public static async createProfile(): Promise<ApiResponse<User>> {
+    return await UserApi.post<User>("/user", undefined, false);
+  }
+
+  public static async getCurrentUser(): Promise<ApiResponse<User>> {
+    return await UserApi.get<User>("/user/current-user", false);
   }
 }
