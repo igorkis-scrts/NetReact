@@ -15,9 +15,3 @@ export type UserContact = {
   region: string | null;
   streetAddress: string | null;
 };
-
-export type LeaderboardData = {
-  id: number;
-  username: string;
-  points: number;
-};

@@ -12,7 +12,6 @@ namespace BookExchange.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	[AllowAnonymous]
 	public class AuthorController : ControllerBase
 	{
 		private readonly IMediator _mediator;

@@ -28,10 +28,6 @@ namespace BookExchange.Domain.Models
           public virtual User PostedBy { get; set; }
           public virtual Condition Condition { get; set; }
           public virtual ICollection<User> BookmarkedBy { get; set; }
-          public virtual ICollection<Request> Requests { get; set; }
-          public virtual ICollection<Deal> Deals { get; set; }
-          //public ICollection<User> RequestedBy { get; set; }
-          
      }
 }
 

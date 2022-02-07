@@ -310,26 +310,9 @@ namespace BookExchange.Application.Common
 
                     context.Wishlist.Add(new Wishlist { UserId = 3, BookId = 3 });
                     context.Wishlist.Add(new Wishlist { UserId = 3, BookId = 4 });
+                    context.SaveChanges();
                }
 
-               if (!context.Deals.Any())
-               {
-                    context.Deals.Add(new Deal { BookTakerId = 1, PostId = 6, DealStatus = DealStatus.InDelivery });
-                    context.Deals.Add(new Deal { BookTakerId = 1, PostId = 2, DealStatus = DealStatus.Delivered });
-               }
-
-               context.SaveChanges();
-
-
-               // populate requests table
-               if (!context.Requests.Any())
-               {
-                    context.Requests.Add(new Domain.Models.Request { PostId = 9, UserId = 1 });
-                    context.Requests.Add(new Domain.Models.Request { PostId = 7, UserId = 1 });
-                    context.Requests.Add(new Domain.Models.Request { PostId = 2, UserId = 2 });
-               }
-
-               context.SaveChanges();
                
                mediator.Publish(new BookCreatedEvent
                {

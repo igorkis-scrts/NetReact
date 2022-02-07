@@ -23,8 +23,6 @@ namespace BookExchange.Domain.Models
 
 		public virtual ICollection<Book> WishedBooks { get; set; }
 
-		public virtual ICollection<Request> Requests { get; set; }
-
 		public byte[] RowVersion { get; set; }
 	}
 }

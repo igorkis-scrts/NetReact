@@ -12,7 +12,7 @@ export const RootPaper = styled(Paper)(({ theme }) => ({
   boxShadow: "none"
 }));
 
-export const SubmitButton = styled(Button)(({ theme }) => ({
+export const FormButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(3),
   marginLeft: theme.spacing(1),
 }));

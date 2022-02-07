@@ -41,20 +41,6 @@ namespace BookExchange.Infrastructure.Persistence.Repositories
                {
                     Wishlist = _context.Entry(user).Collection(u => u.WishedBooks).Query().Count(),
                     Bookshelf = _context.Entry(user).Collection(u => u.Posts).Query().Count(p => p.Status == PostStatus.Active),
-                    Requests = _context.Entry(user).Collection(u => u.Posts).Query()
-                         .Where(post => post.Status == PostStatus.Active)
-                         .Join(_context.Requests.Where(r => r.Status == RequestStatus.Pending), p => p.Id, r => r.PostId, (p, r) => new { p, r })
-                         .Count(),
-
-                    Requested = _context.Entry(user).Collection(u => u.Requests).Query().Count(x => x.Status == RequestStatus.Pending),
-                    Awaiting = _context.Set<Deal>().Count(x => x.BookTakerId == id && x.DealStatus == DealStatus.InDelivery),
-
-                    Sent = _context.Posts.Where(x => x.PostedById == id)
-                         .Join(_context.Deals.Where(x => x.DealStatus != DealStatus.Canceled), 
-                                        p => p.Id, 
-                                        d => d.PostId, 
-                                        (p, d) => new { p, d })
-                         .Count()
                };
           }
 

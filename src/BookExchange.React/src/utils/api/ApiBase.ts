@@ -71,6 +71,29 @@ export class ApiBase {
     return apiResponse;
   }
 
+  protected static async patch<TResponseData = any>(
+    url: string,
+    request?: unknown,
+    resolveError = false
+  ): Promise<ApiResponse<TResponseData>> {
+    const apiResponse = new ApiResponse<TResponseData>();
+
+    await axios
+      .patch<TResponseData>(`${API_BASE_URL}/api${url}`, request, {
+        headers: {
+          Authorization: this.getUserToken(),
+        },
+      })
+      .then((response: any) => {
+        apiResponse.data = response.data;
+      })
+      .catch((reason: AxiosError) => {
+        this.resolveError(reason, apiResponse, resolveError);
+      });
+
+    return apiResponse;
+  }
+
   protected static async delete<TResponseData = any>(
     url: string,
     resolveError = false

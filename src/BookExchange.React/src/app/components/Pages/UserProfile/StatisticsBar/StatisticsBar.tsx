@@ -34,39 +34,11 @@ const StatisticsBar = ({ setDisplayViewIndex, userId }: IStatisticsBarProps) => 
         count: userStats.wishlist ? userStats.wishlist : 0,
       },
       {
-        name: "Requested Books",
+        name: "BookShelf",
         onClick: () => {
           setDisplayViewIndex(2);
         },
-        count: userStats.requested ? userStats.requested : 0,
-      },
-      {
-        name: "Awaiting",
-        onClick: () => {
-          setDisplayViewIndex(3);
-        },
-        count: userStats.awaiting ? userStats.awaiting : 0,
-      },
-      {
-        name: "BookShelf",
-        onClick: () => {
-          setDisplayViewIndex(4);
-        },
         count: userStats.bookshelf ? userStats.bookshelf : 0,
-      },
-      {
-        name: "Requests",
-        onClick: () => {
-          setDisplayViewIndex(5);
-        },
-        count: userStats.requests ? userStats.requests : 0,
-      },
-      {
-        name: "Sent Books",
-        onClick: () => {
-          setDisplayViewIndex(6);
-        },
-        count: userStats.sent ? userStats.sent : 0,
       },
     ]);
   }, [userStats, isLoading, setDisplayViewIndex]);

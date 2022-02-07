@@ -1,4 +1,4 @@
-import { Book, CreateBook, PaginatedResult } from "@app/types";
+import { Book, CreateBook, PaginatedResult, UpdateBook } from "@app/types";
 import { BooksFilter } from "@models/filters";
 import { ApiBase } from "@utils/api/ApiBase";
 import { ApiResponse } from "@utils/api/ApiResponse";
@@ -24,6 +24,17 @@ export class BookApi extends ApiBase {
     }
 
     return await BookApi.post<Book>("/book", formData);
+  }
+
+  public static async updateBook(id: number, book: UpdateBook): Promise<ApiResponse> {
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(book)) {
+      if (value) {
+        formData.append(key, <string | Blob>value);
+      }
+    }
+
+    return await BookApi.patch<Book>(`/book/${id}`, formData);
   }
 
   public static async deleteBook(id: number): Promise<ApiResponse> {

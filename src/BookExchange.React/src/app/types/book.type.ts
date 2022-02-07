@@ -31,3 +31,17 @@ export type CreateBook = {
   categoryIds: number[];
   image: File;
 };
+
+export type UpdateBook = {
+  id: number;
+  title: string;
+  isbn: string;
+  shortDescription: string;
+  description: string;
+  publisher: string;
+  pageCount: number;
+  publishedYear: number;
+  authorIds: number[];
+  categoryIds: number[];
+  image: File;
+};

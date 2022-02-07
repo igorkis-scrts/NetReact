@@ -1,5 +1,6 @@
 export interface EventRegistry {
-  "add-book": boolean;
+  "refresh-book-list": undefined;
+  "add-edit-book": boolean;
   "sign-in": boolean;
   "sign-up": boolean;
 }

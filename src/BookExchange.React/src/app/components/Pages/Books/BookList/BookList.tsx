@@ -12,24 +12,36 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
-import { DialogContainer } from "@shared/atoms/ModalContainer/DialogContainer";
 import { BookListCard } from "@shared/organisms/Cards/BookListCard/BookListCard";
 import { BookSquareCard } from "@shared/organisms/Cards/BookSquareCard/BookSquareCard";
 import { BookSkeletons } from "@shared/organisms/PaginatedView/BookSkeletons/BookSkeletons";
 import { BottomListControls } from "@shared/organisms/PaginatedView/PaginatedView.styled";
 import { countPages } from "@utils/countPages";
 import Emitter from "@utils/Emitter";
-import { useSnackbar } from "notistack";
 import React, { useState, ChangeEvent, useEffect } from "react";
-import AddBook from "../../AddBook";
+import AddEditBook from "../../AddEditBook";
 
 const BookList = () => {
+  const [bookId, setBookId] = useState<number | null>(null);
   const [page, setPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(2);
   const [isListView, setListView] = useState<boolean>(true);
-  const { enqueueSnackbar } = useSnackbar();
 
   const { data, fetch: fetchData, isLoading: isDataLoading } = useFetch(BookApi.getAll);
+
+  useEffect(() => {
+    const action = () =>
+      fetchData({
+        pageNumber: page,
+        pageSize: rowsPerPage,
+      });
+
+    Emitter.subscribe("refresh-book-list", action);
+
+    return () => {
+      Emitter.unsubscribe("refresh-book-list", action);
+    };
+  }, []);
 
   useEffect(() => {
     fetchData({
@@ -48,24 +60,13 @@ const BookList = () => {
   };
 
   const handleAddBookClick = () => {
-    Emitter.emit("add-book", true);
+    setBookId(null);
+    Emitter.publish("add-edit-book", true);
   };
 
-  const deleteBook = async (bookId: number) => {
-    try {
-      await BookApi.deleteBook(bookId);
-
-      await fetchData({
-        pageNumber: page,
-        pageSize: rowsPerPage,
-      });
-
-      enqueueSnackbar("Book has been deleted.", {
-        variant: "success",
-      });
-    } catch (e: any) {
-      enqueueSnackbar(e.message, { variant: "error" });
-    }
+  const handleEditBookClick = async (bookId: number) => {
+    setBookId(bookId);
+    Emitter.publish("add-edit-book", true);
   };
 
   if (isDataLoading) {
@@ -111,14 +112,14 @@ const BookList = () => {
       {isListView ? (
         data.data?.map((item) => (
           <Box my={3} key={item.id}>
-            <BookListCard cardItem={item} action={deleteBook} actionText="Delete" />
+            <BookListCard cardItem={item} action={handleEditBookClick} actionText="Edit" />
           </Box>
         ))
       ) : (
         <Grid container spacing={4}>
           {data.data?.map((item) => (
             <Grid item sm={3} key={item.id}>
-              <BookSquareCard cardItem={item} action={deleteBook} actionText="Delete" />
+              <BookSquareCard cardItem={item} action={handleEditBookClick} actionText="Edit" />
             </Grid>
           ))}
         </Grid>
@@ -141,9 +142,7 @@ const BookList = () => {
         </Grid>
       </BottomListControls>
 
-      <DialogContainer dialogName="add-book" dialogTitle="Add New Book" disableBackdropClick>
-        <AddBook closeDialog={() => Emitter.emit("add-book", false)} />
-      </DialogContainer>
+      <AddEditBook bookId={bookId} />
     </>
   );
 };

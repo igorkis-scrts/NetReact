@@ -8,34 +8,27 @@ interface ISquareCardContainerProps {
   actionText?: string;
   imagePath: string | undefined;
   children: ReactNode;
+
+  contentSquareAction?: () => void;
 }
 
 const SquareCardContainer = ({
- action,
- actionText,
- imagePath,
- children,
+  action,
+  actionText,
+  imagePath,
+  children,
+  contentSquareAction,
 }: ISquareCardContainerProps) => {
   return (
     <CardRoot>
       <CardActionArea>
-        {imagePath && (
-          <Media
-            image={ImageUtils.getAbsolutePath(imagePath)}
-            title="Contemplative Reptile"
-          />
-        )}
+        {imagePath && <Media image={ImageUtils.getAbsolutePath(imagePath)} title="Contemplative Reptile" />}
 
-        <CardContentSquare>{children}</CardContentSquare>
+        <CardContentSquare onClick={contentSquareAction}>{children}</CardContentSquare>
       </CardActionArea>
       <CardActions>
         {action && actionText && (
-          <Button
-            variant="outlined"
-            color="secondary"
-            size="small"
-            onClick={action}
-          >
+          <Button variant="outlined" color="secondary" size="small" onClick={action}>
             {actionText}
           </Button>
         )}

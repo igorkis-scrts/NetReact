@@ -1,4 +1,4 @@
-import { Book, Post, Deal, Request, PaginatedResult } from "@app/types";
+import { Book, Post, PaginatedResult } from "@app/types";
 import { useFetch } from "@hooks/useFetch";
 import { ViewComfy, Filter } from "@mui/icons-material";
 import {
@@ -19,7 +19,7 @@ import { ICardProps } from "@Pages/UserProfile/models/ICardProps";
 import { BookSkeletons } from "./BookSkeletons/BookSkeletons";
 import { BottomListControls } from "./PaginatedView.styled";
 
-interface IPaginatedViewProps<TData extends Book | Post | Deal | Request> {
+interface IPaginatedViewProps<TData extends Book | Post> {
   title: string;
   listCard: FC<ICardProps<TData>>;
   squareCard: FC<ICardProps<TData>>;
@@ -28,7 +28,7 @@ interface IPaginatedViewProps<TData extends Book | Post | Deal | Request> {
   cardActionText?: string;
 }
 
-type GenericData = Book | Post | Deal | Request;
+type GenericData = Book | Post;
 
 const PaginatedView = function PaginatedView<TData extends GenericData>(props: IPaginatedViewProps<TData>) {
   const [page, setPage] = useState<number>(1);

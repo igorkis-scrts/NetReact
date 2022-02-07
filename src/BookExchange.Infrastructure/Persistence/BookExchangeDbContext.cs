@@ -18,14 +18,10 @@ namespace BookExchange.Infrastructure.Persistence
           public DbSet<Book> Books { get; set; }
           
           public DbSet<Wishlist> Wishlist { get; set; }
-          
-          public DbSet<Request> Requests { get; set; }
-          
+
           public DbSet<Bookmark> Bookmarks { get; set; }
           
           public DbSet<Author> Authors { get; set; }
-          
-          public DbSet<Deal> Deals { get; set; }
 
           public BookExchangeDbContext(DbContextOptions<BookExchangeDbContext> options)
               : base(options)
@@ -65,10 +61,8 @@ namespace BookExchange.Infrastructure.Persistence
                modelBuilder.ApplyConfiguration(new PostConfig());
                modelBuilder.ApplyConfiguration(new BookConfig());
                modelBuilder.ApplyConfiguration(new BookDetailsConfig());
-               modelBuilder.ApplyConfiguration(new RequestConfig());
                modelBuilder.ApplyConfiguration(new BookAuthorConfig());
                modelBuilder.ApplyConfiguration(new CategoryConfig());
-               modelBuilder.ApplyConfiguration(new DealConfig());
           }
      }
 }

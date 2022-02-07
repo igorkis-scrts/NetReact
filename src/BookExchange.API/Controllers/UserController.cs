@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using BookExchange.Application.Deals.Queries;
-using BookExchange.Application.Request.Queries;
 using BookExchange.Application.Users.Commands;
 using BookExchange.Application.Users.Queries;
 using BookExchange.Domain;
@@ -100,67 +98,9 @@ namespace BookExchange.API.Controllers
 
 
 		[HttpGet("{id}/posts/owned")]
-		[AllowAnonymous]
 		public async Task<IActionResult> GetUserActivePosts(int id, [FromQuery] PaginationFilter filter)
 		{
 			var query = _mapper.Map<GetUserPostsQuery>(filter);
-			query.UserId = id;
-
-			var response = await _mediator.Send(query);
-
-			return Ok(response);
-		}
-
-
-		[HttpPost("{id}/requests/")]
-		[AllowAnonymous]
-		public async Task<IActionResult> RequestPost(int id, [FromBody] CreateRequestDto requestDto)
-		{
-			var result = await _mediator.Send(new RequestPostCommand { UserId = id, PostId = requestDto.PostId });
-
-			return Ok(result);
-		}
-
-
-		[HttpGet("{id}/requests/to")]
-		[AllowAnonymous]
-		public async Task<IActionResult> GetRequestsToUser(int id, [FromQuery] PaginationFilter filter)
-		{
-			var query = _mapper.Map<GetRequestsToUserQuery>(filter);
-			query.UserId = id;
-			var result = await _mediator.Send(query);
-
-			return Ok(result);
-		}
-
-		[HttpGet("{id}/requests/from")]
-		[AllowAnonymous]
-		public async Task<IActionResult> GetRequestsFromUser(int id, [FromQuery] PaginationFilter filter)
-		{
-			var query = _mapper.Map<GetRequestsFromUserQuery>(filter);
-			query.UserId = id;
-			var result = await _mediator.Send(query);
-
-			return Ok(result);
-		}
-
-		[HttpGet("{id}/deals/from")]
-		[AllowAnonymous]
-		public async Task<IActionResult> GetDealsFromUser(int id, [FromQuery] PaginationFilter filter)
-		{
-			var query = _mapper.Map<GetDealsFromUserQuery>(filter);
-			query.UserId = id;
-
-			var response = await _mediator.Send(query);
-
-			return Ok(response);
-		}
-
-		[HttpGet("{id}/deals/to")]
-		[AllowAnonymous]
-		public async Task<IActionResult> GetDealsToUser(int id, [FromQuery] PaginationFilter filter)
-		{
-			var query = _mapper.Map<GetDealsToUserQuery>(filter);
 			query.UserId = id;
 
 			var response = await _mediator.Send(query);

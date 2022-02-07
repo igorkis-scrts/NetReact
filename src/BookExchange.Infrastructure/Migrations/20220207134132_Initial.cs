@@ -247,62 +247,6 @@ namespace BookExchange.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Deals",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PostId = table.Column<int>(type: "int", nullable: false),
-                    BookTakerId = table.Column<int>(type: "int", nullable: false),
-                    TimeAdded = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
-                    DealStatus = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, defaultValue: "InDelivery")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Deals", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Deals_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Deals_Users_BookTakerId",
-                        column: x => x.BookTakerId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Time = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, defaultValue: "Pending")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Requests_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Requests_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_BookAuthor_AuthorId",
                 table: "BookAuthor",
@@ -336,16 +280,6 @@ namespace BookExchange.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Deals_BookTakerId",
-                table: "Deals",
-                column: "BookTakerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Deals_PostId",
-                table: "Deals",
-                column: "PostId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Posts_BookId",
                 table: "Posts",
                 column: "BookId");
@@ -354,16 +288,6 @@ namespace BookExchange.Infrastructure.Migrations
                 name: "IX_Posts_PostedById",
                 table: "Posts",
                 column: "PostedById");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Requests_PostId",
-                table: "Requests",
-                column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Requests_UserId",
-                table: "Requests",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserContact_UserId",
@@ -401,12 +325,6 @@ namespace BookExchange.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bookmarks");
-
-            migrationBuilder.DropTable(
-                name: "Deals");
-
-            migrationBuilder.DropTable(
-                name: "Requests");
 
             migrationBuilder.DropTable(
                 name: "UserContact");

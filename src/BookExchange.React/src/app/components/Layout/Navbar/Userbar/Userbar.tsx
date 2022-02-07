@@ -22,11 +22,11 @@ const Userbar = observer(() => {
   };
 
   const handleLogin = () => {
-    Emitter.emit("sign-in", true);
+    Emitter.publish("sign-in", true);
   };
 
   const handleRegister = () => {
-    Emitter.emit("sign-up", true);
+    Emitter.publish("sign-up", true);
   };
 
   return (
@@ -52,11 +52,11 @@ const Userbar = observer(() => {
       )}
 
       <DialogContainer dialogName="sign-in">
-        <SignIn closeDialog={() => Emitter.emit("sign-in", false)} />
+        <SignIn closeDialog={() => Emitter.publish("sign-in", false)} />
       </DialogContainer>
 
       <DialogContainer dialogName="sign-up">
-        <SignUp closeDialog={() => Emitter.emit("sign-up", false)} />
+        <SignUp closeDialog={() => Emitter.publish("sign-up", false)} />
       </DialogContainer>
     </>
   );
