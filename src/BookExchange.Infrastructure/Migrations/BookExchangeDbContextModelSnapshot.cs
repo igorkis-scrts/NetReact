@@ -180,41 +180,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("BookExchange.Domain.Models.Deal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BookTakerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DealStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasDefaultValue("InDelivery");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TimeAdded")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getdate()");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookTakerId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Deals");
-                });
-
             modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -252,39 +217,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.HasIndex("PostedById");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.Request", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasDefaultValue("Pending");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.User", b =>
@@ -462,25 +394,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BookExchange.Domain.Models.Deal", b =>
-                {
-                    b.HasOne("BookExchange.Domain.Models.User", "BookTaker")
-                        .WithMany()
-                        .HasForeignKey("BookTakerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookExchange.Domain.Models.Post", "Post")
-                        .WithMany("Deals")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BookTaker");
-
-                    b.Navigation("Post");
-                });
-
             modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>
                 {
                     b.HasOne("BookExchange.Domain.Models.Book", "Book")
@@ -496,25 +409,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("PostedBy");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.Request", b =>
-                {
-                    b.HasOne("BookExchange.Domain.Models.Post", "Post")
-                        .WithMany("Requests")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookExchange.Domain.Models.User", "User")
-                        .WithMany("Requests")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.UserContact", b =>
@@ -554,18 +448,9 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("Details");
                 });
 
-            modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>
-                {
-                    b.Navigation("Deals");
-
-                    b.Navigation("Requests");
-                });
-
             modelBuilder.Entity("BookExchange.Domain.Models.User", b =>
                 {
                     b.Navigation("Posts");
-
-                    b.Navigation("Requests");
 
                     b.Navigation("UserContact");
                 });

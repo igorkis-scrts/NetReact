@@ -2,11 +2,7 @@ import { Container, Grid, CardMedia, Typography, Divider } from "@mui/material";
 import { useStores } from "@stores/useStores";
 import { observer } from "mobx-react";
 import { useState } from "react";
-import { AwaitedBooksPanel } from "./Panels/AwaitedBooksPanel/AwaitedBooksPanel";
-import { BookRequestsPanel } from "./Panels/BookRequestsPanel/BookRequestsPanel";
 import { BookShelfPanel } from "./Panels/BookShelfPanel/BookShelfPanel";
-import { RequestedBooksPanel } from "./Panels/RequestedBooksPanel/RequestedBooksPanel";
-import { SentBooksPanel } from "./Panels/SentBooksPanel/SentBooksPanel";
 import { StatisticsBar } from "./StatisticsBar/StatisticsBar";
 import { ProfileTopCard, ProfileRootGrid } from "./UserProfile.styled";
 import { WishlistPanel } from "./Panels/WishlistPanel/WishlistPanel";
@@ -49,11 +45,7 @@ const UserProfile = observer(() => {
         </ProfileTopCard>
 
         <WishlistPanel index={1} displayIndex={displayViewIndex} />
-        <RequestedBooksPanel index={2} displayIndex={displayViewIndex} />
-        <AwaitedBooksPanel index={3} displayIndex={displayViewIndex} />
-        <BookShelfPanel index={4} displayIndex={displayViewIndex} />
-        <BookRequestsPanel index={5} displayIndex={displayViewIndex} />
-        <SentBooksPanel index={6} displayIndex={displayViewIndex} />
+        <BookShelfPanel index={2} displayIndex={displayViewIndex} />
       </Container>
     </div>
   );

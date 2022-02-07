@@ -9,66 +9,48 @@ using BookExchange.Application.Posts.Queries;
 using BookExchange.Application.Authors.Commands;
 using BookExchange.Application.Books.Events;
 using BookExchange.Application.Users.Queries;
-using BookExchange.Application.Deals.Queries;
-using BookExchange.Application.Request.Queries;
 using BookExchange.Domain.ReadModel;
 
 namespace BookExchange.Application.Common.Mappings
 {
-     public class MappingProfile : Profile
-     {
-          public MappingProfile()
-          {
-               CreateMap<Book, BookDto>();
-               CreateMap<CreateBookCommand, Book>();
-               CreateMap<BookDetails, BookDetailsDto>();
+	public class MappingProfile : Profile
+	{
+		public MappingProfile()
+		{
+			CreateMap<Book, BookDto>();
+			CreateMap<CreateBookCommand, Book>();
+			CreateMap<BookDetails, BookDetailsDto>();
 
-               CreateMap<Post, PostDto>();
-               CreateMap<PostDto, Post>();
-               CreateMap<CreatePostCommand, Post>();
-               CreateMap<ReplacePostCommand, Post>();
+			CreateMap<Post, PostDto>();
+			CreateMap<PostDto, Post>();
+			CreateMap<CreatePostCommand, Post>();
+			CreateMap<ReplacePostCommand, Post>();
 
-               CreateMap<User, UserDto>();
-               CreateMap<UserContact, UserContactDto>();
-
-
-               CreateMap<BooksFilter, GetBooksQuery>();
-               CreateMap<GetBooksQuery, PaginationFilter>();
-
-               CreateMap<BooksFilter, GetUserWishedBooksQuery>();
-               CreateMap<GetUserWishedBooksQuery, PaginationFilter>();
-
-               CreateMap<PostsFilter, GetPostsQuery>();
-               CreateMap<GetPostsQuery, PaginationFilter>();
+			CreateMap<User, UserDto>();
+			CreateMap<UserContact, UserContactDto>();
 
 
-               CreateMap<CreateAuthorDto, CreateAuthorCommand>();
-               CreateMap<Author, AuthorDto>();
+			CreateMap<BooksFilter, GetBooksQuery>();
+			CreateMap<GetBooksQuery, PaginationFilter>();
 
-               CreateMap<Category, CategoryDto>();
+			CreateMap<BooksFilter, GetUserWishedBooksQuery>();
+			CreateMap<GetUserWishedBooksQuery, PaginationFilter>();
 
-               CreateMap<BookCreatedEvent, ReadModelBook>();
+			CreateMap<PostsFilter, GetPostsQuery>();
+			CreateMap<GetPostsQuery, PaginationFilter>();
 
-               CreateMap<Wishlist, WishListDto>();
 
-               CreateMap<Domain.Models.Request, RequestDto>();
-               
-               CreateMap<Deal, DealDto>();
+			CreateMap<CreateAuthorDto, CreateAuthorCommand>();
+			CreateMap<Author, AuthorDto>();
 
-               CreateMap<PaginationFilter, GetDealsFromUserQuery>();
-               CreateMap<PaginationFilter, GetDealsToUserQuery>();
+			CreateMap<Category, CategoryDto>();
 
-               CreateMap<GetDealsFromUserQuery, PaginationFilter>();
-               CreateMap<GetDealsToUserQuery, PaginationFilter>();
+			CreateMap<BookCreatedEvent, ReadModelBook>();
 
-               CreateMap<GetRequestsToUserQuery, PaginationFilter>();
-               CreateMap<GetRequestsFromUserQuery, PaginationFilter>();
+			CreateMap<Wishlist, WishListDto>();
 
-               CreateMap<PaginationFilter, GetRequestsToUserQuery>();
-               CreateMap<PaginationFilter, GetRequestsFromUserQuery>();
-
-               CreateMap<GetUserPostsQuery, PaginationFilter>();
-               CreateMap<PaginationFilter, GetUserPostsQuery>();
-          }
-     }
+			CreateMap<GetUserPostsQuery, PaginationFilter>();
+			CreateMap<PaginationFilter, GetUserPostsQuery>();
+		}
+	}
 }
