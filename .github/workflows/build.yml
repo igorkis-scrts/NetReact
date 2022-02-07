@@ -28,7 +28,7 @@ jobs:
     - name: Install SPA
       run: |
           cd src
-          cd BookExchange.React
+          cd NetReact.ClientApp
           npm i --legacy-peer-deps
           npm run build
         
