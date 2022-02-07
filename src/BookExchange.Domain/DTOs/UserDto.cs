@@ -10,7 +10,6 @@ namespace BookExchange.Domain.DTOs
           public string Username { get; set; }
           public string FirstName { get; set; }
           public string LastName { get; set; }
-          public decimal Points { get; set; }
           public UserContactDto UserContact { get; set; }
      }
 }

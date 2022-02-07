@@ -20,16 +20,10 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
 
                builder.Property(x => x.LastName)
                     .HasMaxLength(100);
-
-
+               
                builder.Property(x => x.Username)
                     .IsRequired()
                     .HasMaxLength(100);
-
-
-               builder.Property(x => x.Points)
-                    .HasDefaultValue(0)
-                    .HasColumnType("decimal(10, 2)");
 
                builder.HasMany(x => x.BookmarkedPosts)
                     .WithMany(x => x.BookmarkedBy)
@@ -37,7 +31,6 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
                          x => x.HasOne(x => x.Post).WithMany(),
                          x => x.HasOne(x => x.User).WithMany()
                     ); 
-
                
                builder.HasMany(x => x.WishedBooks)
                     .WithMany(x => x.WishedBy)
@@ -56,7 +49,6 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
 
                builder.Property(x => x.RowVersion)
                     .IsRowVersion();
-
           }
      }
 }

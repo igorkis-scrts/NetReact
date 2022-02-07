@@ -1,10 +1,6 @@
 ﻿using BookExchange.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BookExchange.Infrastructure.Persistence.Configurations
 {
@@ -12,10 +8,10 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
      {
           public void Configure(EntityTypeBuilder<Book> builder)
           {
-               builder.HasIndex(b => b.ISBN)
+               builder.HasIndex(b => b.Isbn)
                     .IsUnique();
 
-               builder.Property(x => x.ISBN)
+               builder.Property(x => x.Isbn)
                     .HasColumnType("varchar")
                     .HasMaxLength(13);
 
@@ -23,7 +19,7 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
                     .IsRequired()
                     .HasMaxLength(100);
 
-               builder.Property(x => x.ISBN)
+               builder.Property(x => x.Isbn)
                     .IsRequired()
                     .HasMaxLength(13);
                

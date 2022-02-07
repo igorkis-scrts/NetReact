@@ -13,7 +13,7 @@ namespace BookExchange.Domain.Filter
           public bool IncludeCategories { get; set; }
           public bool IncludeWishedBy { get; set; }
 
-          public string ISBN { get; set; }
+          public string Isbn { get; set; }
           public string Title { get; set; }
           public List<int> Authors { get; set; }
           public List<int> Categories { get; set; }

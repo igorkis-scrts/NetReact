@@ -7,7 +7,7 @@ namespace BookExchange.Domain.Models
 {
      public class Category : BaseEntity
      {
-          public string Label;
+          public string Name;
 
           public List<Book> Books;
      }

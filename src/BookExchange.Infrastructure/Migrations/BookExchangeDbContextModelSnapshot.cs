@@ -31,7 +31,9 @@ namespace BookExchange.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -46,7 +48,7 @@ namespace BookExchange.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ISBN")
+                    b.Property<string>("Isbn")
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("varchar(13)");
@@ -64,7 +66,7 @@ namespace BookExchange.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ISBN")
+                    b.HasIndex("Isbn")
                         .IsUnique();
 
                     b.ToTable("Books");
@@ -84,9 +86,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
@@ -95,8 +94,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.HasIndex("AuthorId");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("BookId1");
 
                     b.ToTable("BookAuthor");
                 });
@@ -166,32 +163,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.ToTable("Bookmarks");
                 });
 
-            modelBuilder.Entity("BookExchange.Domain.Models.BookReview", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BookReviews");
-                });
-
             modelBuilder.Entity("BookExchange.Domain.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -200,7 +171,7 @@ namespace BookExchange.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Label")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -242,33 +213,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("Deals");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("PaymentServiceReference")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PaymentStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>
@@ -361,11 +305,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal>("Points")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(10,2)")
-                        .HasDefaultValue(0m);
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
@@ -464,14 +403,10 @@ namespace BookExchange.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("BookExchange.Domain.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("BookAuthor")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("BookExchange.Domain.Models.Book", null)
-                        .WithMany("BookAuthor")
-                        .HasForeignKey("BookId1");
 
                     b.Navigation("Author");
 
@@ -527,25 +462,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BookExchange.Domain.Models.BookReview", b =>
-                {
-                    b.HasOne("BookExchange.Domain.Models.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BookExchange.Domain.Models.User", "User")
-                        .WithMany("BookReviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BookExchange.Domain.Models.Deal", b =>
                 {
                     b.HasOne("BookExchange.Domain.Models.User", "BookTaker")
@@ -563,17 +479,6 @@ namespace BookExchange.Infrastructure.Migrations
                     b.Navigation("BookTaker");
 
                     b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("BookExchange.Domain.Models.Payment", b =>
-                {
-                    b.HasOne("BookExchange.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BookExchange.Domain.Models.Post", b =>
@@ -658,8 +563,6 @@ namespace BookExchange.Infrastructure.Migrations
 
             modelBuilder.Entity("BookExchange.Domain.Models.User", b =>
                 {
-                    b.Navigation("BookReviews");
-
                     b.Navigation("Posts");
 
                     b.Navigation("Requests");

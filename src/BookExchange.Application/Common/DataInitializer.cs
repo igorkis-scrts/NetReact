@@ -2,11 +2,7 @@
 using BookExchange.Domain.Models;
 using BookExchange.Infrastructure.Persistence;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookExchange.Application.Common
 {
@@ -15,9 +11,8 @@ namespace BookExchange.Application.Common
           public static void SeedDatabase(BookExchangeDbContext context, IMediator mediator)
           {
                context.Database.EnsureCreated();
-
-
-               // create 3 users
+               
+               // create 4 users
                if (!context.Users.Any())
                {
                     var user1 = new User
@@ -25,36 +20,43 @@ namespace BookExchange.Application.Common
                          Username = "dimatrubca",
                          FirstName = "Dima",
                          LastName = "Trubca",
-                         Points = 10,
                          IdentityId = "1",
                          UserContact = new UserContact { Email = "dimatrubca@gmail.com" }
                     };
-
-
+                    
                     var user2 = new User
+                    {
+                         Username = "igorkis",
+                         FirstName = "Igor",
+                         LastName = "Kiselev",
+                         IdentityId = "2",
+                         UserContact = new UserContact { Email = "igorkisf636cf51cef00bf14a4820f57b645c2d@gmail.com" }
+                    };
+
+
+                    var user3 = new User
                     {
                          Username = "valentin",
                          FirstName = "Valentin",
                          LastName = "Korotkevichi",
-                         Points = 5,
-                         IdentityId = "2",
+                         IdentityId = "3",
                          UserContact = new UserContact { Email = "dimatrubca@outlook.com" },
                     };
-                    var user3 = new User
+                    
+                    var user4 = new User
                     {
                          Username = "igor431",
                          FirstName = "Igor",
                          LastName = "Korotkevichi",
-                         Points = 5,
-                         IdentityId = "3",
+                         IdentityId = "4",
                          UserContact = new UserContact { Email = "igor431@outlook.com" },
                     };
 
                     context.Users.Add(user1);
-                    context.SaveChanges();
                     context.Users.Add(user2);
-                    context.SaveChanges();
                     context.Users.Add(user3);
+                    context.Users.Add(user4);
+                    context.SaveChanges();
                }
 
                context.SaveChanges();
@@ -63,15 +65,15 @@ namespace BookExchange.Application.Common
 
                if (!context.Set<Category>().Any())
                {
-                    context.Add(new Category { Label = "Novel" });
-                    context.Add(new Category { Label = "Fiction" });
+                    context.Add(new Category { Name = "Novel" });
+                    context.Add(new Category { Name = "Fiction" });
                     context.SaveChanges();
-                    context.Add(new Category { Label = "Non-Fiction" });
+                    context.Add(new Category { Name = "Non-Fiction" });
                     context.SaveChanges();
-                    context.Add(new Category { Label = "War story" });
-                    context.Add(new Category { Label = "Thriller" });
-                    context.Add(new Category { Label = "Contemporary" });
-                    context.Add(new Category { Label = "Science" });
+                    context.Add(new Category { Name = "War story" });
+                    context.Add(new Category { Name = "Thriller" });
+                    context.Add(new Category { Name = "Contemporary" });
+                    context.Add(new Category { Name = "Science" });
                     context.SaveChanges();
                }
 
@@ -93,7 +95,7 @@ namespace BookExchange.Application.Common
 
                var book1 = new Book
                {
-                    ISBN = "9780786112517",
+                    Isbn = "9780786112517",
                     Title = "War and Peace",
                     ShortDescription = "War and Peace is a novel by the Russian author Leo Tolstoy, first published serially, then published in its entirety in 1869. It is regarded as one of Tolstoy's finest literary achievements and remains an internationally praised classic of world literature.",
                     ThumbnailPath = @"uploads\books\war-and-peace.jpg",
@@ -109,7 +111,7 @@ namespace BookExchange.Application.Common
 
                var book2 = new Book
                {
-                    ISBN = "9788807900501",
+                    Isbn = "9788807900501",
                     Title = "A Confession",
                     ShortDescription = "A Confession, or My Confession, is a short work on the subject of melancholia, philosophy and religion by the acclaimed Russian novelist Leo Tolstoy. It was written in 1879 to 1880, when Tolstoy was in his early fifties.",
                     ThumbnailPath = @"uploads\books\confession.jpg",
@@ -125,7 +127,7 @@ namespace BookExchange.Application.Common
 
                var book3 = new Book
                {
-                    ISBN = "9780786105236",
+                    Isbn = "9780786105236",
                     Title = "The Cossacks",
                     ShortDescription = "The Cossacks is a short novel by Leo Tolstoy, published in 1863 in the popular literary magazine The Russian Messenger",
                     ThumbnailPath = @"uploads\books\The-Cossacks-cover.jpg",
@@ -141,7 +143,7 @@ namespace BookExchange.Application.Common
 
                var book4 = new Book
                {
-                    ISBN = "9781455869749",
+                    Isbn = "9781455869749",
                     Title = "The Fault in Our Stars",
                     ShortDescription = "Two cancer-afflicted teenagers Hazel and Augustus meet at a cancer support group. The two of them embark on a journey to visit a reclusive author in Amsterdam.",
                     ThumbnailPath = @"uploads\books\ourstars.jpg",
@@ -157,7 +159,7 @@ namespace BookExchange.Application.Common
 
                var book5 = new Book
                {
-                    ISBN = "9781494506902",
+                    Isbn = "9781494506902",
                     Title = "Sapiens: A Brief History of Humankind",
                     ShortDescription = "Sapiens: A Brief History of Humankind is a book by Yuval Noah Harari, first published in Hebrew in Israel in 2011 based on a series of lectures Harari taught at The Hebrew University of Jerusalem, and in English in 2014",
                     ThumbnailPath = @"uploads\books\sapiens.jpg",
@@ -173,7 +175,7 @@ namespace BookExchange.Application.Common
 
                var book6 = new Book
                {
-                    ISBN = "9780552562966",
+                    Isbn = "9780552562966",
                     Title = "A Short History of Nearly Everything",
                     ShortDescription = "A Short History of Nearly Everything by American-British author Bill Bryson is a popular science book that explains some areas of science, using easily accessible language that appeals more to the general public than many other books dedicated to the subject",
                     ThumbnailPath = @"uploads\books\brief-history-of-nearly-everything.jpg",
@@ -190,7 +192,7 @@ namespace BookExchange.Application.Common
 
                var book7 = new Book
                {
-                    ISBN = "9780345331359",
+                    Isbn = "9780345331359",
                     Title = "Cosmos",
                     ShortDescription = "Cosmos is a 1980 popular science book by astronomer and Pulitzer Prize-winning author Carl Sagan. Its 13 illustrated chapters, corresponding to the 13 episodes of the Cosmos TV series, which the book was co-developed with and intended to complement, explore the mutual development of science and civilization.",
                     ThumbnailPath = @"uploads\books\cosmos.jpg",
@@ -312,7 +314,7 @@ namespace BookExchange.Application.Common
 
                if (!context.Deals.Any())
                {
-                    context.Deals.Add(new Deal { BookTakerId = 1, PostId = 6, DealStatus=DealStatus.InDelivery });
+                    context.Deals.Add(new Deal { BookTakerId = 1, PostId = 6, DealStatus = DealStatus.InDelivery });
                     context.Deals.Add(new Deal { BookTakerId = 1, PostId = 2, DealStatus = DealStatus.Delivered });
                }
 
@@ -328,29 +330,7 @@ namespace BookExchange.Application.Common
                }
 
                context.SaveChanges();
-
-               // populate bookmarks table
-               if (!context.Bookmarks.Any())
-               {
-                    context.Bookmarks.Add(new Bookmark { UserId = 1, PostId = 4 });
-                    context.Bookmarks.Add(new Bookmark { UserId = 1, PostId = 3 });
-                    context.Bookmarks.Add(new Bookmark { UserId = 2, PostId = 2 });
-               }
-               context.SaveChanges();
-
-
-               // populate book reviews
-               if (!context.BookReviews.Any())
-               {
-                    context.BookReviews.Add(new BookReview { BookId = 1, UserId = 1, Rating = 5});
-                    context.BookReviews.Add(new BookReview { BookId = 1, UserId = 1, Rating = 4 });
-                    context.BookReviews.Add(new BookReview { BookId = 1, UserId = 1, Rating = 5 });
-                    context.BookReviews.Add(new BookReview { BookId = 2, UserId = 2, Rating = 4 });
-                    context.BookReviews.Add(new BookReview { BookId = 2, UserId = 2, Rating = 3 });
-               }
-
-               context.SaveChanges();
-
+               
                mediator.Publish(new BookCreatedEvent
                {
                     Id = book1.Id,
@@ -358,7 +338,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book1.ShortDescription,
                     Description = book1.Details.Description,
                     Authors = book1.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book1.Categories?.Select(a => a.Label).ToList()
+                    Categories = book1.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -368,7 +348,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book2.ShortDescription,
                     Description = book2.Details.Description,
                     Authors = book2.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book2.Categories?.Select(a => a.Label).ToList()
+                    Categories = book2.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -378,7 +358,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book3.ShortDescription,
                     Description = book3.Details.Description,
                     Authors = book3.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book3.Categories?.Select(a => a.Label).ToList()
+                    Categories = book3.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -388,7 +368,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book4.ShortDescription,
                     Description = book4.Details.Description,
                     Authors = book4.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book4.Categories?.Select(a => a.Label).ToList()
+                    Categories = book4.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -398,7 +378,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book5.ShortDescription,
                     Description = book5.Details.Description,
                     Authors = book5.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book5.Categories?.Select(a => a.Label).ToList()
+                    Categories = book5.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -408,7 +388,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book6.ShortDescription,
                     Description = book6.Details.Description,
                     Authors = book6.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book6.Categories?.Select(a => a.Label).ToList()
+                    Categories = book6.Categories?.Select(a => a.Name).ToList()
                });
 
                mediator.Publish(new BookCreatedEvent
@@ -418,7 +398,7 @@ namespace BookExchange.Application.Common
                     ShortDescription = book7.ShortDescription,
                     Description = book7.Details.Description,
                     Authors = book7.Authors?.Select(a => a.Name).ToList(),
-                    Categories = book7.Categories?.Select(a => a.Label).ToList()
+                    Categories = book7.Categories?.Select(a => a.Name).ToList()
                });
           }
 

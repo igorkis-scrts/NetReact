@@ -8,7 +8,7 @@ namespace BookExchange.Domain.Models
      public class Book : BaseEntity
      {
           public string Title { get; set; }
-          public string ISBN { get; set; }
+          public string Isbn { get; set; }
           public string ShortDescription { get; set; }
           public string ThumbnailPath { get; set; }
           public BookDetails Details { get; set; }

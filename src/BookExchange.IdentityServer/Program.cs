@@ -1,5 +1,4 @@
 using BookExchange.IdentityServer;
-using BookExchange.IdentityServer.Identity;
 using BookExchange.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;

@@ -23,13 +23,13 @@ namespace BookExchange.Application.Categories.Commands
 
           public Task<Category> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
           {
-               if (ServiceUtils.CheckBookCategoryExists(_categoriesRepository, request.Label)) {
-                    throw new BadRequestException($"Category with label = {request.Label} already exists");
+               if (ServiceUtils.CheckBookCategoryExists(_categoriesRepository, request.Name)) {
+                    throw new BadRequestException($"Category with name = {request.Name} already exists");
                }
 
                Category bookCategory = new Category
                {
-                    Label = request.Label
+                    Name = request.Name
                };
 
                _categoriesRepository.Add(bookCategory);

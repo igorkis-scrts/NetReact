@@ -15,9 +15,8 @@ namespace BookExchange.Domain
           {
                return a => true;
           }
-
-          //var result = predicates.Aggregate<Expression<Func<T, bool>>, Expression< Func<T, bool>>> (GetTrueExpression<T>, (result, next) => applyOperation.Invoke(result, next));
-          public static Expression<Func<T, bool>> CombineExpresions<T>(this List<Expression<Func<T, bool>>> expresions, LogicalOperator combineOperator)
+          
+          public static Expression<Func<T, bool>> CombineExpresions<T>(this List<Expression<Func<T, bool>>> expressions, LogicalOperator combineOperator)
           {
                ExpressionOperation<T> applyOperator;
 
@@ -31,9 +30,9 @@ namespace BookExchange.Domain
                          break;
                };
 
-               if (expresions == null || expresions.Count == 0) return (a => true);
+               if (expressions == null || expressions.Count == 0) return (a => true);
 
-               var result = expresions.Aggregate((current, expression) => applyOperator(current, expression));
+               var result = expressions.Aggregate((current, expression) => applyOperator(current, expression));
 
                return result;
           }

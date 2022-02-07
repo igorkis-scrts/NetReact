@@ -13,10 +13,8 @@ namespace BookExchange.Infrastructure.Persistence.Configurations
      {
           public void Configure(EntityTypeBuilder<Category> builder)
           {
-               builder.Property(x => x.Label)
+               builder.Property(x => x.Name)
                     .IsRequired();
-
-               
           }
      }
 }

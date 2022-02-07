@@ -1,8 +1,5 @@
-using BookExchange.API.Configuration;
 using BookExchange.Application.Common;
 using BookExchange.Application.Common.Exceptions;
-using BookExchange.Application.Common.Interfaces;
-using BookExchange.Application.Common.Services;
 using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
 using BookExchange.Domain.ReadModel;
@@ -100,8 +97,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers(options => { options.Filters.Add(new AuthorizeFilter()); });
 
-builder.Services.AddSingleton<ILogger>(svc => svc.GetRequiredService<ILogger<RequestTimeMiddleware>>());
-
 builder.Services.AddElasticSearch(builder.Configuration);
 
 builder.Services.AddScoped<DbContext, BookExchangeDbContext>();
@@ -109,7 +104,6 @@ builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IBookReviewRepository, BookReviewRepository>();
 builder.Services.AddScoped<IRequestRepository, RequestRepository>();
 builder.Services.AddScoped<IDealRepository, DealRepository>();
 builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
@@ -119,7 +113,13 @@ builder.Services.AddScoped<IRepositoryBase<BookDetails>, RepositoryBase<BookDeta
 builder.Services.AddScoped<IRepositoryBase<Wishlist>, RepositoryBase<Wishlist>>();
 
 builder.Services.AddScoped<IReadModelBookRepository, ElasticBookRepository>();
-builder.Services.AddScoped<IRecommendationService, RecommendationService>();
+
+builder.Services.AddTransient(provider =>
+{
+	var loggerFactory = provider.GetRequiredService<ILoggerFactory>();
+	const string categoryName = "Any";
+	return loggerFactory.CreateLogger(categoryName);
+});
 
 builder.Services.AddMediatR(typeof(BookExchange.Application.Class1));
 builder.Services.AddAutoMapper(typeof(BookExchange.Application.Common.Mappings.MappingProfile).Assembly);
@@ -137,12 +137,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-/*
-app.UseFileServer(new FileServerOptions { 
-     FileProvider = new PhysicalFileProvider(
-          Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles")),
-     RequestPath = "/StaticFile"
-});*/
 
 app.UseRouting();
 app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

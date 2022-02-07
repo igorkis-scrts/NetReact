@@ -7,6 +7,6 @@ namespace BookExchange.Domain.DTOs
      public class CategoryDto
      {
           public int Id { get; set; }
-          public string Label { get; set; }
+          public string Name { get; set; }
      }
 }

@@ -1,10 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using BookExchange.Domain.Wrappers;
+﻿using BookExchange.Domain.Wrappers;
+using MediatR;
 
-namespace BookExchange.Domain.Queries
+namespace BookExchange.Application.Common
 {
      public class PaginatedQueryBase<TDto> : IRequest<PagedResponse<TDto>>
      {

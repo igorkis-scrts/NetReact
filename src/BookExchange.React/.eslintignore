@@ -1,0 +1,11 @@
+build/
+node_modules/
+public/
+
+src/registerServiceWorker.js
+src/service-worker.js
+src/serviceWorkerRegistration.js
+src/setupProxy.js
+src/reportWebVitals.js
+
+craco.config.js
