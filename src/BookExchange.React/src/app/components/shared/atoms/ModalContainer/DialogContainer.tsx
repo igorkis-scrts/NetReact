@@ -1,6 +1,5 @@
 import { EventKey } from "@config/EventRegistry";
 import { Close } from "@mui/icons-material";
-import Typography from "@mui/material/Typography";
 import Emitter from "@utils/Emitter";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -48,8 +47,9 @@ const DialogContainer = <T extends EventKey>({
         setIsOpen(false);
       }}
     >
-      {dialogTitle && <DialogTitle sx={{ m: 0, p: 2 }}>
-        <Typography variant="h5">{dialogTitle}</Typography>
+      {dialogTitle && (
+        <DialogTitle sx={{ m: 0, p: 2 }}>
+          {dialogTitle}
           <IconButton
             aria-label="close"
             onClick={() => setIsOpen(false)}
@@ -63,7 +63,7 @@ const DialogContainer = <T extends EventKey>({
             <Close />
           </IconButton>
         </DialogTitle>
-      }
+      )}
       <ContainerDialogContent>{children}</ContainerDialogContent>
     </Dialog>
   );

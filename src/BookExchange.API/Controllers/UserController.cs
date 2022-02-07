@@ -98,7 +98,6 @@ namespace BookExchange.API.Controllers
 
 
 		[HttpGet("{id}/posts/owned")]
-		[AllowAnonymous]
 		public async Task<IActionResult> GetUserActivePosts(int id, [FromQuery] PaginationFilter filter)
 		{
 			var query = _mapper.Map<GetUserPostsQuery>(filter);

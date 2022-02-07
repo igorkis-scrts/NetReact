@@ -20,7 +20,7 @@ const BookListCard = ({ cardItem: book, action, actionText }: ICardProps<Book>) 
       actionText={actionText}
       imagePath={`${book.thumbnailPath}`}
     >
-      <Typography component="h5" variant="h5">
+      <Typography variant="h5">
         <LinkButton color="inherit" style={{ textDecoration: "none" }} onClick={handleClick}>
           {book.title}
         </LinkButton>

@@ -17,7 +17,7 @@ const ListCardContainer = ({ children, action, actionText, imagePath }: IListCar
         <ListCardContent>{children}</ListCardContent>
         <Controls>
           {action && actionText && (
-            <Button variant="outlined" color="secondary" size="small" onClick={action}>
+            <Button variant="outlined" color="info" size="small" onClick={action}>
               {actionText}
             </Button>
           )}

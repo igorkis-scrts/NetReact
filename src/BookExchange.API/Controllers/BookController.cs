@@ -63,7 +63,7 @@ namespace BookExchange.API.Controllers
 
 
 		[HttpPatch("{id}")]
-		public async Task<IActionResult> Patch(int id, [FromBody] UpdateBookCommand command)
+		public async Task<IActionResult> Patch(int id, [FromForm] UpdateBookCommand command)
 		{
 			if (id != command.Id)
 			{
