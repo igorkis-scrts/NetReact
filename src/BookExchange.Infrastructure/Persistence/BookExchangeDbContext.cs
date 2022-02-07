@@ -12,13 +12,19 @@ namespace BookExchange.Infrastructure.Persistence
           private readonly DbConnection _connection;
 
           public DbSet<User> Users { get; set; }
+          
           public DbSet<Post> Posts { get; set; }
+          
           public DbSet<Book> Books { get; set; }
+          
           public DbSet<Wishlist> Wishlist { get; set; }
+          
           public DbSet<Request> Requests { get; set; }
+          
           public DbSet<Bookmark> Bookmarks { get; set; }
+          
           public DbSet<Author> Authors { get; set; }
-          public DbSet<BookReview> BookReviews { get; set; }
+          
           public DbSet<Deal> Deals { get; set; }
 
           public BookExchangeDbContext(DbContextOptions<BookExchangeDbContext> options)
@@ -53,6 +59,7 @@ namespace BookExchange.Infrastructure.Persistence
           {
                base.OnModelCreating(modelBuilder);
                
+               modelBuilder.ApplyConfiguration(new AuthorConfig());
                modelBuilder.ApplyConfiguration(new UserConfig());
                modelBuilder.ApplyConfiguration(new UserContactConfig());
                modelBuilder.ApplyConfiguration(new PostConfig());
@@ -61,7 +68,6 @@ namespace BookExchange.Infrastructure.Persistence
                modelBuilder.ApplyConfiguration(new RequestConfig());
                modelBuilder.ApplyConfiguration(new BookAuthorConfig());
                modelBuilder.ApplyConfiguration(new CategoryConfig());
-               modelBuilder.ApplyConfiguration(new BookReviewConfig());
                modelBuilder.ApplyConfiguration(new DealConfig());
           }
      }

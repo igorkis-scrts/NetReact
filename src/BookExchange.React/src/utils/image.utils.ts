@@ -1,7 +1,7 @@
-const API_BASE_URL = `https://localhost:6002/`;
+import { API_BASE_URL } from "@config/Constants";
 
 const getAbsolutePath = (relativePath: string) => {
-  return `${API_BASE_URL}/${relativePath}`.replaceAll("\\", "/");
+  return `${API_BASE_URL}/${relativePath}`.replace(/\\/g, "/");
 };
 
 const ImageUtils = {

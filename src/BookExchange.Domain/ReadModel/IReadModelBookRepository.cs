@@ -13,7 +13,5 @@ namespace BookExchange.Domain.ReadModel
           public Task DeleteById(int id);
           public Task AddBulkAsync(ReadModelBook[] books);
           public Task<List<int>> Get(string query, int page, int pageSize);
-
-
      }
 }

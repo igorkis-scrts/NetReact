@@ -38,8 +38,8 @@ namespace BookExchange.Application.Books.Commands
                if (!string.IsNullOrWhiteSpace(command.ShortDescription))
                     book.ShortDescription = command.ShortDescription;
 
-               if (!string.IsNullOrWhiteSpace(command.ISBN))
-                    book.ISBN = command.ISBN;
+               if (!string.IsNullOrWhiteSpace(command.Isbn))
+                    book.Isbn = command.Isbn;
 
                if (!string.IsNullOrWhiteSpace(command.Description))
                     book.Details.Description = command.Description;
@@ -48,8 +48,8 @@ namespace BookExchange.Application.Books.Commands
                     book.Details.Publisher = command.Publisher;
 
 
-               if (command.AuthorsIds != null)
-                    command.AuthorsIds.ForEach(id => {
+               if (command.AuthorIds != null)
+                    command.AuthorIds.ForEach(id => {
                          var author = _bookAuthorsRepository.GetById(id);
 
                          if (author != null) {
@@ -57,8 +57,8 @@ namespace BookExchange.Application.Books.Commands
                          }
                     });
 
-               if (command.CategoriesIds != null)
-                    command.CategoriesIds.ForEach(id => {
+               if (command.CategoryIds != null)
+                    command.CategoryIds.ForEach(id => {
                          var category = _bookCategoriesRepository.GetById(id);
 
                          if (category != null) {

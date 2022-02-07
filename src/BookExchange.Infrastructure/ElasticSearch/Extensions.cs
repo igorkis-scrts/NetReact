@@ -1,13 +1,8 @@
-﻿using BookExchange.Domain.Models;
-using BookExchange.Domain.ReadModel;
+﻿using BookExchange.Domain.ReadModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookExchange.Infrastructure.ElasticSearch
 {
@@ -39,7 +34,7 @@ namespace BookExchange.Infrastructure.ElasticSearch
 
           private static void CreateIndex(IElasticClient client, string indexName)
           {
-               var createIndexResponse = client.Indices.Create(indexName, index => index.Map<ReadModelBook>(x => x.AutoMap()));
+               client.Indices.Create(indexName, index => index.Map<ReadModelBook>(x => x.AutoMap()));
           }
      }
 }

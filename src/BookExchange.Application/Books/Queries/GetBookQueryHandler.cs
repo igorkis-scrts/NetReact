@@ -1,16 +1,12 @@
-﻿using BookExchange.Domain.DTOs;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using BookExchange.Application.Common.Exceptions;
 using BookExchange.Domain.Interfaces;
 using BookExchange.Domain.Models;
 using BookExchange.Domain.Queries;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace BookExchange.Service.Services
+namespace BookExchange.Application.Books.Queries
 {
      public class GetBookQueryHandler : IRequestHandler<GetBookQuery, Book>
      {

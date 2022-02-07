@@ -11,16 +11,24 @@ namespace BookExchange.Application.Books.Commands
      {
           [Required]
           public int Id { get; set; }
+          
           public string Title { get; set; }
 
           [StringLength(13, MinimumLength = 13, ErrorMessage = "Invalid ISBN length")]
-          public string ISBN { get; set; }
+          public string Isbn { get; set; }
+          
           public string ShortDescription { get; set; }
+          
           public string Description { get; set; }
+          
           public string Publisher { get; set; }
+          
           public int? PageCount { get; set; }
+          
           public int? PublishedYear { get; set; }
-          public List<int> AuthorsIds { get; set; }
-          public List<int> CategoriesIds { get; set; }
+          
+          public List<int> AuthorIds { get; set; }
+          
+          public List<int> CategoryIds { get; set; }
      }
 }

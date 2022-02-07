@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BookExchange.Domain.Filter
+﻿namespace BookExchange.Domain.Filter
 {
      public class PaginationFilter
      {
@@ -13,10 +6,8 @@ namespace BookExchange.Domain.Filter
           private int _pageSize;
 
           public int PageNumber { 
-               get {
-                    return this._pageNumber;
-               }
-               
+               get => _pageNumber;
+
                set  
                {
                     if (value < 1) _pageNumber = 1;
@@ -27,10 +18,7 @@ namespace BookExchange.Domain.Filter
 
           public int PageSize
           {
-               get
-               {
-                    return this._pageSize;
-               }
+               get => _pageSize;
 
                set
                {
@@ -46,13 +34,13 @@ namespace BookExchange.Domain.Filter
 
           public PaginationFilter()
           {
-               this.PageNumber = 1;
-               this.PageSize = 10;
+               PageNumber = 1;
+               PageSize = 10;
           }
           public PaginationFilter(int pageNumber, int pageSize)
           {
-               this.PageNumber = pageNumber < 1 ? 1 : pageNumber;
-               this.PageSize = pageSize > 10 ? 10 : pageSize;
+               PageNumber = pageNumber < 1 ? 1 : pageNumber;
+               PageSize = pageSize > 10 ? 10 : pageSize;
           }
           public LogicalOperator FilterLogicalOperator { get; set; }
      }
