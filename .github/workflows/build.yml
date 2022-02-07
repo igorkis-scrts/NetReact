@@ -1,0 +1,36 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build Infrastructure
+      run: dotnet build --no-restore
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: "16"
+    - name: Install SPA
+      run: |
+          cd src
+          cd BookExchange.React
+          npm i --legacy-peer-deps
+          npm run build
+        
+#     - name: Test
+#       run: dotnet test --no-build --verbosity normal
