@@ -21,7 +21,7 @@
 ## Instructions
 ### Infrastructure
 - Restore nuget packages (`dotnet-restore`)
-- Apply migrations in NetReact.Infrastructure and NetReact.IdentityServer projects (execute `dotnet ef database update` in project's root, **MS SQL Server Express required**)
+- Apply migrations in NetReact.Infrastructure and NetReact.IdentityServer projects (execute `dotnet ef database update` in both projects directories, **MS SQL Server Express required**)
 - If you want to use Elastic Search functionality, you need to download and run local instance of ES ([Elastic.co](https://www.elastic.co/downloads/elasticsearch))
 - Build solution, run `NetReact.API` and `NetReact.IdentityServer` projects
 ### Client App
