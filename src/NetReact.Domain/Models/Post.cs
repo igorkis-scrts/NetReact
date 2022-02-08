@@ -27,7 +27,6 @@ namespace NetReact.Domain.Models
           public virtual Book Book { get; set; }
           public virtual User PostedBy { get; set; }
           public virtual Condition Condition { get; set; }
-          public virtual ICollection<User> BookmarkedBy { get; set; }
      }
 }
 

@@ -12,7 +12,7 @@ using NetReact.Infrastructure.Persistence;
 namespace NetReact.Infrastructure.Migrations
 {
     [DbContext(typeof(NetReactDbContext))]
-    [Migration("20220207170542_Initial")]
+    [Migration("20220208123952_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,21 +148,6 @@ namespace NetReact.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("BookDetails");
-                });
-
-            modelBuilder.Entity("NetReact.Domain.Models.Bookmark", b =>
-                {
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PostId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bookmarks");
                 });
 
             modelBuilder.Entity("NetReact.Domain.Models.Category", b =>
@@ -375,25 +360,6 @@ namespace NetReact.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Book");
-                });
-
-            modelBuilder.Entity("NetReact.Domain.Models.Bookmark", b =>
-                {
-                    b.HasOne("NetReact.Domain.Models.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NetReact.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NetReact.Domain.Models.Post", b =>

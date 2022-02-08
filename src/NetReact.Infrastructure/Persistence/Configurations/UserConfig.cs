@@ -25,13 +25,6 @@ namespace NetReact.Infrastructure.Persistence.Configurations
                     .IsRequired()
                     .HasMaxLength(100);
 
-               builder.HasMany(x => x.BookmarkedPosts)
-                    .WithMany(x => x.BookmarkedBy)
-                    .UsingEntity<Bookmark>(
-                         x => x.HasOne(x => x.Post).WithMany(),
-                         x => x.HasOne(x => x.User).WithMany()
-                    ); 
-               
                builder.HasMany(x => x.WishedBooks)
                     .WithMany(x => x.WishedBy)
                     .UsingEntity<Wishlist>(

@@ -19,8 +19,6 @@ namespace NetReact.Domain.Models
 
 		public virtual ICollection<Post> Posts { get; set; }
 
-		public virtual ICollection<Post> BookmarkedPosts { get; set; }
-
 		public virtual ICollection<Book> WishedBooks { get; set; }
 
 		public byte[] RowVersion { get; set; }

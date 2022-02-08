@@ -13,8 +13,6 @@ namespace NetReact.Infrastructure.ElasticSearch
                var url = configuration["elasticsearch:url"];
                var defaultIndex = configuration["elasticsearch:index"];
 
-
-
                var settings = new ConnectionSettings(new Uri(url))
                     .DefaultIndex(defaultIndex);
 

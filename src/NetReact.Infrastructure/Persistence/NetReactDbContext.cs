@@ -19,8 +19,6 @@ namespace NetReact.Infrastructure.Persistence
           
           public DbSet<Wishlist> Wishlist { get; set; }
 
-          public DbSet<Bookmark> Bookmarks { get; set; }
-          
           public DbSet<Author> Authors { get; set; }
 
           public NetReactDbContext(DbContextOptions<NetReactDbContext> options)

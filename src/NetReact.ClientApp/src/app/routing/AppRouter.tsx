@@ -10,6 +10,7 @@ const Home = lazy(() => import("@Pages/Home"));
 const UserProfile = lazy(() => import("@Pages/UserProfile"));
 const Books = lazy(() => import("@Pages/Books"));
 const BookDetails = lazy(() => import("@Pages/BookDetails"));
+const SearchBooks = lazy(() => import("@Pages/SearchBooks"));
 const NotFound = lazy(() => import("@Pages/NotFound"));
 
 const AppRouter = () => {
@@ -28,7 +29,9 @@ const AppRouter = () => {
           <Route path={appUrls.books} element={<Books />} />
           <Route path=":id" element={<BookDetails />} />
         </Route>
-        {/*<Route path="/search" element={<SearchBooks />} />*/}
+        <Route path={appUrls.searchBooks} element={<AuthProtection />}>
+          <Route path={appUrls.searchBooks} element={<SearchBooks />} />
+        </Route>
       </Route>
     </Routes>
   );

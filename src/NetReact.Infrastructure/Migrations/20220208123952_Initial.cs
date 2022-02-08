@@ -223,30 +223,6 @@ namespace NetReact.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Bookmarks",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bookmarks", x => new { x.PostId, x.UserId });
-                    table.ForeignKey(
-                        name: "FK_Bookmarks_Posts_PostId",
-                        column: x => x.PostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Bookmarks_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_BookAuthor_AuthorId",
                 table: "BookAuthor",
@@ -267,11 +243,6 @@ namespace NetReact.Infrastructure.Migrations
                 table: "BookDetails",
                 column: "BookId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bookmarks_UserId",
-                table: "Bookmarks",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_Isbn",
@@ -324,7 +295,7 @@ namespace NetReact.Infrastructure.Migrations
                 name: "BookDetails");
 
             migrationBuilder.DropTable(
-                name: "Bookmarks");
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "UserContact");
@@ -337,9 +308,6 @@ namespace NetReact.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
-
-            migrationBuilder.DropTable(
-                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "Books");
