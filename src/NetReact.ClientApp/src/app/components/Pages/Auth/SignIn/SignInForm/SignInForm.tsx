@@ -7,7 +7,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useSnackbar } from "notistack";
 import { appUrls } from "@app/appUrls";
 import { SignInData } from "../../../../../types";
 import { SubmitButton, Form } from "../../Auth.styled";
