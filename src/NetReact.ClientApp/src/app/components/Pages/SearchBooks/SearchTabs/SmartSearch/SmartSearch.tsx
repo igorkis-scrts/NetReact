@@ -1,6 +1,6 @@
 import { BookApi } from "@api/Book.api";
 import { Dispatch, SetStateAction } from "react";
-import { Book } from "../../../../../types";
+import { Book } from "@app/types";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { useSnackbar } from "notistack";
 

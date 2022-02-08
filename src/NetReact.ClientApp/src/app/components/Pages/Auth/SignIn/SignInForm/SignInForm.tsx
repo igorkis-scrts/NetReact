@@ -18,23 +18,22 @@ interface ISignInFormProps {
 
 const schema = yup.object().shape({
   username: yup.string().required("Username is required"),
-  password: yup.string().required("No password provided"),
+  password: yup.string().required("No password provided")
 });
 
 const SignInForm = ({ closeDialog }: ISignInFormProps) => {
-  const { auth } = useStores();
+  const { auth, notification } = useStores();
   const navigate = useNavigate();
   const location = useLocation();
-  const { enqueueSnackbar } = useSnackbar();
 
   const from = (location.state as any)?.from?.pathname || "/";
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SignInData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema)
   });
 
   const onSubmit = async (data: SignInData) => {
@@ -42,12 +41,15 @@ const SignInForm = ({ closeDialog }: ISignInFormProps) => {
       await auth!.signIn(data.username, data.password);
       await auth!.fetchCurrentUser();
 
+      notification!.enqueueSnackbar("User has been logged in.", { variant: "success" });
+
       navigate(from, { replace: true });
       if (typeof closeDialog === "function") {
         closeDialog();
       }
-    } catch (e: any) {
-      enqueueSnackbar(e.message, { variant: "error" });
+    }
+    catch (e: any) {
+      notification!.enqueueSnackbar(e.message, { variant: "error" });
     }
   };
 

@@ -8,6 +8,7 @@ import { NavbarHomeLogo } from "./NavbarHomeLogo/NavbarHomeLogo";
 import { appUrls } from "@app/appUrls";
 
 import { NavbarLinkButton } from "./NavbarLinkButton/NavbarLinkButton";
+import { NotificationCenter } from "./NotificationCenter/NotificationCenter";
 import { Userbar } from "./Userbar/Userbar";
 import Toolbar from "@mui/material/Toolbar";
 import Grid from "@mui/material/Grid";
@@ -16,13 +17,13 @@ const authTabs: INavbarTab[] = [
   {
     id: 0,
     title: "Books",
-    url: appUrls.books,
+    url: appUrls.books
   },
   {
     id: 1,
     title: "Search",
-    url: appUrls.searchBooks,
-  },
+    url: appUrls.searchBooks
+  }
 ];
 
 const Navbar = observer(() => {
@@ -41,6 +42,7 @@ const Navbar = observer(() => {
 
           <Grid container alignItems="center" justifyContent="end">
             <Userbar />
+            {auth!.isLoggedIn && <NotificationCenter />}
           </Grid>
         </Grid>
       </Toolbar>

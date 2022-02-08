@@ -2,7 +2,6 @@ import { Grid, TextField, FormControlLabel, Checkbox } from "@mui/material";
 import { LinkButton } from "@shared/Styles/LinkButton";
 import { useStores } from "@stores/useStores";
 import React from "react";
-import { useSnackbar } from "notistack";
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -26,20 +25,19 @@ const schema = yup.object().shape({
     .string()
     .required("No password provided")
     .min(8, "Password should contain at least 8 characters"),
-  confirmPassword: yup.string().oneOf([yup.ref("password"), null], "Passwords must match"),
+  confirmPassword: yup.string().oneOf([ yup.ref("password"), null ], "Passwords must match")
 });
 
 const SignUpForm = ({ closeDialog }: ISignUpFormProps) => {
-  const { auth } = useStores();
+  const { auth, notification } = useStores();
   const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SignUpData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema)
   });
 
   const onSubmit = async (data: SignUpData) => {
@@ -47,12 +45,15 @@ const SignUpForm = ({ closeDialog }: ISignUpFormProps) => {
       await auth!.signUp(data);
       await auth!.fetchCurrentUser();
 
+      notification!.enqueueSnackbar("User has been registered.", { variant: "success" });
+
       navigate("/profile");
       if (typeof closeDialog === "function") {
         closeDialog();
       }
-    } catch (e: any) {
-      enqueueSnackbar(e.message, { variant: "error" });
+    }
+    catch (e: any) {
+      notification!.enqueueSnackbar(e.message, { variant: "error" });
     }
   };
 
