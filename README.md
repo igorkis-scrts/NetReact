@@ -58,15 +58,15 @@ Client side of the application. React with Typescript.
 
 ## Tech Stack
 ### Infrastructure
-- (https://get.asp.net/)[ASP.NET 6]
-- (https://docs.microsoft.com/en-US/ef/)[Entity Framework]
-- (https://duendesoftware.com/products/identityserver)[Identity Server]
-- (https://www.elastic.co/)[Elastic Search]
-- (https://swagger.io/)[Swagger]
+- [https://get.asp.net/](ASP.NET 6)
+- [https://docs.microsoft.com/en-US/ef/](Entity Framework)
+- [https://duendesoftware.com/products/identityserver](Identity Server)
+- [https://www.elastic.co/](Elastic Search)
+- [https://swagger.io/](Swagger)
 ### Client App
-- (https://mui.com/)[MUI v5]
-- (https://en.reactjs.org/)[React]
-- (https://www.typescriptlang.org/)[Typescript]
+- [https://mui.com/](MUI v5)
+- [https://en.reactjs.org/](React)
+- [https://www.typescriptlang.org/](Typescript)
 
 ## Credits
 [Book Exchange App](https://github.com/dimatrubca/book-exchange-app) (dimatrubca)
