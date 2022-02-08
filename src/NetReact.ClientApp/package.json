@@ -25,7 +25,6 @@
     "react-swipeable-views": "^0.14.0",
     "sass": "^1.49.7",
     "typescript": "^4.5.5",
-    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
@@ -37,7 +36,6 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-swipeable-views": "^0.13.1",
     "@types/ts-nameof": "^4.2.1",
-    "@types/uuid": "^8.3.4",
     "circular-dependency-plugin": "^5.2.2",
     "craco-esbuild": "^0.5.0",
     "eslint-config-react-app": "^7.0.0",
