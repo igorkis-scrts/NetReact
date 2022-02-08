@@ -7,6 +7,7 @@ import { CssBaseline } from "@mui/material";
 import { createAppTheme } from "@config/themes/createAppTheme";
 import LoaderBlock from "@shared/atoms/Loaders/LoaderBlock";
 import { useStores } from "@stores/useStores";
+import { Notifier } from "./components/Notifier/Notifier";
 
 interface IAppProviderProps {
   children: ReactNode;
@@ -45,13 +46,15 @@ const AppProvider = observer((props: IAppProviderProps) => {
           maxSnack={3}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "center",
+            horizontal: "right",
           }}
         >
           <CssBaseline />
-          <Suspense fallback={<LoaderBlock />}>
-            {render()}
-          </Suspense>
+          <Notifier>
+            <Suspense fallback={<LoaderBlock />}>
+              {render()}
+            </Suspense>
+          </Notifier>
         </SnackbarProvider>
       </ThemeProvider>
     </StyledEngineProvider>

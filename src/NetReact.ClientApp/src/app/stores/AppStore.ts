@@ -25,8 +25,4 @@ export class AppStore {
       throw error;
     });
   }
-
-  public test() {
-    console.log(this);
-  }
 }
