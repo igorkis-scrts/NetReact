@@ -59,7 +59,7 @@ namespace NetReact.Infrastructure.ElasticSearch.Repositories
 				.Size(pageSize));
 
 			var response = result.Documents.Select(b => b.Id).ToList();
-			//result.HitsMetadata.Total
+
 			return response;
 		}
 	}

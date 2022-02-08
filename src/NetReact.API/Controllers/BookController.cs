@@ -46,7 +46,7 @@ namespace NetReact.API.Controllers
 		[HttpGet("smart-search")]
 		public async Task<IActionResult> GetAll([FromQuery] string searchTerm)
 		{
-			SmartSearchBooksQuery query = new SmartSearchBooksQuery { SearchTerm = searchTerm };
+			var query = new SmartSearchBooksQuery { SearchTerm = searchTerm };
 			var result = await _mediator.Send(query);
 
 			return Ok(result);

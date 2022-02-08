@@ -17,9 +17,9 @@ export class BookApi extends ApiBase {
 
   public static async addBook(book: CreateBook): Promise<ApiResponse<Book>> {
     const formData = new FormData();
-    for (const [key, value] of Object.entries(book)) {
+    for (const [ key, value ] of Object.entries(book)) {
       if (value) {
-        formData.append(key, <string | Blob>value);
+        formData.append(key, <string | Blob> value);
       }
     }
 
@@ -28,9 +28,9 @@ export class BookApi extends ApiBase {
 
   public static async updateBook(id: number, book: UpdateBook): Promise<ApiResponse> {
     const formData = new FormData();
-    for (const [key, value] of Object.entries(book)) {
+    for (const [ key, value ] of Object.entries(book)) {
       if (value) {
-        formData.append(key, <string | Blob>value);
+        formData.append(key, <string | Blob> value);
       }
     }
 
@@ -40,10 +40,8 @@ export class BookApi extends ApiBase {
   public static async deleteBook(id: number): Promise<ApiResponse> {
     return await BookApi.delete<Book>(`/book/${id}`, true);
   }
-}
 
-// const GetBooksBySearch = async (searchTerm: string) => {
-//   return fetchApi<PaginatedResult<Book>>(
-//     `/book/smart-search?searchTerm=${searchTerm}`
-//   );
-// };
+  public static async getBooksBySearch(searchTerm: string): Promise<ApiResponse<PaginatedResult<Book>>> {
+    return await BookApi.get<PaginatedResult<Book>>(`/book/smart-search?searchTerm=${searchTerm}`, true);
+  }
+}

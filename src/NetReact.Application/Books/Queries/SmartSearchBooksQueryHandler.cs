@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using NetReact.Domain.DTOs;
 using NetReact.Domain.Interfaces;
-using NetReact.Domain.Models;
-using NetReact.Domain.Queries;
 using NetReact.Domain.ReadModel;
 using NetReact.Domain.Wrappers;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,7 +30,7 @@ namespace NetReact.Application.Books.Queries
                var books = _bookRepository.GetBooksWithIds(bookIds);
                var bookDtos = _mapper.Map<List<BookDto>>(books);
 
-               var response = new PagedResponse<BookDto>(bookDtos, request.PageNumber, request.PageSize);
+               var response = new PagedResponse<BookDto>(bookDtos, 1, 10);
 
                return response;
           }
