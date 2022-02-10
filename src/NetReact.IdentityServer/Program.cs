@@ -1,3 +1,7 @@
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using NetReact.IdentityServer;
 using NetReact.IdentityServer.Models;
 using Duende.IdentityServer.Services;
@@ -10,6 +14,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder();
+
+var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+var envName = builder.Environment.EnvironmentName;
+builder.Configuration.AddJsonFile($"{assemblyName}.appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"{assemblyName}.appsettings.{envName}.json", optional: true, reloadOnChange: true);
+
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -58,6 +68,9 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact.IdentityServer v1"));
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact.IdentityServer v1"));
 
 app.UseHttpsRedirection();
 app.UseRouting();

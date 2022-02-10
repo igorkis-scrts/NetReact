@@ -24,6 +24,24 @@
 - Apply migrations in NetReact.Infrastructure and NetReact.IdentityServer projects (execute `dotnet ef database update` in both projects directories, **MS SQL Server Express required**)
 - If you want to use Elastic Search functionality, you need to download and run local instance of ES ([Elastic.co](https://www.elastic.co/downloads/elasticsearch))
 - Build solution, run `NetReact.API` and `NetReact.IdentityServer` projects
+#### Docker Compose
+- ```
+  dotnet dev-certs https --clean
+  dotnet dev-certs https -ep ./conf.d/https/dev_cert.pfx -p madison
+  dotnet dev-certs https --trust
+  docker-compose down # Down any previous setup
+  docker-compose up --build -d # Build and run containers
+  wsl -d docker-desktop
+  sysctl -w vm.max_map_count=262144
+  ```
+
+You may access database via
+```
+127.0.0.1\sql-server-db,1433
+User: sa
+Password: StrongP@ssw0rd
+```
+
 ### Client App
 - Install packages (`npm i`)
 - run `npm run start` to start dev server (client app will be available via `http://localhost:3000`)

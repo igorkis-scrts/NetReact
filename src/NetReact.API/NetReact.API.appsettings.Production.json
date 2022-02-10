@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "NetReact": "Data Source = sql-server-db,1433; Initial Catalog = NetReact; MultipleActiveResultSets=true; User ID=sa; Password=StrongP@ssw0rd"
+  }
+}
