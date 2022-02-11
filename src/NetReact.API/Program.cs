@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using NetReact.Application.Common;
@@ -89,10 +90,9 @@ builder.Services.AddHealthChecks()
 builder.Services.AddAuthentication("Bearer")
 	.AddJwtBearer("Bearer", options =>
 	{
-		options.Authority = "https://localhost:5001";
-		// options.Authority = builder.Environment.IsDevelopment() 
-		// 	? "https://localhost:5001" 
-		// 	: "https://net-react-identity:5001";
+		options.Authority = builder.Environment.IsDevelopment() 
+			? "https://localhost:5001" 
+			: "https://net-react-identity:5001";
 		// options.Authority = "http://net-react-identity:5001";
 		// options.RequireHttpsMetadata = false; 
 		// options.Audience = "bookApi";
@@ -134,11 +134,12 @@ builder.Services.AddScoped<IRepositoryBase<Wishlist>, RepositoryBase<Wishlist>>(
 builder.Services.AddScoped<IReadModelBookRepository, ElasticBookRepository>();
 
 builder.Services.AddDataProtection()
-	.UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
+	.UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration
 	{
 		EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
 		ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
 	})
+	.SetApplicationName("NetReactApi")
 	.SetDefaultKeyLifetime(TimeSpan.FromDays(365));
 
 builder.Services.AddTransient(provider =>

@@ -1,8 +1,12 @@
+using System;
 using System.Reflection;
 using NetReact.IdentityServer;
 using NetReact.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -60,6 +64,15 @@ builder.Services.AddIdentityServer(options =>
 	.AddProfileService<IdentityProfileService>();
 
 builder.Services.AddAuthentication();
+
+builder.Services.AddDataProtection()
+	.UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration
+	{
+		EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+		ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+	})
+	.SetApplicationName("NetReactIdentity")
+	.SetDefaultKeyLifetime(TimeSpan.FromDays(365));
 
 var app = builder.Build();
 
