@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using NetReact.IdentityServer;
 using NetReact.IdentityServer.Models;
@@ -30,7 +27,11 @@ builder.Services.AddSwaggerGen(c =>
 var connectionString = builder.Configuration.GetConnectionString("NetReactIdentity");
 builder.Services.AddDbContext<IdentityContext>(options =>
 	options.UseSqlServer(connectionString,
-		x => x.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName)));
+		x =>
+		{
+			x.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName);
+			x.EnableRetryOnFailure();
+		}));
 
 builder.Services.AddScoped<IProfileService, IdentityProfileService>();
 
@@ -69,9 +70,6 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact.IdentityServer v1"));
 }
 
-app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact.IdentityServer v1"));
-
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
@@ -82,7 +80,8 @@ app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 using (var scope = app.Services.CreateScope())
 {
 	var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationIdentityUser>>();
-	IdentityDataSeeder.SeedAll(userManager);
+	var context = scope.ServiceProvider.GetService<IdentityContext>();
+	IdentityDataSeeder.SeedAll(context, userManager);
 }
 
 app.Run();

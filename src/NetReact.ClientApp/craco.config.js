@@ -3,8 +3,8 @@ const tsNameof = require("ts-nameof");
 
 const { whenProd, whenDev } = require("@craco/craco");
 
-const CircularDependencyPlugin = require("circular-dependency-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const CircularDependencyPlugin = require("circular-dependency-plugin");
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const CracoEsbuildPlugin = require("craco-esbuild");
 
 const ImageminPlugin = require("imagemin-webpack-plugin").default;

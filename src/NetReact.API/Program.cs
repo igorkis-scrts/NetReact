@@ -77,7 +77,11 @@ builder.Services.AddMvc(
 var connectionString = builder.Configuration.GetConnectionString("NetReact");
 builder.Services.AddDbContext<NetReactDbContext>(options =>
 	options.UseSqlServer(connectionString,
-		x => x.MigrationsAssembly(typeof(NetReactDbContext).Assembly.FullName)));
+		x =>
+		{
+			x.MigrationsAssembly(typeof(NetReactDbContext).Assembly.FullName);
+			x.EnableRetryOnFailure();
+		}));
 builder.Services.AddHealthChecks()
 	.AddCheck<DbPendingMigrationHealthCheck<NetReactDbContext>>("db-migration-check");
 
@@ -86,6 +90,13 @@ builder.Services.AddAuthentication("Bearer")
 	.AddJwtBearer("Bearer", options =>
 	{
 		options.Authority = "https://localhost:5001";
+		// options.Authority = builder.Environment.IsDevelopment() 
+		// 	? "https://localhost:5001" 
+		// 	: "https://net-react-identity:5001";
+		// options.Authority = "http://net-react-identity:5001";
+		// options.RequireHttpsMetadata = false; 
+		// options.Audience = "bookApi";
+		// options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
 
 		options.TokenValidationParameters = new TokenValidationParameters
 		{
@@ -150,9 +161,6 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact v1"));
 }
-
-app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact v1"));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

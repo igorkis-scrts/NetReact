@@ -1,8 +1,10 @@
+import { IDENTITY_URL } from "@config/Constants";
+
 const fetchIdentity = <TResponse>(
   url: string,
   config: any = {}
 ): Promise<TResponse> => {
-  return fetch(`https://localhost:5001${url}`, config)
+  return fetch(`${IDENTITY_URL}${url}`, config)
     .then((res) => {
       if (!res.ok) {
         return res.text().then((text) => {

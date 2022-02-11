@@ -1,5 +1,6 @@
-node_modules
-build
+.gitignore
 .dockerignore
 Dockerfile
-Dockerfile.prod
+build
+node_modules
+README.md
