@@ -55,6 +55,11 @@ builder.Services.AddIdentityServer(options =>
 		options.Events.RaiseInformationEvents = true;
 		options.Events.RaiseFailureEvents = true;
 		options.Events.RaiseSuccessEvents = true;
+		
+		if (builder.Environment.IsProduction())
+		{
+			options.IssuerUri = "https://net-react-identity:5001";
+		}
 	})
 	.AddInMemoryIdentityResources(Config.IdentityResources)
 	.AddInMemoryApiResources(Config.ApiResources)

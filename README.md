@@ -1,4 +1,3 @@
-
 <div align="center">
   <img alt="Serverify A3" width="256" heigth="48" src="https://user-images.githubusercontent.com/6746043/153037177-75e57a6b-3872-4c04-aaf8-e11d804d277c.svg">
   <h3>An ASP.NET WebAPI/React Single Page application template</h3>
@@ -25,22 +24,25 @@
 - If you want to use Elastic Search functionality, you need to download and run local instance of ES ([Elastic.co](https://www.elastic.co/downloads/elasticsearch))
 - Build solution, run `NetReact.API` and `NetReact.IdentityServer` projects
 #### Docker Compose
-- ```
-  dotnet dev-certs https --clean
-  dotnet dev-certs https -ep ./conf.d/https/dev_cert.pfx -p madison
-  dotnet dev-certs https --trust
-  docker-compose down # Down any previous setup
-  docker-compose up --build -d # Build and run containers
+- Run `generate_self_signed_cert.ps1` Powershell scenario as administrator to generate self-signed root certificate and individual certificates for NetReact.API and NetReact. IdentityServer applications (trusted root certificate will be used to sign them). If scenario fails with pCertContext descriptor/handler error, add generated src\certs\aspnetapp-root-cert.cer manually as local machine trusted root certificate. Or you can skip this part and use your legit non-dev trusted certificate issued by third-party authority (e.g. Let's Encrypt).
+- Build and run Docker containers by executing   
+```
+docker-compose up --build -d
+```
+- Increase memory limit for Elastic Search if ES docker container keeps shutting down. Guide - [Elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_set_vm_max_map_count_to_at_least_262144)
+```
+  # Windows only
   wsl -d docker-desktop
   sysctl -w vm.max_map_count=262144
-  ```
+```
 
-You may access database via
+You may access database with DBeaver/SQL Server Management Studio/DataGrip via
 ```
 127.0.0.1\sql-server-db,1433
 User: sa
 Password: StrongP@ssw0rd
 ```
+SQL Server service needs to be stopped in SQL Server Configuration Manager to be able to connect to Docker container with SQL Server instance.
 
 ### Client App
 - Install packages (`npm i`)

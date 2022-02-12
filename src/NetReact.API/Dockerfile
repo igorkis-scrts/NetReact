@@ -22,4 +22,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "NetReact.API.dll"]
+COPY entrypoint.sh ./
+RUN ["chmod", "+x", "entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
