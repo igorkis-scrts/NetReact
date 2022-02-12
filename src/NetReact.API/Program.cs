@@ -93,15 +93,9 @@ builder.Services.AddAuthentication("Bearer")
 		options.Authority = builder.Environment.IsDevelopment() 
 			? "https://localhost:5001" 
 			: "https://net-react-identity:5001";
-		// options.Authority = "http://net-react-identity:5001";
-		// options.RequireHttpsMetadata = false; 
-		// options.Audience = "bookApi";
-		// options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
 
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateAudience = false
-		};
+		options.Audience = "bookApiResource";
+		options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
 	});
 
 // adds an authorization policy to make sure the token is for scope 'api1'
@@ -161,6 +155,10 @@ if (app.Environment.IsDevelopment())
 	app.UseDeveloperExceptionPage();
 	app.UseSwagger();
 	app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact v1"));
+}
+else
+{
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
