@@ -29,7 +29,7 @@
 - run `npm run start` to start dev server (client app will be available via `http://localhost:3000`)
 
 ### Docker Compose
-- Run `generate_self_signed_cert.ps1` Powershell scenario as administrator to generate self-signed root certificate and individual certificates for NetReact.API and NetReact.IdentityServer applications (trusted root certificate will be used to sign them). If scenario fails with pCertContext descriptor/handler error, add generated src\certs\aspnetapp-root-cert.cer manually as local machine trusted root certificate. Or you can skip this part and use your legit non-dev trusted certificate issued by third-party authority (e.g. Let's Encrypt). Very informative rticle on topic for anyone interested - [Securing an API while running IdentityServer4 on Docker with HTTPS enabled locally](https://mjarosie.github.io/dev/2020/09/24/running-identityserver4-on-docker-with-https.html)
+- Run `generate_self_signed_cert.ps1` Powershell scenario as administrator to generate self-signed root certificate and individual certificates for NetReact.API and NetReact.IdentityServer applications (trusted root certificate will be used to sign them). If scenario fails with pCertContext descriptor/handler error, add generated src\certs\aspnetapp-root-cert.cer manually as local machine trusted root certificate. Or you can skip this part and use your legit non-dev trusted certificate issued by third-party authority (e.g. Let's Encrypt). Very informative article on topic for anyone interested - [Securing an API while running IdentityServer4 on Docker with HTTPS enabled locally](https://mjarosie.github.io/dev/2020/09/24/running-identityserver4-on-docker-with-https.html)
 
 - Build and run Docker containers by executing   
 ```
