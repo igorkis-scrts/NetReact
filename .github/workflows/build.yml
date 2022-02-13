@@ -22,7 +22,7 @@ jobs:
           cd src
           dotnet restore NetReact.sln
     - name: Build Infrastructure
-      run: dotnet build --no-restore
+      run: dotnet build NetReact.sln --no-restore
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
