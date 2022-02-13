@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+ARG VERSION=6.0-alpine3.14
+
+FROM mcr.microsoft.com/dotnet/aspnet:$VERSION AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 EXPOSE 5001
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:$VERSION AS build
 WORKDIR /src
 COPY ["NetReact.API/NetReact.API.csproj", "NetReact.API/"]
 COPY ["NetReact.Application/NetReact.Application.csproj", "NetReact.Application/"]
@@ -21,6 +21,9 @@ RUN dotnet publish "NetReact.API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# there are no bash, openssl and icu packages in alpine images
+RUN apk add --no-cache bash openssl icu
 
 COPY entrypoint.sh ./
 RUN ["chmod", "+x", "entrypoint.sh"]
