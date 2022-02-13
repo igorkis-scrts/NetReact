@@ -19,12 +19,15 @@ RUN dotnet publish "NetReact.IdentityServer.csproj" \
     /p:PublishSingleFile=true \
     -c Release \
     -o /app/publish 
+ 
+#    /p:PublishTrimmed=true \ is broken under certain circumstances on alpine builds,
+#    see https://github.com/dotnet/efcore/issues/26878
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# there is no icu in alpine images, required to get full culture support
+# there is no icu in alpine images, it is required to get full culture support
 RUN apk add --no-cache icu
 
 ENTRYPOINT ["./NetReact.IdentityServer", "NetReact.IdentityServer.dll"]
