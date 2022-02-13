@@ -1,7 +1,7 @@
 {
     "author": "Igor Kiselev",
     "classifications": [ "Web", "SPA" ],
-    "name": ".NET React SPA Template",
+    "name": "NetReact Single Page Application",
     "identity": "NetReact",       
     "shortName": "netreact",
     "tags": {
@@ -14,6 +14,11 @@
             "type": "parameter",
             "defaultValue": "Igor Kiselev",
             "replaces":"AuthorName"
+        },
+        "title": {
+            "type": "parameter",
+            "defaultValue": "react-app",
+            "replaces":"client-app"
         }
     }
 }
