@@ -20,9 +20,9 @@ jobs:
     - name: Restore dependencies
       run: |
           cd src
-          dotnet restore NetReact.sln
+          dotnet restore
     - name: Build Infrastructure
-      run: dotnet build NetReact.sln --no-restore
+      run: dotnet build --no-restore
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
