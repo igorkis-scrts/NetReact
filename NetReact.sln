@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.API", "NetReact.API\NetReact.API.csproj", "{3EAFF2CE-FCAB-4A83-B939-FA5019AE62CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.API", "src\NetReact.API\NetReact.API.csproj", "{3EAFF2CE-FCAB-4A83-B939-FA5019AE62CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Application", "NetReact.Application\NetReact.Application.csproj", "{B1CD51C9-FCF6-4768-A08A-FE9F2E9A4FFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Application", "src\NetReact.Application\NetReact.Application.csproj", "{B1CD51C9-FCF6-4768-A08A-FE9F2E9A4FFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Domain", "NetReact.Domain\NetReact.Domain.csproj", "{8007CBEB-C928-4DF9-91B9-F3D4554E8BE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Domain", "src\NetReact.Domain\NetReact.Domain.csproj", "{8007CBEB-C928-4DF9-91B9-F3D4554E8BE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Infrastructure", "NetReact.Infrastructure\NetReact.Infrastructure.csproj", "{A2714D32-DEB1-42D1-9009-238C24EE8C4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Infrastructure", "src\NetReact.Infrastructure\NetReact.Infrastructure.csproj", "{A2714D32-DEB1-42D1-9009-238C24EE8C4C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.IdentityServer", "NetReact.IdentityServer\NetReact.IdentityServer.csproj", "{2FBC7CD0-2A3B-4245-A950-D9401723342B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.IdentityServer", "src\NetReact.IdentityServer\NetReact.IdentityServer.csproj", "{2FBC7CD0-2A3B-4245-A950-D9401723342B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker-compose", "docker-compose.dcproj", "{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker-compose", "src\docker-compose.dcproj", "{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

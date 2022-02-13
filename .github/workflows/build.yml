@@ -29,9 +29,7 @@ jobs:
         node-version: "16"
     - name: Install SPA
       run: |
+          cd src
           cd NetReact.ClientApp
           npm i --legacy-peer-deps
           npm run build
-        
-#     - name: Test
-#       run: dotnet test --no-build --verbosity normal
