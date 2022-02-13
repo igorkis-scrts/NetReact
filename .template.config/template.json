@@ -1,0 +1,24 @@
+{
+    "author": "Igor Kiselev",
+    "classifications": [ "Web", "SPA" ],
+    "name": "NetReact Single Page Application",
+    "identity": "NetReact",       
+    "shortName": "netreact",
+    "tags": {
+        "language": "C#"
+    },
+    "sourceName": "NetReact",      
+    "preferNameDirectory" : "true",
+    "symbols":{
+        "author": {
+            "type": "parameter",
+            "defaultValue": "Igor Kiselev",
+            "replaces":"AuthorName"
+        },
+        "title": {
+            "type": "parameter",
+            "defaultValue": "react-app",
+            "replaces":"client-app"
+        }
+    }
+}
