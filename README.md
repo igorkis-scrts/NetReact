@@ -40,8 +40,6 @@
 dotnet new --install .
 ```
 
-
-
 - Build and run Docker containers by executing   
 ```
 docker-compose up --build -d
