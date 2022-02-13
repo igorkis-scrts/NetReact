@@ -1,0 +1,19 @@
+{
+    "author": "Igor Kiselev",
+    "classifications": [ "Web", "SPA" ],
+    "name": ".NET React SPA Template",
+    "identity": "NetReact",       
+    "shortName": "netreact",
+    "tags": {
+        "language": "C#"
+    },
+    "sourceName": "NetReact",      
+    "preferNameDirectory" : "true",
+    "symbols":{
+        "author": {
+            "type": "parameter",
+            "defaultValue": "Igor Kiselev",
+            "replaces":"AuthorName"
+        }
+    }
+}

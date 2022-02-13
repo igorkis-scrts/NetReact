@@ -16,7 +16,7 @@ const NavbarHomeLogo = () => {
     <Grid item>
       <IconButton edge="start" onClick={redirectToHome} color="inherit">
         <Home />
-        <Typography variant="h6">.NET React</Typography>
+        <Typography variant="h6">NetReact</Typography>
       </IconButton>
     </Grid>
   );
