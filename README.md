@@ -1,6 +1,6 @@
 <div align="center">
   <img alt="Serverify A3" width="256" heigth="48" src="https://user-images.githubusercontent.com/6746043/153037177-75e57a6b-3872-4c04-aaf8-e11d804d277c.svg">
-  <h3>An ASP.NET WebAPI/React Single Page application template</h3>
+  <h3>An ASP.NET WebAPI/IdentityServer/React Single Page application</h3>
 </div>
 
 ### Build status
