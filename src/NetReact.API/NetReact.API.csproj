@@ -5,6 +5,7 @@
     <UserSecretsId>bd6ade01-1594-4125-89d7-53d65826a6fe</UserSecretsId>
     <LangVersion>10</LangVersion>
     <RootNamespace>NetReact.API</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,15 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\uploads\books\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NetReact.API.appsettings.Production.json">
+      <DependentUpon>NetReact.API.appsettings.json</DependentUpon>
+    </Content>
+    <Content Update="NetReact.API.appsettings.Development.json">
+      <DependentUpon>NetReact.API.appsettings.json</DependentUpon>
+    </Content>
   </ItemGroup>
      
 

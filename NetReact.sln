@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetReact.IdentityServer", "src\NetReact.IdentityServer\NetReact.IdentityServer.csproj", "{2FBC7CD0-2A3B-4245-A950-D9401723342B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "docker-compose", "src\docker-compose.dcproj", "{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{2FBC7CD0-2A3B-4245-A950-D9401723342B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FBC7CD0-2A3B-4245-A950-D9401723342B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FBC7CD0-2A3B-4245-A950-D9401723342B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F6CC934-CE9A-4FF9-9C71-F3C084FD278B}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

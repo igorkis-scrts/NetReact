@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>10</LangVersion>
     <RootNamespace>NetReact.IdentityServer</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,15 @@
 
   <ItemGroup>
     <Folder Include="Migrations" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NetReact.IdentityServer.appsettings.Production.json">
+      <DependentUpon>NetReact.IdentityServer.appsettings.json</DependentUpon>
+    </Content>
+    <Content Update="NetReact.IdentityServer.appsettings.Development.json">
+      <DependentUpon>NetReact.IdentityServer.appsettings.json</DependentUpon>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,7 @@
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using NetReact.Application.Common;
 using NetReact.Application.Common.Exceptions;
 using NetReact.Domain.Interfaces;
@@ -9,6 +13,9 @@ using NetReact.Infrastructure.Persistence;
 using NetReact.Infrastructure.Persistence.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,9 +24,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NetReact.Infrastructure.HealthCheck;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder();
+
+var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+var envName = builder.Environment.EnvironmentName;
+builder.Configuration.AddJsonFile($"{assemblyName}.appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddJsonFile($"{assemblyName}.appsettings.{envName}.json", optional: true, reloadOnChange: true);
 
 builder.Logging.AddConfiguration(builder.Configuration.GetSection("Logging"));
 builder.Logging.AddConsole();
@@ -65,20 +78,24 @@ builder.Services.AddMvc(
 var connectionString = builder.Configuration.GetConnectionString("NetReact");
 builder.Services.AddDbContext<NetReactDbContext>(options =>
 	options.UseSqlServer(connectionString,
-		x => x.MigrationsAssembly(typeof(NetReactDbContext).Assembly.FullName)));
-
-//var authOptions = services.ConfigureAuthOptions(Configuration);
+		x =>
+		{
+			x.MigrationsAssembly(typeof(NetReactDbContext).Assembly.FullName);
+			x.EnableRetryOnFailure();
+		}));
+builder.Services.AddHealthChecks()
+	.AddCheck<DbPendingMigrationHealthCheck<NetReactDbContext>>("db-migration-check");
 
 // accepts any access token issued by identity server
 builder.Services.AddAuthentication("Bearer")
 	.AddJwtBearer("Bearer", options =>
 	{
-		options.Authority = "https://localhost:5001";
+		options.Authority = builder.Environment.IsDevelopment() 
+			? "https://localhost:5001" 
+			: "https://net-react-identity:5001";
 
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateAudience = false
-		};
+		options.Audience = "bookApiResource";
+		options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
 	});
 
 // adds an authorization policy to make sure the token is for scope 'api1'
@@ -90,8 +107,6 @@ builder.Services.AddAuthorization(options =>
 		policy.RequireClaim("scope", "bookApi");
 	});
 });
-
-//services.AddJwtAuthentication(authOptions);
 
 builder.Services.AddHttpContextAccessor();
 
@@ -111,6 +126,15 @@ builder.Services.AddScoped<IRepositoryBase<BookDetails>, RepositoryBase<BookDeta
 builder.Services.AddScoped<IRepositoryBase<Wishlist>, RepositoryBase<Wishlist>>();
 
 builder.Services.AddScoped<IReadModelBookRepository, ElasticBookRepository>();
+
+builder.Services.AddDataProtection()
+	.UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration
+	{
+		EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+		ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+	})
+	.SetApplicationName("NetReactApi")
+	.SetDefaultKeyLifetime(TimeSpan.FromDays(365));
 
 builder.Services.AddTransient(provider =>
 {
@@ -132,6 +156,10 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NetReact v1"));
 }
+else
+{
+	app.UseHsts();
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -142,8 +170,10 @@ app.UseCors(configurePolicy => configurePolicy.AllowAnyOrigin().AllowAnyMethod()
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => {
+app.UseEndpoints(endpoints =>
+{
 	endpoints.MapControllers();
+	endpoints.MapHealthChecks("/");
 });
 
 using (var scope = app.Services.CreateScope())

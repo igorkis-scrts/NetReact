@@ -10,6 +10,11 @@
 *.userosscache
 *.sln.docstates
 
+#Certificates
+.pfx
+.crt
+.cer
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -403,3 +408,6 @@ packages/react-devtools-shell/dist
 packages/react-devtools-scheduling-profiler/dist
 
 src/IdentityServer
+src/certs
+src/NetReact.API/certs
+src/NetReact.IdentityServer/certs

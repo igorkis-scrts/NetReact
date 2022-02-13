@@ -1,4 +1,3 @@
-
 <div align="center">
   <img alt="Serverify A3" width="256" heigth="48" src="https://user-images.githubusercontent.com/6746043/153037177-75e57a6b-3872-4c04-aaf8-e11d804d277c.svg">
   <h3>An ASP.NET WebAPI/React Single Page application template</h3>
@@ -21,12 +20,36 @@
 ## Instructions
 ### Infrastructure
 - Restore nuget packages (`dotnet-restore`)
-- Apply migrations in NetReact.Infrastructure and NetReact.IdentityServer projects (execute `dotnet ef database update` in both projects directories, **MS SQL Server Express required**)
+- Apply migrations in NetReact.Infrastructure and NetReact.IdentityServer projects (execute `dotnet ef database update` in both projects directories, **MS SQL Server required**)
 - If you want to use Elastic Search functionality, you need to download and run local instance of ES ([Elastic.co](https://www.elastic.co/downloads/elasticsearch))
 - Build solution, run `NetReact.API` and `NetReact.IdentityServer` projects
+
 ### Client App
 - Install packages (`npm i`)
 - run `npm run start` to start dev server (client app will be available via `http://localhost:3000`)
+
+### Docker Compose
+- Run `generate_self_signed_cert.ps1` Powershell scenario as administrator to generate self-signed root certificate and individual certificates for NetReact.API and NetReact. IdentityServer applications (trusted root certificate will be used to sign them). If scenario fails with pCertContext descriptor/handler error, add generated src\certs\aspnetapp-root-cert.cer manually as local machine trusted root certificate. Or you can skip this part and use your legit non-dev trusted certificate issued by third-party authority (e.g. Let's Encrypt). Very informative rticle on topic for anyone interested - [Securing an API while running IdentityServer4 on Docker with HTTPS enabled locally](https://mjarosie.github.io/dev/2020/09/24/running-identityserver4-on-docker-with-https.html)
+
+- Build and run Docker containers by executing   
+```
+docker-compose up --build -d
+```
+- Increase memory limit for Elastic Search if ES docker container keeps shutting down. Guide - [Elastic.co](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#_set_vm_max_map_count_to_at_least_262144)
+```
+  # Windows only
+  wsl -d docker-desktop
+  sysctl -w vm.max_map_count=262144
+```
+
+### Database
+You may explore database with DBeaver/SQL Server Management Studio/DataGrip via
+```
+127.0.0.1\sql-server-db,1433
+User: sa
+Password: StrongP@ssw0rd
+```
+SQL Server service needs to be stopped in SQL Server Configuration Manager to be able to connect to Docker container with SQL Server instance.
 
 ## Components
 - [src/NetReact.API](#netreact-api) - ASP.NET Core Web API (CQRS pattern)

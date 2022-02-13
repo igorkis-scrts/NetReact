@@ -31,6 +31,3 @@ jobs:
           cd NetReact.ClientApp
           npm i --legacy-peer-deps
           npm run build
-        
-#     - name: Test
-#       run: dotnet test --no-build --verbosity normal

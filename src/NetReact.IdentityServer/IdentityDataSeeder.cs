@@ -5,8 +5,12 @@ namespace NetReact.IdentityServer;
 
 public static class IdentityDataSeeder
 {
-	public static void SeedAll(UserManager<ApplicationIdentityUser> userManager)
+	public static void SeedAll(IdentityContext context, UserManager<ApplicationIdentityUser> userManager)
 	{
+		//TODO: replace it with migration appliance
+		//as EnsureCreated is for rapid prototyping and is not compatible with migrations
+		//https://stackoverflow.com/questions/38238043/how-and-where-to-call-database-ensurecreated-and-database-migrate
+		context.Database.EnsureCreated();
 		SeedUsers(userManager);
 	}
 

@@ -1,0 +1,111 @@
+version: "3.9"
+
+networks:
+  net-react-network:
+    driver: bridge
+
+volumes:
+  elastic-data:
+    driver: local
+  protected-data-api:
+    driver: local
+  protected-data-identity:
+    driver: local
+
+
+services:
+  net-react-app:
+    container_name: net-react-app
+    image: net-react-app
+    ports:
+      - "3000:80"
+    build:
+      context: .
+      dockerfile: NetReact.ClientApp/Dockerfile
+    networks:
+      - net-react-network
+  net-react-api:
+    container_name: net-react-api
+    image: net-react-api
+    ports:
+      - "6002:6002"
+    build:
+      context: .
+      dockerfile: NetReact.API/Dockerfile
+    depends_on:
+      - sql-server-db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:6002
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp-web-api.pfx
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
+      - Logging__Console__FormatterName=""
+    volumes:
+      - ./NetReact.API:/root/NetReact.API:cached
+      - ./NetReact.API/certs:/https/
+      - type: bind
+        source: ./certs/aspnetapp-root-cert.cer
+        target: /https-root/aspnetapp-root-cert.cer
+      - protected-data-api:/root/.aspnet/DataProtection-Keys
+    networks:
+      - net-react-network
+  net-react-identity:
+    container_name: net-react-identity
+    image: net-react-identity
+    ports:
+      - "5001:5001"
+    build:
+      context: .
+      dockerfile: NetReact.IdentityServer/Dockerfile
+    depends_on:
+      - sql-server-db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:5001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp-identity-server.pfx
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      - Logging__Console__FormatterName=""
+    volumes:
+      - ./NetReact.IdentityServer:/root/NetReact.IdentityServer:cached
+      - ./NetReact.IdentityServer/certs:/https/
+      - type: bind
+        source: ./certs/aspnetapp-root-cert.cer
+        target: /https-root/aspnetapp-root-cert.cer
+      - protected-data-identity:/root/.aspnet/DataProtection-Keys
+    networks:
+      - net-react-network
+  sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - "1433:1433"
+      - "1434:1434/udp"
+    expose:
+      - 1433
+    environment:
+      SA_PASSWORD: StrongP@ssw0rd
+      ACCEPT_EULA: "Y"
+    networks:
+      - net-react-network
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elastic-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - net-react-network
